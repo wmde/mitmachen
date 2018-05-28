@@ -1,6 +1,5 @@
 from .api import Mitmachen
 
-
 m = Mitmachen()
 
 print(m.autocomplete_query)
