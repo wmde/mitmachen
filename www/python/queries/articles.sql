@@ -9,7 +9,7 @@ FROM
 		page,
     	categorylinks
 	WHERE
-        cl_to IN ('%(categories)s')
+        cl_to IN %(categories)s
         AND cl_type = 'page'
         AND cl_from = page_id
     LIMIT 10000) AS subpages,
@@ -17,6 +17,6 @@ FROM
 WHERE
 	page.page_id = subpages.page_id
 	AND tl_from = subpages.page_id
-    AND tl_title IN ('%(tags)s')
+    AND tl_title IN %(tags)s
 ORDER BY RAND()
 LIMIT 30;

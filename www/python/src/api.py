@@ -13,11 +13,15 @@
 #    limitations under the License.
 import toolforge
 import pymysql.cursors
+import os
 
+__dir__ = os.path.abspath("..")
+print(__dir__)
+print(os.listdir(__dir__))
 
 class Mitmachen:
 
-    MAX_DEPTH = 3  # maximum depth in category tree search
+    MAX_DEPTH = 5 # maximum depth in category tree search
     TAGS = ["Überarbeiten", "Lückenhaft", "Veraltet", "Belege_fehlen", "Allgemeinverständlichkeit"]
 
     def __init__(self):
@@ -31,17 +35,18 @@ class Mitmachen:
         self.conn = toolforge.connect("dewiki_p", cursorclass=pymysql.cursors.DictCursor)
 
     def _load(self, fname):
-        with open("queries/%s" % fname, "r") as queryfile:
+        with open(os.path.abspath(os.path.join(__dir__, "queries/%s" % fname)), "r") as queryfile:
             return queryfile.read()
 
     def matching_categories(self, first_letters):
         with self.conn.cursor() as cursor:
-            cursor.execute(self.autocomplete_query, {"first_letters": first_letters.capitalize()})
+            cursor.execute(self.autocomplete_query, {"first_letters": "%s%%" % first_letters.capitalize()})
+            
             self.conn.commit()
             try:
-                return [item["cat_title"].replace("_", " ") for item in cursor.fetchall()
-                        if ":" not in item["cat_title"]]
-            except Exception:
+                return [item["cat_title"].decode("utf-8").replace("_", " ") for item in cursor.fetchall()
+                        if ":" not in item["cat_title"].decode("utf-8")]
+            except Exception as e:
                 return []
 
     def suggest_categories(self):
@@ -49,46 +54,58 @@ class Mitmachen:
             cursor.execute(self.suggest_query)
             self.conn.commit()
             try:
-                return [item["cat_title"].replace("_", " ") for item in cursor.fetchall()
-                        if ":" not in item["cat_title"]]
-            except Exception:
+                return [item["cat_title"].decode("utf-8").replace("_", " ") for item in cursor.fetchall()
+                        if ":" not in item["cat_title"].decode("utf-8")]
+            except Exception as e:
+                print(e)
                 return ["China", "19. Jahrhundert", "Fußball"]
 
     def find_articles(self, category):
-        tree = set(category.replace(" ", "_"))
+        tree = set([category.replace(" ", "_")])
         self._find_all_subcategories([category], tree, 0)
+        print(tree)
         return self._find_tagged_articles(list(tree))
 
     def _find_all_subcategories(self, categories, tree, depth):
-        if depth == self.MAX_DEPTH:
+        if depth >= self.MAX_DEPTH:
             return
 
         categories = [cat for cat in categories if not ":" in cat]
         if not categories:
-            return
+            return []
+        #if len(categories) < 2:
+        #    categories.append("DOESNOTEXIST")  # TODO: Make nice
 
-        category_string = "','".join(categories)
+        #category_string = "','".join(categories)
+        #print(category_string)
 
         with self.conn.cursor() as cursor:
-            cursor.execute(self.subcategory_query, {"categories": category_string})
+            cursor.execute(self.subcategory_query, {"categories": categories})
+            
+            
             self.conn.commit()
             try:
-                subcategories = [item["cat_title"] for item in cursor.fetchall()]
-            except Exception:
+                subcategories = [item["cat_title"].decode("utf-8") for item in cursor.fetchall()]
+            except Exception as e:
+                print(e)
                 subcategories = []
 
         tree.update(subcategories)
+        #with open("tmp.log", "a") as fn:
+        #    fn.write(str(tree))
         self._find_all_subcategories(subcategories, tree, depth + 1)
+
 
     def _find_tagged_articles(self, categories):
 
         category_string = "','".join(categories)
 
         with self.conn.cursor() as cursor:
-            cursor.execute(self.articles_query, {"categories": category_string, "tags": self.tag_string})
+            cursor.execute(self.articles_query, {"categories": categories, "tags": self.TAGS})
             self.conn.commit()
             try:
-                articles = [{"page": item["page_title"], "problems": [item["tl_title"]]} for item in cursor.fetchall()]
+                articles = [{"page": item["page_title"].decode("utf-8"),
+                             "problems": [item["tl_title"].decode("utf-8").replace("_", " ")]} for item in cursor.fetchall()]
             except Exception:
                 articles = []
 

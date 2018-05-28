@@ -1,9 +1,9 @@
 SELECT DISTINCT
-	page_title
+    page_title
 FROM
-	page,
+    page,
     categorylinks
 WHERE
-	cl_from = page_id
+    cl_from = page_id
     AND cl_type = 'subcat'
-    AND cl_to IN ('%(categories)s');
+    AND cl_to IN %(categories)s;
