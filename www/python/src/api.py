@@ -21,7 +21,7 @@ print(os.listdir(__dir__))
 
 class Mitmachen:
 
-    MAX_DEPTH = 5 # maximum depth in category tree search
+    MAX_DEPTH = 3  # maximum depth in category tree search
     TAGS = ["Überarbeiten", "Lückenhaft", "Veraltet", "Belege_fehlen", "Allgemeinverständlichkeit"]
 
     def __init__(self):
@@ -29,8 +29,6 @@ class Mitmachen:
         self.suggest_query = self._load("suggest.sql")
         self.subcategory_query = self._load("subcategories.sql")
         self.articles_query = self._load("articles.sql")
-
-        self.tag_string = "','".join(self.TAGS)
 
         self.conn = toolforge.connect("dewiki_p", cursorclass=pymysql.cursors.DictCursor)
 
@@ -72,34 +70,21 @@ class Mitmachen:
 
         categories = [cat for cat in categories if not ":" in cat]
         if not categories:
-            return []
-        #if len(categories) < 2:
-        #    categories.append("DOESNOTEXIST")  # TODO: Make nice
-
-        #category_string = "','".join(categories)
-        #print(category_string)
-
+            return
+        
         with self.conn.cursor() as cursor:
             cursor.execute(self.subcategory_query, {"categories": categories})
-            
-            
             self.conn.commit()
             try:
-                subcategories = [item["cat_title"].decode("utf-8") for item in cursor.fetchall()]
+                subcategories = [item["page_title"].decode("utf-8") for item in cursor.fetchall()]
             except Exception as e:
                 print(e)
                 subcategories = []
 
         tree.update(subcategories)
-        #with open("tmp.log", "a") as fn:
-        #    fn.write(str(tree))
         self._find_all_subcategories(subcategories, tree, depth + 1)
 
-
     def _find_tagged_articles(self, categories):
-
-        category_string = "','".join(categories)
-
         with self.conn.cursor() as cursor:
             cursor.execute(self.articles_query, {"categories": categories, "tags": self.TAGS})
             self.conn.commit()
