@@ -26,12 +26,12 @@ def index():
 @app.route("/autocomplete", methods=["GET"])
 def autocomplete():
     first_letters = flask.request.args.get("q")
-    return flask.jsonify({"categories" : api.matching_categories(first_letters)})
+    return flask.jsonify({"categories": api.matching_categories(first_letters)})
 
 
 @app.route("/suggest")
 def suggest():
-    return flask.jsonify({"categories" : api.suggest_categories()})
+    return flask.jsonify({"categories": api.suggest_categories()})
 
 
 @app.route("/find", methods=["GET"])

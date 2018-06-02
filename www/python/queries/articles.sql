@@ -19,4 +19,4 @@ WHERE
 	AND tl_from = subpages.page_id
     AND tl_title IN %(tags)s
 ORDER BY RAND()
-LIMIT 30;
+LIMIT %(num)s;
