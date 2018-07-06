@@ -29,7 +29,7 @@ tool account and set up the webservice as described
 If you found a bug, would like to contribute ideas or code, or are
 interested in bringing *Mitmachen* to another Wikipedia please head
 over to the
-[Mitmachen project on Wikimedia Phabricator](https://phabricator.wikimedia.org)
+[Mitmachen project on Wikimedia Phabricator](https://phabricator.wikimedia.org/tag/mitmachen/)
 (or simply leave a pull request).
 
 However, please note that there are no plans to expand *Mitmachen* beyond
