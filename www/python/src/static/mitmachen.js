@@ -71,6 +71,12 @@ $( function() {
                         .text("Keine Ergebnisse gefunden. Wie wäre es mit einem der nebenstehenden Themen?")
                         .appendTo(articleList);
                 }
+
+                if (result.more) {
+                    $("<li/>").addClass("list-group-item")
+                        .text("Weitere Ergebnisse verfügbar.")
+                        .appendTo(articleList);
+                }
             });
         }
     });
