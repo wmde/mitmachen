@@ -37,4 +37,5 @@ def suggest():
 @app.route("/find", methods=["GET"])
 def find():
     category = flask.request.args.get("q")
-    return flask.jsonify({"articles": api.find_articles(category)})
+    articles, more = api.find_articles(category)
+    return flask.jsonify({"articles": articles, "more": more})

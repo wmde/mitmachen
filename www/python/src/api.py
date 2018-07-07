@@ -13,6 +13,7 @@
 #    limitations under the License.
 import logging
 import os
+import random
 
 import pymysql.cursors
 import toolforge
@@ -136,14 +137,17 @@ class Mitmachen:
             with conn.cursor() as cursor:
                 cursor.execute(self.articles_query,
                                {"categories": categories,
-                                "tags": self.TAGS,
-                                "num": self.NUM})
+                                "tags": self.TAGS})
                 conn.commit()
                 articles = self._extract_problems(cursor.fetchall(),
                                                   articles)
 
+            more = len(articles) > self.NUM
+            if more:
+                articles = random.sample(articles, self.NUM)
+
             return [{"page": page, "problems": list(set(problems))}
-                    for page, problems in articles.items()]
+                    for page, problems in articles.items()], more
         finally:
             conn.close()
 
