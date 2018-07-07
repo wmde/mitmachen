@@ -65,6 +65,12 @@ $( function() {
                         $("<span/>").addClass("badge").addClass("badge-warning").text(problem).appendTo(li);
                     });
                 });
+
+                if (result.articles.length == 0) {
+                    $("<li/>").addClass("list-group-item")
+                        .text("Keine Ergebnisse gefunden. Wie wäre es mit einem der nebenstehenden Themen?")
+                        .appendTo(articleList);
+                }
             });
         }
     });
