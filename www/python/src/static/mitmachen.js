@@ -63,6 +63,7 @@ $( function() {
 
                     $.each(doc.problems, function(i, problem){
                         $("<span/>").addClass("badge").addClass("badge-warning").text(problem).appendTo(li);
+                        li.append(" ");
                     });
                 });
 
