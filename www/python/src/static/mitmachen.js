@@ -2,7 +2,7 @@ $( function() {
     // https://stackoverflow.com/questions/34704997/jquery-autocomplete-in-flask
     $("#category").autocomplete({
         source:function(request, response) {
-            $.getJSON("{{url_for('autocomplete')}}",{
+            $.getJSON($URL_FOR_AUTOCOMPLETE,{
                 q: request.term,
             },
             function(data) {
@@ -15,7 +15,7 @@ $( function() {
         }
     });
 
-    $.getJSON("{{url_for('suggest')}}", {},
+    $.getJSON($URL_FOR_SUGGEST, {},
         function(result) {
             var suggest = $("#suggested").text("Wie wäre es mit ")
             $.each(result.categories, function(i, value) {
@@ -49,7 +49,7 @@ $( function() {
             .text("Bitte warten...").appendTo(articleList);
 
 
-        $.getJSON("{{url_for('find')}}", {q: topic}, function(result) {
+        $.getJSON($URL_FOR_FIND, {q: topic}, function(result) {
             articleList.empty();
             $.each(result.articles, function(i, doc) {
                 var li = $("<li/>").addClass("list-group-item").appendTo(articleList);

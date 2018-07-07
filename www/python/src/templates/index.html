@@ -11,6 +11,11 @@
     <script src="https://tools-static.wmflabs.org/cdnjs/ajax/libs/popper.js/1.13.0/umd/popper.js"></script>
     <script src="https://tools-static.wmflabs.org/cdnjs/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="{{ url_for('static', filename='mitmachen.js') }}"></script>
+    <script type=text/javascript>
+        $URL_FOR_SUGGEST = {{url_for('suggest')|tojson|safe}};
+        $URL_FOR_FIND = {{url_for('find')|tojson|safe}};
+        $URL_FOR_AUTOCOMPLETE = {{url_for('autocomplete')|tojson|safe}};
+    </script>
 </head>
 <body class="bg-light">
 
