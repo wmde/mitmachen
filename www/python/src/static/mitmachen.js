@@ -37,7 +37,7 @@ $( function() {
     });
 
     $("#category").on("change keypress", function(event) {
-        if (e.type == 'change' || (e.type == 'keypress' && e.which == 13)) {
+        if (event.type == 'change' || (event.type == 'keypress' && event.which == 13)) {
             var topic = $("#category").val();
             console.log(topic);
 
