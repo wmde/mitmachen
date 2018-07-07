@@ -142,14 +142,14 @@ class Mitmachen:
                 articles = self._extract_problems(cursor.fetchall(),
                                                   articles)
 
+            articles = articles.items()
+
             more = len(articles) > self.NUM
             if more:
-                selected_articles = random.sample(list(articles), self.NUM)
-            else:
-                selected_articles = list(articles)
+                articles = random.sample(articles, self.NUM)
 
             return [{"page": page, "problems": list(set(problems))}
-                    for page, problems in selected_articles], more
+                    for page, problems in articles], more
         finally:
             conn.close()
 
