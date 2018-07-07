@@ -97,7 +97,7 @@ class Mitmachen:
         are examined. See :meth:`._find_all_subcategories` and
         :meth:`._find_tagged_articles` for details.
         """
-        tree = {[category.replace(" ", "_")]}
+        tree = set([category.replace(" ", "_")])
         self._find_all_subcategories([category], tree, 0)
         return self._find_tagged_articles(list(tree))
 
