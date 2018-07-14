@@ -22,9 +22,9 @@ __dir__ = os.path.abspath("../queries")
 
 
 def generate_iabot_cats():
-    archive = ["Wikipedia:Defekte_Weblinks/Ungeprüfte_Archivlinks 2018-%02d" % i
+    archive = ["Wikipedia:Defekte_Weblinks/Ungeprüfte_Archivlinks_2018-%02d" % i
                for i in range(4, 13)]
-    dead = ["Wikipedia:Defekte_Weblinks/Ungeprüfte_Botmarkierungen 2018-%02d" % i
+    dead = ["Wikipedia:Defekte_Weblinks/Ungeprüfte_Botmarkierungen_2018-%02d" % i
             for i in range(4, 13)]
     return archive + dead
 

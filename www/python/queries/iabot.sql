@@ -1,8 +1,6 @@
-USE dewiki_p;
-
 SELECT DISTINCT
 	page_title,
-	"Ungeprüfter_Link" AS tl_title
+	'Ungeprüfter Link' AS tl_title
 FROM
 	page,
     (SELECT DISTINCT
