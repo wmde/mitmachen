@@ -11,8 +11,12 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
+import json
 import flask
 from api import Mitmachen
+
+with open("text.js", "rt") as f:
+    text = json.load(f)
 
 api = Mitmachen()
 app = flask.Flask(__name__)
@@ -20,7 +24,7 @@ app = flask.Flask(__name__)
 
 @app.route("/")
 def index():
-    return flask.render_template("index.html")
+    return flask.render_template("index.html", text=text)
 
 
 @app.route("/autocomplete", methods=["GET"])

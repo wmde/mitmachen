@@ -1,4 +1,14 @@
 $( function() {
+    // All displayed text is defined here
+    var text = {
+        SUGGEST_INTRO: "Wie wäre es mit",
+        SUGGEST_OR: "oder",
+        PLEASE_WAIT: "Bitte warten...",
+        NO_RESULTS: "Keine Ergebnisse gefunden. Wie wäre es mit einem der nebenstehenden Themen?",
+        MORE_RESULTS: "Weitere Ergebnisse verfügbar.",
+        LOAD_MORE: "Neue Auswahl"
+    }
+
     // https://stackoverflow.com/questions/34704997/jquery-autocomplete-in-flask
     $("#category").autocomplete({
         source:function(request, response) {
@@ -18,7 +28,7 @@ $( function() {
     function suggest_topics() {
         $.getJSON($URL_FOR_SUGGEST, {},
             function(result) {
-                var suggest = $("#suggested").text("Wie wäre es mit ")
+                var suggest = $("#suggested").text(text.SUGGEST_INTRO + " ")
                 $.each(result.categories, function(i, value) {
                     $("<span />").addClass("badge")
                         .addClass("badge-secondary").css("white-space", "normal")
@@ -26,7 +36,7 @@ $( function() {
                     if (i < result.categories.length - 2) {
                         suggest.append(" ");
                     } else if ( i == result.categories.length - 2) {
-                        suggest.append(" oder ")
+                        suggest.append(" " + text.SUGGEST_OR + " ")
                     }
                 });
                 suggest.append("?");
@@ -37,7 +47,6 @@ $( function() {
                 });
         });
     }
-    suggest_topics();
 
     $("#category").on("change keypress", function(event) {
         if (event.type == 'change' || (event.type == 'keypress' && event.which == 13)) {
@@ -48,7 +57,7 @@ $( function() {
             articleList.empty();
 
             $("<li/>").addClass("list-group-item")
-                .text("Bitte warten...").appendTo(articleList);
+                .text(text.PLEASE_WAIT).appendTo(articleList);
 
 
             $.getJSON($URL_FOR_FIND, {q: topic}, function(result) {
@@ -80,19 +89,19 @@ $( function() {
 
                 if (result.articles.length == 0) {
                     $("<li/>").addClass("list-group-item")
-                              .text("Keine Ergebnisse gefunden. Wie wäre es mit einem der nebenstehenden Themen?")
+                              .text(text.NO_RESULTS)
                               .appendTo(articleList);
                     suggest_topics();
                 }
 
                 if (result.more) {
                     var more = $("<li/>").addClass("list-group-item")
-                                         .text("Weitere Ergebnisse verfügbar.")
+                                         .text(text.MORE_RESULTS)
                                          .appendTo(articleList);
                     $("<button />").addClass("btn")
                                    .addClass("btn-secondary")
                                    .attr("type", "button")
-                                   .text("Neue Auswahl")
+                                   .text(text.LOAD_MORE)
                                    .click(function(event) {
                                        $("#category").change();
                                    })

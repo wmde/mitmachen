@@ -22,22 +22,22 @@
 <div class="container">
 
     <div class="py-5 text-center">
-        <h2>Mitmachen!</h2>
-        <p class="lead">Bei Wikipedia gibt es immer was zu tun...</p>
+        <h2>{{ text.TITLE }}</h2>
+        <p class="lead">{{ text.CLAIM }}</p>
     </div>
     <div class="row">
         <div class="col-md-3 mb-3">
             <div>
-                <label for="category">In welchem Themengebiet kennst du dich aus?</label>
+                <label for="category">{{ text.INTRO_QUESTION }}</label>
                 <input id="category" class="form-control input-lg">
             </div>
             <div class="mb-3">
-                <p class="text-small text-muted" id="suggested"></p>
+                <p class="text-small text-muted" id="suggested">{{ text.INTRO_LOADING }}</p>
             </div>
         </div>
         <div class="col-md-6 mb-3">
             <ul id="articles" class="list-group mb-3">
-                <li class="list-group-item">Benutze die Suchfunktion, um ein Themengebiet auszuwählen!</li>
+                <li class="list-group-item">{{ text.INTRO_SEARCH }}</li>
             </ul>
         </div>
         <div class="col-md-3 mb-3">
