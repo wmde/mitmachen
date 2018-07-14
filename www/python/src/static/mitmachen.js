@@ -47,6 +47,7 @@ $( function() {
                 });
         });
     }
+    suggest_topics();
 
     $("#category").on("change keypress", function(event) {
         if (event.type == 'change' || (event.type == 'keypress' && event.which == 13)) {
