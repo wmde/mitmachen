@@ -21,11 +21,20 @@ import toolforge
 __dir__ = os.path.abspath("../queries")
 
 
+def generate_iabot_cats():
+    archive = ["Wikipedia:Defekte_Weblinks/Ungeprüfte_Archivlinks 2018-%02d" % i
+               for i in range(4, 13)]
+    dead = ["Wikipedia:Defekte_Weblinks/Ungeprüfte_Botmarkierungen 2018-%02d" % i
+            for i in range(4, 13)]
+    return archive + dead
+
+
 class Mitmachen:
     MAX_DEPTH = 3  # maximum depth in category tree search
     TAGS = ["Überarbeiten", "Lückenhaft", "Veraltet",
             "Belege_fehlen", "Allgemeinverständlichkeit"]
     NUM = 10  # number of articles to return (goal)
+    IABOT_CATS = generate_iabot_cats()
 
     def __init__(self):
         self.logger = logging.getLogger("mitmachen")
@@ -34,6 +43,7 @@ class Mitmachen:
         self.suggest_query = self._load("suggest.sql")
         self.subcategory_query = self._load("subcategories.sql")
         self.articles_query = self._load("articles.sql")
+        self.iabot_query = self._load("iabot.sql")
 
     def _get_connection(self):
         return toolforge.connect("dewiki_p",
@@ -142,8 +152,16 @@ class Mitmachen:
                 articles = self._extract_problems(cursor.fetchall(),
                                                   articles)
 
-            articles = articles.items()
+            with conn.cursor() as cursor:
+                cursor.execute(self.iabot_query,
+                               {"categories": categories,
+                                "iabot_categories": self.IABOT_CATS})
+                conn.commit()
+                articles = self._extract_problems(cursor.fetchall(),
+                                                  articles)
 
+            articles = articles.items()
+            
             more = len(articles) > self.NUM
             if more:
                 articles = random.sample(articles, self.NUM)

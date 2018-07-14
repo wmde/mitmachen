@@ -1,0 +1,24 @@
+USE dewiki_p;
+
+SELECT DISTINCT
+	page_title,
+	"Ungeprüfter_Link" AS tl_title
+FROM
+	page,
+    (SELECT DISTINCT
+		page_id
+	FROM
+		page,
+    	categorylinks
+	WHERE
+     cl_to IN %(categories)s
+        AND cl_type = 'page'
+        AND cl_from = page_id
+    LIMIT 10000) AS subpages,
+    categorylinks
+WHERE
+	page.page_id = subpages.page_id
+    AND cl_to IN %(iabot_categories)s
+    AND cl_type = 'page'
+    AND cl_from = page.page_id
+LIMIT 100;
