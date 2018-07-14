@@ -22,14 +22,15 @@ api = Mitmachen()
 app = flask.Flask(__name__)
 
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def index():
-    return flask.render_template("index.html", text=text)
+    query = flask.request.args.get("q", default="")
+    return flask.render_template("index.html", text=text, query=query)
 
 
 @app.route("/autocomplete", methods=["GET"])
 def autocomplete():
-    first_letters = flask.request.args.get("q")
+    first_letters = flask.request.args.get("q", default="A")
     return flask.jsonify({"categories": api.matching_categories(first_letters)})
 
 
@@ -40,6 +41,6 @@ def suggest():
 
 @app.route("/find", methods=["GET"])
 def find():
-    category = flask.request.args.get("q")
+    category = flask.request.args.get("q", default="")
     articles, more = api.find_articles(category)
     return flask.jsonify({"articles": articles, "more": more})
