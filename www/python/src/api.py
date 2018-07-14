@@ -175,7 +175,10 @@ class Mitmachen:
         for item in result:
             try:
                 page = item["page_title"].decode("utf-8")
-                problem = item["tl_title"].decode("utf-8").replace("_", " ")
+                try:
+                    problem = item["tl_title"].decode("utf-8").replace("_", " ")
+                except AttributeError:
+                    problem = item["tl_title"]
             except Exception as e:
                 self.logger.error(
                     "Failed to extract problem from query result: %s", e)
