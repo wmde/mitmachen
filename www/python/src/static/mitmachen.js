@@ -112,4 +112,7 @@ $( function() {
         }
     });
 
+    if ($("#category").val() != "") {
+        $("#category").change();
+    }
 });
