@@ -31,7 +31,7 @@ $( function() {
                 var suggest = $("#suggested").text(text.SUGGEST_INTRO + " ")
                 $.each(result.categories, function(i, value) {
                     $("<span />").addClass("badge")
-                        .addClass("badge-secondary").css("white-space", "normal")
+                        .addClass("badge-secondary").attr("title", value)
                         .attr("id", "suggest-" + value).text(value).appendTo(suggest);
                     if (i < result.categories.length - 2) {
                         suggest.append(" ");
