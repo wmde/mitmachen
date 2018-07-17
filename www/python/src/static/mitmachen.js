@@ -6,7 +6,12 @@ $( function() {
         PLEASE_WAIT: "Bitte warten...",
         NO_RESULTS: "Keine Ergebnisse gefunden. Wie wäre es mit einem der nebenstehenden Themen?",
         MORE_RESULTS: "Weitere Ergebnisse verfügbar.",
-        LOAD_MORE: "Neue Auswahl"
+        LOAD_MORE: "Neue Auswahl",
+        "Belege fehlen": "In diesem Artikel fehlen Belege für Behauptungen",
+        "Veraltet": "Teile dieses Artikels sind nicht auf dem neuesten Stand",
+        "Lückenhaft": "Dieser Artikel ist nicht vollständig",
+        "Ungeprüfter Link": "In diesem Artikel wurde automatisch ein Link aktualisiert.",
+        "Überarbeiten": "In diesem Artikel muss grundlegend etwas verändert werden."
     }
 
     // https://stackoverflow.com/questions/34704997/jquery-autocomplete-in-flask
@@ -75,6 +80,7 @@ $( function() {
                                  .html(result.displaytitle)
                                  .appendTo(htitle);
                         $("<small/>").addClass("text-muted")
+                                     .attr("title", text[result.description])
                                      .text(result.description)
                                      .appendTo(div);
                     });
