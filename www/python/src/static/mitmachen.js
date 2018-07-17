@@ -80,7 +80,6 @@ $( function() {
                                  .html(result.displaytitle)
                                  .appendTo(htitle);
                         $("<small/>").addClass("text-muted")
-                                     .attr("title", text[result.description])
                                      .text(result.description)
                                      .appendTo(div);
                     });
@@ -88,6 +87,7 @@ $( function() {
                     $.each(doc.problems, function(i, problem){
                         $("<span/>").addClass("badge")
                                     .addClass("badge-warning")
+                                    .attr("title", text[problem])
                                     .text(problem)
                                     .appendTo(li);
                         li.append(" ");
