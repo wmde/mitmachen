@@ -57,66 +57,69 @@ $( function() {
     $("#category").on("change keypress", function(event) {
         if (event.type == 'change' || (event.type == 'keypress' && event.which == 13)) {
             var topic = $("#category").val();
-            console.log(topic);
 
             $("#suggested").empty();
 
             var articleList = $("#articles");
             articleList.empty();
 
-            $("<li/>").addClass("list-group-item")
-                .text(text.PLEASE_WAIT).appendTo(articleList);
+            if (!topic) {
+                suggest_topics();
+            } else {
+                $("<li/>").addClass("list-group-item")
+                    .text(text.PLEASE_WAIT).appendTo(articleList);
 
 
-            $.getJSON($URL_FOR_FIND, {q: topic}, function(result) {
-                articleList.empty();
-                $.each(result.articles, function(i, doc) {
-                    var li = $("<li/>").addClass("list-group-item")
-                                       .appendTo(articleList);
-                    var div = $("<div/>").appendTo(li);
-                    var htitle = $("<h6>").addClass("my-0").appendTo(div);
+                $.getJSON($URL_FOR_FIND, {q: topic}, function(result) {
+                    articleList.empty();
+                    $.each(result.articles, function(i, doc) {
+                        var li = $("<li/>").addClass("list-group-item")
+                                           .appendTo(articleList);
+                        var div = $("<div/>").appendTo(li);
+                        var htitle = $("<h6>").addClass("my-0").appendTo(div);
 
-                    $.getJSON("https://de.wikipedia.org/api/rest_v1/page/summary/".concat(encodeURIComponent(doc.page)),
-                    function(result) {
-                        $("<a/>").attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)))
-                                 .html(result.displaytitle)
-                                 .appendTo(htitle);
-                        $("<small/>").addClass("text-muted")
-                                     .text(result.description)
-                                     .appendTo(div);
+                        $.getJSON("https://de.wikipedia.org/api/rest_v1/page/summary/".concat(encodeURIComponent(doc.page)),
+                        function(result) {
+                            $("<a/>").attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)))
+                                     .html(result.displaytitle)
+                                     .appendTo(htitle);
+                            $("<small/>").addClass("text-muted")
+                                         .text(result.description)
+                                         .appendTo(div);
+                        });
+
+                        $.each(doc.problems, function(i, problem){
+                            $("<span/>").addClass("badge")
+                                        .addClass("badge-warning")
+                                        .attr("title", text[problem])
+                                        .text(problem)
+                                        .appendTo(li);
+                            li.append(" ");
+                        });
                     });
 
-                    $.each(doc.problems, function(i, problem){
-                        $("<span/>").addClass("badge")
-                                    .addClass("badge-warning")
-                                    .attr("title", text[problem])
-                                    .text(problem)
-                                    .appendTo(li);
-                        li.append(" ");
-                    });
+                    if (result.articles.length == 0) {
+                        $("<li/>").addClass("list-group-item")
+                                  .text(text.NO_RESULTS)
+                                  .appendTo(articleList);
+                        suggest_topics();
+                    }
+
+                    if (result.more) {
+                        var more = $("<li/>").addClass("list-group-item")
+                                             .text(text.MORE_RESULTS)
+                                             .appendTo(articleList);
+                        $("<button />").addClass("btn")
+                                       .addClass("btn-secondary")
+                                       .attr("type", "button")
+                                       .text(text.LOAD_MORE)
+                                       .click(function(event) {
+                                           $("#category").change();
+                                       })
+                                       .appendTo(more);
+                    }
                 });
-
-                if (result.articles.length == 0) {
-                    $("<li/>").addClass("list-group-item")
-                              .text(text.NO_RESULTS)
-                              .appendTo(articleList);
-                    suggest_topics();
-                }
-
-                if (result.more) {
-                    var more = $("<li/>").addClass("list-group-item")
-                                         .text(text.MORE_RESULTS)
-                                         .appendTo(articleList);
-                    $("<button />").addClass("btn")
-                                   .addClass("btn-secondary")
-                                   .attr("type", "button")
-                                   .text(text.LOAD_MORE)
-                                   .click(function(event) {
-                                       $("#category").change();
-                                   })
-                                   .appendTo(more);
-                }
-            });
+            }
         }
     });
 
