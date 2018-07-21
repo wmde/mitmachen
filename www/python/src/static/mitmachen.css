@@ -1,30 +1,29 @@
 body {
-    color: #222; // Wikimedia Base10
+    color: #222;  /* Wikimedia Base10 */
 }
 
 .bg-light {
-    background-color: #eaecf0 !important; // Wikimedia Base80
+    background-color: #eaecf0 !important; /* Wikimedia Base80 */
 }
 
 a {
-    color: #36c; // Wikimedia Accent50
+    color: #36c; /* Wikimedia Accent50 */
 }
 
 .text-muted {
-    color: #72777d; // Wikimedia Base30
+    color: #72777d !important; /* Wikimedia Base30 */
 }
 
 span.badge-warning {
-    color: #222; // Wikimedia Base10
-    background-color: #fc3; // Wikimedia Yellow50
+    color: #222; /* Wikimedia Base10 */
+    background-color: #fc3; /* Wikimedia Yellow50 */
     cursor: help;
 }
 
 span.badge-secondary {
-    color: #eaecf0; // Wikimedia Base80
-    background-color: #14866d; // Wikimedia Green30
+    color: #eaecf0; /* Wikimedia Base80 */
+    background-color: #14866d; /* Wikimedia Green30 */
 }
-
 
 [id^=suggest-] {
     cursor: pointer;
@@ -32,4 +31,3 @@ span.badge-secondary {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
