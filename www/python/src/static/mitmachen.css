@@ -14,12 +14,13 @@ a {
     color: #72777d; // Wikimedia Base30
 }
 
-.badge-warning {
+span.badge-warning {
     color: #222; // Wikimedia Base10
     background-color: #fc3; // Wikimedia Yellow50
+    cursor: help;
 }
 
-.badge-secondary {
+span.badge-secondary {
     color: #eaecf0; // Wikimedia Base80
     background-color: #14866d; // Wikimedia Green30
 }
@@ -32,6 +33,3 @@ a {
     text-overflow: ellipsis;
 }
 
-span.badge-warning {
-    cursor: help;
-}
