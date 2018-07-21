@@ -27,21 +27,19 @@
         <p class="lead">{{ text.CLAIM }}</p>
     </div>
     <div class="row">
-        <div class="col-md-3 mb-3">
+        <div class="col-md-6 mb-3">
             <div>
                 <label for="category">{{ text.INTRO_QUESTION }}</label>
                 <input id="category" class="form-control input-lg" type="text" value="{{ query }}">
             </div>
             <div class="mb-3">
+                <ul id="articles" class="list-group mb-3">
+                </ul>
                 <p class="text-small text-muted" id="suggested">{{ text.SUGGEST_LOADING }}</p>
             </div>
         </div>
+
         <div class="col-md-6 mb-3">
-            <ul id="articles" class="list-group mb-3">
-                <li class="list-group-item">{{ text.INTRO_SEARCH }}</li>
-            </ul>
-        </div>
-        <div class="col-md-3 mb-3">
             <h4>Tutorials</h4>
             <p>Hier könnten Links und Videos eingebettet werden.</p>
         </div>

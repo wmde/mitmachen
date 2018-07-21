@@ -4,7 +4,7 @@ $( function() {
         SUGGEST_INTRO: "Wie wäre es mit",
         SUGGEST_OR: "oder",
         PLEASE_WAIT: "Bitte warten...",
-        NO_RESULTS: "Keine Ergebnisse gefunden. Wie wäre es mit einem der nebenstehenden Themen?",
+        NO_RESULTS: "Keine Ergebnisse gefunden.",
         MORE_RESULTS: "Weitere Ergebnisse verfügbar.",
         LOAD_MORE: "Neue Auswahl",
         "Belege fehlen": "In diesem Artikel fehlen Belege für Behauptungen",
@@ -58,6 +58,8 @@ $( function() {
         if (event.type == 'change' || (event.type == 'keypress' && event.which == 13)) {
             var topic = $("#category").val();
             console.log(topic);
+
+            $("#suggested").empty();
 
             var articleList = $("#articles");
             articleList.empty();
