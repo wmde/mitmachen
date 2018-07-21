@@ -1,3 +1,30 @@
+body {
+    color: #222; // Wikimedia Base10
+}
+
+.bg-light {
+    background-color: #eaecf0 !important; // Wikimedia Base80
+}
+
+a {
+    color: #36c; // Wikimedia Accent50
+}
+
+.text-muted {
+    color: #72777d; // Wikimedia Base30
+}
+
+.badge-warning {
+    color: #222; // Wikimedia Base10
+    background-color: #fc3; // Wikimedia Yellow50
+}
+
+.badge-secondary {
+    color: #eaecf0; // Wikimedia Base80
+    background-color: #14866d; // Wikimedia Green30
+}
+
+
 [id^=suggest-] {
     cursor: pointer;
     max-width: 100%;
