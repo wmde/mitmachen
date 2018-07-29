@@ -90,13 +90,7 @@ class Mitmachen:
                         "Failed to return list of random categories: %s", e)
                     return ["China", "19. Jahrhundert", "Fußball"]
                 else:
-                    # Sort long category names to the center
-                    # of the list for improved UI layout
-                    ordered = sorted(sugg, key=len)
-                    point = int(len(ordered) / 2)
-                    categories = ordered[:point]
-                    categories.extend(reversed(ordered[point:]))
-                    return categories
+                    return sugg
 
         finally:
             conn.close()
