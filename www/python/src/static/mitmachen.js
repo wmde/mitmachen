@@ -118,6 +118,7 @@ $( function() {
                                        .click(function(event) {
                                            $("#category").change();
                                        })
+                                       .css("margin-left", "0.5em")
                                        .appendTo(more);
                     }
                 });
