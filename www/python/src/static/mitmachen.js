@@ -27,6 +27,7 @@ $( function() {
         minLength: 3,
         select: function(event, ui) {
             console.log(ui.item.value);
+            $("#category").val(ui.item.value);
             $("#category").change();
         }
     });
