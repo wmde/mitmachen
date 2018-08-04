@@ -11,6 +11,7 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
+import json
 import logging
 import os
 import random
@@ -45,6 +46,13 @@ class Mitmachen:
         self.articles_query = self._load("articles.sql")
         self.iabot_query = self._load("iabot.sql")
 
+        autocomplete_result = os.path.join(__dir__, "autocomplete.json")
+        if os.path.exists(autocomplete_result):
+            with open(autocomplete_result, "rt") as f:
+                self.all_categories = json.load(f)
+        else:
+            self.all_categories = {}
+
     def _get_connection(self):
         return toolforge.connect("dewiki_p",
                                  cursorclass=pymysql.cursors.DictCursor)
@@ -73,6 +81,13 @@ class Mitmachen:
                     return []
         finally:
             conn.close()
+
+    def autocomplete(self, first_letters):
+        if self.all_categories:
+            key = first_letters[:3].capitalize()
+            return self.all_categories.get(key, default=[])
+        else:
+            return self.matching_categories(first_letters)
 
     def suggest_categories(self):
         """Return a list of random category names."""
