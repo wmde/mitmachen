@@ -83,12 +83,10 @@ class Mitmachen:
             conn.close()
 
     def autocomplete(self, first_letters):
-        first_letters = first_letters.capitalize()
-
         if self.all_categories:
-            key = first_letters[:3]
+            key = first_letters[:3].capitalize()
             return [cat for cat in self.all_categories.get(key, [])
-                    if cat.startswith(first_letters)]
+                    if cat.lower().startswith(first_letters.lower())]
         else:
             return self.matching_categories(first_letters)
 

@@ -30,7 +30,7 @@ def index():
 
 @app.route("/autocomplete", methods=["GET"])
 def autocomplete():
-    first_letters = flask.request.args.get("q", default="A")
+    first_letters = flask.request.args.get("q", default="Aaa")
     return flask.jsonify({"categories": api.autocomplete(first_letters)})
 
 
