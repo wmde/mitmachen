@@ -27,4 +27,3 @@ for combination in itertools.product(uppercase, lowercase, lowercase):
 print("Final save...")
 with open("autocomplete.json", "wt") as f:
     json.dump(all_categories, f)
-    
