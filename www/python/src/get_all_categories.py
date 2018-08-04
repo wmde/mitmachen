@@ -13,9 +13,10 @@ all_categories = {}
 i = 0
 
 for combination in itertools.product(uppercase, lowercase, lowercase):
-    categories = m.matching_categories(combination)
+    triple = "".join(combination)
+    categories = m.matching_categories(triple)
     if categories:
-        all_categories[combination] = categories
+        all_categories[triple] = categories
         i += 1
 
         if not i % 100:

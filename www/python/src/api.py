@@ -85,7 +85,7 @@ class Mitmachen:
     def autocomplete(self, first_letters):
         if self.all_categories:
             key = first_letters[:3].capitalize()
-            return self.all_categories.get(key, default=[])
+            return self.all_categories.get(key, [])
         else:
             return self.matching_categories(first_letters)
 

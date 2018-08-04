@@ -27,7 +27,7 @@ span.badge-secondary {
 
 [id^=suggest-] {
     cursor: pointer;
-    max-width: 100%;
+    max-width: 35%;
     overflow: hidden;
     text-overflow: ellipsis;
 }
