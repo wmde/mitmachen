@@ -2,6 +2,14 @@ body {
     color: #222;  /* Wikimedia Base10 */
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: Lato, sans-serif;
+}
+
+.lead {
+    font-family: Lato, sans-serif;
+}
+
 .bg-light {
     background-color: #eaecf0 !important; /* Wikimedia Base80 */
 }
