@@ -14,6 +14,10 @@ a {
     color: #72777d !important; /* Wikimedia Base30 */
 }
 
+span.badge {
+    font-size: 90%;
+}
+
 span.badge-warning {
     color: #222; /* Wikimedia Base10 */
     background-color: #fc3; /* Wikimedia Yellow50 */
@@ -21,7 +25,7 @@ span.badge-warning {
 }
 
 span.badge-secondary {
-    color: #eaecf0; /* Wikimedia Base80 */
+    color: #ffffff;
     background-color: #14866d; /* Wikimedia Green30 */
 }
 
