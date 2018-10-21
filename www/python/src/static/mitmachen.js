@@ -7,11 +7,11 @@ $( function() {
         NO_RESULTS: "Dazu haben wir leider nichts gefunden. Wie wäre es mit einem anderen Thema?",
         MORE_RESULTS: "Zu diesem Thema gibt's noch mehr...",
         LOAD_MORE: "neue Vorschläge anzeigen",
-        "Belege ergänzen": "In diesem Artikel fehlen Belege. Recherchiere fehlende Quellen und füge sie ein.",
-        "Artikel aktualisieren": "Teile dieses Artikels sind nicht auf dem neuesten Stand. Recherchiere die Informationen und ergänze den Artikel.",
-        "Artikel ergänzen": "In diesem Artikel fehlen wichtige Informationen. Recherchiere die Informationen und ergänze den Artikel.",
-        "Link prüfen": "In diesem Artikel wurde ein Link automatisch aktualisiert. Prüfe, ob der Link noch stimmt.",
-        "Artikel überarbeiten": "In diesem Artikel muss grundlegend etwas verändert werden. Schau nach, was fehlt und überarbeite den Artikel."
+        "Belege fehlen": "In diesem Artikel fehlen Belege. Recherchiere fehlende Quellen und füge sie ein.",
+        "Veraltet": "Teile dieses Artikels sind nicht auf dem neuesten Stand. Recherchiere die Informationen und ergänze den Artikel.",
+        "Lückenhaft": "In diesem Artikel fehlen wichtige Informationen. Recherchiere die Informationen und ergänze den Artikel.",
+        "Ungeprüfter Link": "In diesem Artikel wurde ein Link automatisch aktualisiert. Prüfe, ob der Link noch stimmt.",
+        "Überarbeiten": "In diesem Artikel muss grundlegend etwas verändert werden. Schau nach, was fehlt und überarbeite den Artikel."
     }
 
     // https://stackoverflow.com/questions/34704997/jquery-autocomplete-in-flask
