@@ -23,10 +23,10 @@ __dir__ = os.path.abspath("../queries")
 
 
 def generate_iabot_cats():
-    archive = ["Wikipedia:Defekte_Weblinks/Ungeprüfte_Archivlinks_2018-%02d" % i
-               for i in range(4, 13)]
-    dead = ["Wikipedia:Defekte_Weblinks/Ungeprüfte_Botmarkierungen_2018-%02d" % i
-            for i in range(4, 13)]
+    archive = ["Wikipedia:Defekte_Weblinks/Ungeprüfte_Archivlinks_201%d-%02d" % (y, m)
+               for m in range(4, 13) for y in (8, 9)]
+    dead = ["Wikipedia:Defekte_Weblinks/Ungeprüfte_Botmarkierungen_201%d-%02d" % (y, m)
+            for m in range(4, 13) for y in (8, 9)]
     return archive + dead
 
 
@@ -83,6 +83,7 @@ class Mitmachen:
             conn.close()
 
     def autocomplete(self, first_letters):
+        """Return a list of autocomplete suggestions."""
         if self.all_categories:
             key = first_letters[:3].capitalize()
             return [cat for cat in self.all_categories.get(key, [])
@@ -151,6 +152,7 @@ class Mitmachen:
         self._find_all_subcategories(subcategories, tree, depth + 1)
 
     def _find_tagged_articles(self, categories):
+        """Return a list of articles with associated problems."""
         conn = self._get_connection()
         articles = {}
         try:
@@ -182,6 +184,7 @@ class Mitmachen:
             conn.close()
 
     def _extract_problems(self, result, articles):
+        """Add articles with their associated results to the articles dict."""
         for item in result:
             try:
                 page = item["page_title"].decode("utf-8")
