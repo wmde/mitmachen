@@ -14,6 +14,15 @@ $( function() {
         "Überarbeiten": "In diesem Artikel muss grundlegend etwas verändert werden. Schau nach, was fehlt und überarbeite den Artikel."
     }
 
+    var anchor = {
+        "Belege fehlen": "#Vorlage_Belege_fehlen",
+        "Veraltet": "#Vorlage_Veraltet",
+        "Lückenhaft": "#Vorlage_Lueckenhaft",
+        "Ungeprüfter Link": "",
+        "Überarbeiten": "#Vorlage_Ueberarbeiten",
+        "Allgemeinverständlichkeit": "#Vorlage_Unverstaendlich"
+    }
+
     // https://stackoverflow.com/questions/34704997/jquery-autocomplete-in-flask
     $("#category").autocomplete({
         source:function(request, response) {
@@ -91,7 +100,7 @@ $( function() {
                         });
 
                         $.each(doc.problems, function(i, problem){
-                            var a = $("<a/>").attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)).concat("#Vorlage_").concat(problem.replace(" ", "_")))
+                            var a = $("<a/>").attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)).concat(anchor[problem]))
                                              .appendTo(li);
                             $("<span/>").addClass("badge")
                                         .addClass("badge-warning")
