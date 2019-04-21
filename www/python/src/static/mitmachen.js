@@ -91,12 +91,13 @@ $( function() {
                         });
 
                         $.each(doc.problems, function(i, problem){
+                            var a = $("<a/>").attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)).concat("#Vorlage_").concat(problem.replace(" ", "_")))
+                                             .appendTo(li);
                             $("<span/>").addClass("badge")
                                         .addClass("badge-warning")
-                                        .attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)).concat("#Vorlage_").concat(problem.replace(" ", "_")))
                                         .attr("title", text[problem])
                                         .text(problem)
-                                        .appendTo(li);
+                                        .appendTo(a);
                             li.append(" ");
                         });
                     });
