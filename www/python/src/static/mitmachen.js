@@ -93,6 +93,7 @@ $( function() {
                         $.each(doc.problems, function(i, problem){
                             $("<span/>").addClass("badge")
                                         .addClass("badge-warning")
+                                        .attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)).concat("#Vorlage_").concat(problem.replace(" ", "_")))
                                         .attr("title", text[problem])
                                         .text(problem)
                                         .appendTo(li);
