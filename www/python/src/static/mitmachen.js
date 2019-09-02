@@ -26,8 +26,12 @@ $( function() {
     // https://stackoverflow.com/questions/34704997/jquery-autocomplete-in-flask
     $("#category").autocomplete({
         source:function(request, response) {
+            var term = request.term.trim();
+            if(term == ""){
+                return false;
+            }
             $.getJSON($URL_FOR_AUTOCOMPLETE,{
-                q: request.term,
+                q: term,
             },
             function(data) {
                 response(data.categories);
@@ -35,7 +39,6 @@ $( function() {
         },
         minLength: 3,
         select: function(event, ui) {
-            console.log(ui.item.value);
             $("#category").val(ui.item.value);
             $("#category").change();
         }
@@ -66,9 +69,10 @@ $( function() {
     suggest_topics();
 
     $("#category").on("change keypress", function(event) {
-        if (event.type == 'change' || (event.type == 'keypress' && event.which == 13)) {
+        // if (event.type == 'change' || (event.type == 'keypress' && event.which == 13)) {
+        if (event.type == 'keypress' && event.which == 13) {
             var topic = $("#category").val();
-
+            topic = topic.trim().toLowerCase();
             $("#suggested").empty();
 
             var articleList = $("#articles");
@@ -92,6 +96,7 @@ $( function() {
                         $.getJSON("https://de.wikipedia.org/api/rest_v1/page/summary/".concat(encodeURIComponent(doc.page)),
                         function(result) {
                             $("<a/>").attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)))
+                                     .attr('target', '_blank')
                                      .html(result.displaytitle)
                                      .appendTo(htitle);
                             $("<small/>").addClass("text-muted")
@@ -138,6 +143,7 @@ $( function() {
     });
 
     if ($("#category").val() != "") {
+        console.log('this is running');
         $("#category").change();
     }
 });
