@@ -9,7 +9,7 @@ FROM
 		page,
     	categorylinks
 	WHERE
-        cl_to IN %(categories)s
+        cl_to REGEXP %(categories)s COLLATE UTF8_GENERAL_CI
         AND cl_type = 'page'
         AND cl_from = page_id
     LIMIT 10000) AS subpages,

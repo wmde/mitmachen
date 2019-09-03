@@ -155,10 +155,11 @@ class Mitmachen:
         """Return a list of articles with associated problems."""
         conn = self._get_connection()
         articles = {}
+        categories_concat = '|'.join(categories)
         try:
             with conn.cursor() as cursor:
                 cursor.execute(self.articles_query,
-                               {"categories": categories,
+                               {"categories": categories_concat,
                                 "tags": self.TAGS})
                 conn.commit()
                 articles = self._extract_problems(cursor.fetchall(),
@@ -166,7 +167,7 @@ class Mitmachen:
 
             with conn.cursor() as cursor:
                 cursor.execute(self.iabot_query,
-                               {"categories": categories,
+                               {"categories": categories_concat,
                                 "iabot_categories": self.IABOT_CATS})
                 conn.commit()
                 articles = self._extract_problems(cursor.fetchall(),
