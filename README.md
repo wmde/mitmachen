@@ -42,5 +42,6 @@ of attention.
 
 ## License
 
-*Mitmachen* is licensed under the
-[Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+The [initial version of *Mitmachen*](https://github.com/ionicsolutions/mitmachen) was licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+
+The version developed in this repository is licenced under [GNU GPL 2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html).
