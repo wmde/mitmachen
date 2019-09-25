@@ -14,6 +14,7 @@
 import json
 import flask
 from api import Mitmachen
+# import request
 
 with open("text.js", "rt") as f:
     text = json.load(f)
@@ -25,8 +26,13 @@ app = flask.Flask(__name__)
 @app.route("/", methods=["GET"])
 def index():
     query = flask.request.args.get("q", default="")
-    return flask.render_template("index.html", text=text, query=query)
+    # return flask.render_template("index.html", text=text, query=query)
+    return flask.render_template("index3.html", text=text, query=query)
 
+@app.route("/articles", methods=["GET"])
+def second():
+    query = flask.request.args.get("q", default="")
+    return flask.render_template("index2.html", text=text, query=query)
 
 @app.route("/autocomplete", methods=["GET"])
 def autocomplete():
@@ -44,3 +50,14 @@ def find():
     category = flask.request.args.get("q", default="")
     articles, more = api.find_articles(category)
     return flask.jsonify({"articles": articles, "more": more})
+
+@app.route("/tracking", methods=["POST"])
+def tracking():
+    data = flask.request.get_json()
+    result = api.save_tracking_info(data)
+    return flask.jsonify({"status": 1, "message": "Saved tracking"})
+
+if __name__ == '__main__':
+    app.debug = True
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
+    app.run(host = '0.0.0.0', port = 5000)

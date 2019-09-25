@@ -5,14 +5,14 @@ conn = toolforge.connect("s53772__mitracking_p", cursorclass=pymysql.cursors.Dic
 
 # having issue with kunst and kultur category, can't get result with space and underscore in between
 all_links = {
-	"Geographie": "https://petscan.wmflabs.org/?psid=11395957&format=json",
-	"Geschichte": "https://petscan.wmflabs.org/?psid=11395982&format=json",
-	"Gesellschaft": "https://petscan.wmflabs.org/?psid=11396009&format=json",
-	"Religion": "https://petscan.wmflabs.org/?psid=11396021&format=json",
-	"Sport": "https://petscan.wmflabs.org/?psid=11396048&format=json",
-	"Technik": "https://petscan.wmflabs.org/?psid=11396099&format=json",
-	"Wissen": "https://petscan.wmflabs.org/?psid=11396124&format=json",
-	"Kunst_und_Kultur": "https://petscan.wmflabs.org/?psid=11397537&format=json"
+	"Geographie": "https://petscan.wmflabs.org/?psid=11458260&format=json",
+	"Geschichte": "https://petscan.wmflabs.org/?psid=11458273&format=json",
+	"Gesellschaft": "https://petscan.wmflabs.org/?psid=11458287&format=json",
+	"Religion": "https://petscan.wmflabs.org/?psid=11458319&format=json",
+	"Sport": "https://petscan.wmflabs.org/?psid=11458327&format=json",
+	"Technik": "https://petscan.wmflabs.org/?psid=11458343&format=json",
+	"Wissen": "https://petscan.wmflabs.org/?psid=11458358&format=json",
+	"Kunst_und_Kultur": "https://petscan.wmflabs.org/?psid=11458424&format=json"
 }
 
 for item in list(all_links.keys()):

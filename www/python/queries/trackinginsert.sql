@@ -1,0 +1,1 @@
+INSERT INTO tracking (type, title, weblink, count) VALUES(%(type)s, %(title)s, %(weblink)s, 1);

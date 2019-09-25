@@ -45,6 +45,8 @@ class Mitmachen:
         self.subcategory_query = self._load("subcategories.sql")
         self.articles_query = self._load("articles.sql")
         self.iabot_query = self._load("iabot.sql")
+        self.tracking_query = self._load("tracking.sql")
+        self.tracking_insert_query = self._load("trackinginsert.sql")
 
         autocomplete_result = os.path.join(__dir__, "autocomplete.json")
         if os.path.exists(autocomplete_result):
@@ -57,10 +59,38 @@ class Mitmachen:
         return toolforge.connect("dewiki_p",
                                  cursorclass=pymysql.cursors.DictCursor)
 
+    def _tracking_connection(self):
+        return toolforge.connect("s53772__mitracking_p", cursorclass=pymysql.cursors.DictCursor)
+
     def _load(self, fname):
         self.logger.info("Load query from '%s'.", fname)
         with open(os.path.join(__dir__, fname), "r") as queryfile:
             return queryfile.read()
+
+    # save tracking data into other DB
+    def save_tracking_info(self, data):
+        conn = self._tracking_connection()
+        try:
+            with conn.cursor() as cursor:
+                cursor.execute(self.tracking_query, {"type": data['type'], "title": data['title']})
+                # tracking_insert_query
+                
+                try:
+                    rowsaffected = cursor.rowcount
+
+                    if rowsaffected >= 1:
+                        conn.commit()
+                        return []
+                    else:
+                        cursor.execute(self.tracking_insert_query, {"type": data['type'], "title": data['title'], "weblink": data['weblink']})
+                        conn.commit()
+                        return []
+                except Exception as e:
+                    self.logger.log('Failed to update, update error: %s', e)
+                    return []
+
+        finally:
+            conn.close()
 
     def matching_categories(self, first_letters):
         """Return a list of categories starting with *first_letters*."""

@@ -1,0 +1,1 @@
+UPDATE tracking SET count = count + 1 WHERE type = %(type)s AND title = %(title)s;
