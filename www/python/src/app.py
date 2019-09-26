@@ -57,7 +57,13 @@ def tracking():
     result = api.save_tracking_info(data)
     return flask.jsonify({"status": 1, "message": "Saved tracking"})
 
-if __name__ == '__main__':
-    app.debug = True
-    app.config['TEMPLATES_AUTO_RELOAD'] = True
-    app.run(host = '0.0.0.0', port = 5000)
+@app.route("/getsubcateg", methods=["POST"])
+def getsubcateg():
+    data = flask.request.get_json()
+    subcategories = api.getsubcategories(data)
+    return flask.jsonify({"status": 1, "message": "All subcategories", "data": subcategories})
+
+# if __name__ == '__main__':
+#     app.debug = True
+#     app.config['TEMPLATES_AUTO_RELOAD'] = True
+#     app.run(host = '0.0.0.0', port = 5000)

@@ -15,7 +15,7 @@ import json
 import logging
 import os
 import random
-
+import ast
 import pymysql.cursors
 import toolforge
 
@@ -47,6 +47,10 @@ class Mitmachen:
         self.iabot_query = self._load("iabot.sql")
         self.tracking_query = self._load("tracking.sql")
         self.tracking_insert_query = self._load("trackinginsert.sql")
+        self.getsubs_query = self._load("getsubs.sql")
+
+
+        self.blacklist = self._readfile("blacklist.txt")
 
         autocomplete_result = os.path.join(__dir__, "autocomplete.json")
         if os.path.exists(autocomplete_result):
@@ -66,6 +70,14 @@ class Mitmachen:
         self.logger.info("Load query from '%s'.", fname)
         with open(os.path.join(__dir__, fname), "r") as queryfile:
             return queryfile.read()
+
+    def _readfile(self, pp):
+        self.logger.info("Reading file: {}".format(pp))
+        with open(os.path.join('./', pp), "r") as bb:
+            full_list = ast.literal_eval(bb.read())
+            full_list = [item.lower().replace(' ', '_') for item in full_list]
+            full_list = list(set(full_list))
+            return full_list
 
     # save tracking data into other DB
     def save_tracking_info(self, data):
@@ -91,6 +103,28 @@ class Mitmachen:
 
         finally:
             conn.close()
+
+    # get subcategories list for all categories
+    def getsubcategories(self, data):
+        conn = self._tracking_connection()
+
+        categories = ast.literal_eval(data['categories'])
+
+        try:
+            with conn.cursor() as cursor:
+                cursor.execute(self.getsubs_query, {"categories": categories})
+                conn.commit()
+
+                try:
+                    subcategories = [item['subcateg'].decode('utf-8') for item in cursor.fetchall()]
+                except Exception as e:
+                    self.logged.log('Failed to fetch subcategories for categories')
+                    return []
+                else:
+                    return subcategories
+        finally:
+            conn.close()
+
 
     def matching_categories(self, first_letters):
         """Return a list of categories starting with *first_letters*."""
@@ -185,6 +219,10 @@ class Mitmachen:
         """Return a list of articles with associated problems."""
         conn = self._get_connection()
         articles = {}
+
+        # categories is list and remove items from it that are in blacklist
+        categories = [item for item in categories if item not in blacklist]
+
         categories_concat = '|'.join(categories)
         try:
             with conn.cursor() as cursor:

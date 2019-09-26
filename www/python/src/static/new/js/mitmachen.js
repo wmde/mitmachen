@@ -22,6 +22,29 @@ var anchor = {
     "Allgemeinverständlichkeit": "#Vorlage_Unverstaendlich"
 }
 
+function suggest_topics() {
+    $.getJSON($URL_FOR_SUGGEST, {},
+        function(result) {
+            var suggest = $("#suggested").text(text.SUGGEST_INTRO + " ")
+            $.each(result.categories, function(i, value) {
+                $("<span />").addClass("badge")
+                    .addClass("badge-secondary").attr("title", value)
+                    .attr("id", "suggest-" + value).text(value).appendTo(suggest);
+                if (i < result.categories.length - 2) {
+                    suggest.append(" ");
+                } else if ( i == result.categories.length - 2) {
+                    suggest.append(" " + text.SUGGEST_OR + " ")
+                }
+            });
+            suggest.append("?");
+
+            $("span.badge").click(function(event){
+                $("#category").val(event.target.id.replace(/suggest-/, ""));
+                $("#category").change();
+            });
+    });
+}
+
 // params - type, title, weblink
 function trackingUserActivity(type, title, weblink){
     var data = {};
@@ -43,6 +66,58 @@ function trackingUserActivity(type, title, weblink){
     })
 }
 
+// get subcategories for categories
+function getSubcategoriesForUser(){
+    var userInt = localStorage.getItem('user_interests');
+
+    if(userInt != undefined){
+        userInt = JSON.parse(userInt);
+        if(userInt.length > 0){
+            $.ajax({
+                url: '/getsubcateg',
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(userInt),
+                success: function(d){
+                    if(d['status']){
+                        $('.categories-subcategories').html('<div class="owl-carousel owl-theme common-grid-listing"></div>');
+
+                        for(var item in d['data']){
+                            $('.owl-carousel').append('<div class="item active"><span>'+d['data'][item]+'</span></div>')
+                        }
+
+                        var owl = $('.owl-carousel');
+                        owl.owlCarousel({
+                            stagePadding: 130,
+                            margin: 10,
+                            nav: true,
+                            loop: false,
+                            navRewind: false,
+                            responsive: {
+                                0: {
+                                    items: 1,
+                                    stagePadding: 50,
+                                },
+                                600: {
+                                    items: 2
+                                },
+                                1000: {
+                                    items: 5
+                                }
+                            }
+                        });
+
+                    }
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            })
+        }
+    }
+}
+
 // function that runs on articles page only
 // check if search term is there, also bring in suggested topics, also topics based on user interests
 function runArticlesCode(){
@@ -56,72 +131,72 @@ function runArticlesCode(){
 
     suggest_topics();
 
+    // fetch subcategories
+    getSubcategoriesForUser();
+
 }
 
 function findTopics(topic){
 
     trackingUserActivity('search', topic, '');
 
-    var articleList = $("#articles");
+    var articleList = $('.results-search');
     articleList.empty();
 
-    $("<li/>").addClass("list-group-item")
-        .text(text.PLEASE_WAIT).appendTo(articleList);
+    $("<div/>").text(text.PLEASE_WAIT).appendTo(articleList);
 
-
-    $.getJSON($URL_FOR_FIND, {q: topic}, function(result) {
+    $.getJSON($URL_TO_FIND, {q: topic}, function(result){
         articleList.empty();
-        $.each(result.articles, function(i, doc) {
-            var li = $("<li/>").addClass("list-group-item")
-                               .appendTo(articleList);
-            var div = $("<div/>").appendTo(li);
-            var htitle = $("<h6>").addClass("my-0").appendTo(div);
 
-            $.getJSON("https://de.wikipedia.org/api/rest_v1/page/summary/".concat(encodeURIComponent(doc.page)),
-            function(result) {
-                $("<a/>").attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)))
-                         .attr('target', '_blank')
-                         .html(result.displaytitle)
-                         .appendTo(htitle);
-                $("<small/>").addClass("text-muted")
-                             .text(result.description)
-                             .appendTo(div);
-            });
-
-            $.each(doc.problems, function(i, problem){
-                var a = $("<a/>").attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)).concat(anchor[problem]))
-                                 .appendTo(li);
-                $("<span/>").addClass("badge")
-                            .addClass("badge-warning")
-                            .attr("title", text[problem])
-                            .text(problem)
-                            .appendTo(a);
-                li.append(" ");
-            });
-        });
-
-        if (result.articles.length == 0) {
-            $("<li/>").addClass("list-group-item")
-                      .text(text.NO_RESULTS)
-                      .appendTo(articleList);
+        if(result.articles.length == 0){
+            $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
             suggest_topics();
         }
 
-        if (result.more) {
-            var more = $("<li/>").addClass("list-group-item")
-                                 .text(text.MORE_RESULTS)
-                                 .appendTo(articleList);
+        $.each(result.articles, function(i, doc){
+
+            var div = $("<div/>").addClass("list-box list-box-new mb-2").appendTo(articleList);
+            var h3 = $("<h3/>").appendTo(div);
+            var ptag = $("<p/>").appendTo(div);
+            var ul = $("<ul/>").addClass('links-row').appendTo(div);
+
+            $.getJSON("https://de.wikipedia.org/api/rest_v1/page/summary/".concat(encodeURIComponent(doc.page)), function(result){
+                $("<a/>").attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page))).attr('target', '_blank').html(result.displaytitle).appendTo(h3);
+                /*$("<small/>").addClass("text-muted")
+                    .text(result.description)
+                    .appendTo(div);*/
+
+                $("<a/>").attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page))).attr('target', '_blank').html("Preview Article").appendTo(ptag);
+            })
+
+            $.each(doc.problems, function(i, problem){
+                var ulLi = $("<li/>");
+                var a = $("<a/>").attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)).concat(anchor[problem])).appendTo(ulLi);
+                $("<span/>").addClass("badge")
+                .addClass("badge-warning")
+                .attr("title", text[problem])
+                .text(problem)
+                .appendTo(a);
+
+                ulLi.appendTo(ul);
+            })
+
+        })
+
+        if(result.more){
+            var more = $("<div/>").text(text.MORE_RESULTS).appendTo(articleList);
             $("<button />").addClass("btn")
-                           .addClass("btn-secondary")
-                           .attr("type", "button")
-                           .text(text.LOAD_MORE)
-                           .click(function(event) {
-                               $("#category").change();
-                           })
-                           .css("margin-left", "0.5em")
-                           .appendTo(more);
+                .addClass("btn-secondary")
+                .attr("type", "button")
+                .text(text.LOAD_MORE)
+                .click(function(event) {
+                    $("#category").change();
+                })
+                .css("margin-left", "0.5em")
+                .appendTo(more);
         }
-    });
+
+    })
 
 }
 
@@ -149,28 +224,7 @@ $( function() {
         }
     });
 
-    function suggest_topics() {
-        $.getJSON($URL_FOR_SUGGEST, {},
-            function(result) {
-                var suggest = $("#suggested").text(text.SUGGEST_INTRO + " ")
-                $.each(result.categories, function(i, value) {
-                    $("<span />").addClass("badge")
-                        .addClass("badge-secondary").attr("title", value)
-                        .attr("id", "suggest-" + value).text(value).appendTo(suggest);
-                    if (i < result.categories.length - 2) {
-                        suggest.append(" ");
-                    } else if ( i == result.categories.length - 2) {
-                        suggest.append(" " + text.SUGGEST_OR + " ")
-                    }
-                });
-                suggest.append("?");
-
-                $("span.badge").click(function(event){
-                    $("#category").val(event.target.id.replace(/suggest-/, ""));
-                    $("#category").change();
-                });
-        });
-    }
+    
     // suggest_topics();
 
     $("#category").on("change keypress", function(event) {

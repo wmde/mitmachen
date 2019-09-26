@@ -1,7 +1,7 @@
 
 
 $(document).ready(function(){
-  var owl = $('.owl-carousel');
+  /*var owl = $('.owl-carousel');
               owl.owlCarousel({
                 stagePadding: 130,
                 margin: 10,
@@ -20,7 +20,7 @@ $(document).ready(function(){
                     items: 5
                   }
                 }
-              });
+              });*/
 
   $('[data-toggle="tooltip"]').tooltip(); 
 
