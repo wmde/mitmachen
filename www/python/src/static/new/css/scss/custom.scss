@@ -4,7 +4,6 @@
 
 
 
-
 .banner-block {
     min-height: 304px;
     background: $clr_primary;
@@ -71,8 +70,9 @@
  
 .navbar-brand {
 	padding:0;
-    margin-left: -3px;
+    margin-left: 3px;
     margin-top: -2px;
+    margin-right: 6px;
     img {
     	@media (min-width:576px) and (max-width:767px) {
     		max-width: 225px;
@@ -135,9 +135,8 @@ nav {
 
 .search-bar-wrap {
 	position:relative;
-	width: 770px;
+	width: 60%;
 	@media (min-width:992px) {
-		max-width: 846px;
 	    margin: 0 auto;
 	}    
   input {
@@ -150,6 +149,7 @@ nav {
 	transition: 0.3s all;
     &:focus {
     	box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15) !important;
+    	font-weight: 600;
     }
     &:hover {
     	box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
@@ -184,7 +184,7 @@ nav {
 
 
 .tabs-block {
-    padding: 20px 0px;
+    padding: 24px 0px 20px;
     overflow: hidden;
     background: #f3f3f3;
 }
@@ -251,7 +251,15 @@ nav {
 		height: 104px;
 		border-radius: 2px;
 		position: relative;
-		border-bottom:5px solid transparent !important;
+		&:after {
+			content:"";
+			height:5px;
+			width:100%;
+			position:absolute;
+			bottom:0;
+			background: transparent;
+			left:0;
+		}
 		&:hover {
 			text-decoration:none;
 			background:#238352;
@@ -273,8 +281,13 @@ nav {
       &.active {
       	a,span {
       		box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.1);
-      		border-bottom:5px solid #238352 !important;
       		border:1px solid #EDEDEE;
+      	}
+
+      	span {
+      		&::after {
+      			background: #238352;
+      		}
       	}
       }
 
@@ -804,7 +817,7 @@ nav {
 
 
 .pop-up-heading {
-	padding-top: 19px;
+	padding-top: 6px;
 	h2 {
 	   font-size: 30px;
 	   color: #000;
@@ -1030,7 +1043,7 @@ nav {
     } 
 
     .container-fluid {
-    	    max-width: 1317px;
+    	 
 	}  
 }
 
@@ -1136,11 +1149,21 @@ nav {
   
   .banner-info {
   	 padding-top: 120px;
+  	 @media (max-width:767px) {
+  	 	padding-top: 92px;
+  	 }
+  	 @media (min-width:992px) {
+  	 	padding-left: 118px;
+  	 }
+  	 @media (min-width:768px) and (max-width:991px) {
+  	 	padding-left:98px;
+  	 }
   }  
 }
 
 .refresh-topic-row {
     margin-bottom: 5px;
+    padding-top: 16px;
 }
 
 .article-page-wrap {
@@ -1223,4 +1246,9 @@ nav {
 	.owl-dots {
 		display: none;
 	}
+}
+
+.banner-block .navbar-brand {
+    margin-left: -3px;
+    margin-right: 1rem;
 }

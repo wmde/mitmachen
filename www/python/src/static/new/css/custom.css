@@ -22,7 +22,7 @@ body {
 
 .main-wrapper {
   margin-bottom: 450px;
-  padding-top: 100px; }
+  padding-top: 98px; }
 
 .pad-top0 {
   padding-top: 0; }
@@ -155,8 +155,9 @@ input:focus {
 
 .navbar-brand {
   padding: 0;
-  margin-left: -3px;
-  margin-top: -2px; }
+  margin-left: 3px;
+  margin-top: -2px;
+  margin-right: 6px; }
   @media (min-width: 576px) and (max-width: 767px) {
     .navbar-brand img {
       max-width: 225px; } }
@@ -198,10 +199,9 @@ nav.navbar.sticky-top {
 
 .search-bar-wrap {
   position: relative;
-  width: 770px; }
+  width: 60%; }
   @media (min-width: 992px) {
     .search-bar-wrap {
-      max-width: 846px;
       margin: 0 auto; } }
   .search-bar-wrap input {
     height: 63px;
@@ -215,7 +215,8 @@ nav.navbar.sticky-top {
     transition: 0.3s all; }
     .search-bar-wrap input:focus {
       -webkit-box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15) !important;
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15) !important; }
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15) !important;
+      font-weight: 600; }
     .search-bar-wrap input:hover {
       -webkit-box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
       box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); }
@@ -240,7 +241,7 @@ nav.navbar.sticky-top {
     top: 21px; }
 
 .tabs-block {
-  padding: 20px 0px;
+  padding: 24px 0px 20px;
   overflow: hidden;
   background: #f3f3f3; }
 
@@ -300,8 +301,15 @@ nav.navbar.sticky-top {
       background: #fff;
       height: 104px;
       border-radius: 2px;
-      position: relative;
-      border-bottom: 5px solid transparent !important; }
+      position: relative; }
+      .common-grid-listing li a:after, .common-grid-listing li span:after, .common-grid-listing .item a:after, .common-grid-listing .item span:after {
+        content: "";
+        height: 5px;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        background: transparent;
+        left: 0; }
       .common-grid-listing li a:hover, .common-grid-listing li span:hover, .common-grid-listing .item a:hover, .common-grid-listing .item span:hover {
         text-decoration: none;
         background: #238352;
@@ -317,8 +325,9 @@ nav.navbar.sticky-top {
     .common-grid-listing li.active a, .common-grid-listing li.active span, .common-grid-listing .item.active a, .common-grid-listing .item.active span {
       -webkit-box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.1);
       box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.1);
-      border-bottom: 5px solid #238352 !important;
       border: 1px solid #EDEDEE; }
+    .common-grid-listing li.active span::after, .common-grid-listing .item.active span::after {
+      background: #238352; }
   .common-grid-listing .item {
     width: 100%; }
 
@@ -723,7 +732,7 @@ nav.navbar.sticky-top {
     width: 214px; } }
 
 .pop-up-heading {
-  padding-top: 19px; }
+  padding-top: 6px; }
   .pop-up-heading h2 {
     font-size: 30px;
     color: #000;
@@ -914,8 +923,6 @@ nav.navbar.sticky-top {
     height: 56px; }
   .header-small .search-bar-wrap i {
     top: 18px; }
-  .header-small .container-fluid {
-    max-width: 1317px; }
 
 .navbar.navbar-expand-lg .container {
   display: block; }
@@ -988,9 +995,19 @@ nav.navbar.sticky-top {
 
 .header-small .banner-info {
   padding-top: 120px; }
+  @media (max-width: 767px) {
+    .header-small .banner-info {
+      padding-top: 92px; } }
+  @media (min-width: 992px) {
+    .header-small .banner-info {
+      padding-left: 118px; } }
+  @media (min-width: 768px) and (max-width: 991px) {
+    .header-small .banner-info {
+      padding-left: 98px; } }
 
 .refresh-topic-row {
-  margin-bottom: 5px; }
+  margin-bottom: 5px;
+  padding-top: 16px; }
 
 .article-page-wrap .tabs-block {
   padding-bottom: 30px; }
@@ -1048,3 +1065,7 @@ nav.navbar.sticky-top {
 
 .owl-carousel .owl-dots {
   display: none; }
+
+.banner-block .navbar-brand {
+  margin-left: -3px;
+  margin-right: 1rem; }
