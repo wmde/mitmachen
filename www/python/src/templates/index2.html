@@ -18,6 +18,8 @@
         $URL_FOR_SUGGEST = {{url_for('suggest')|tojson|safe}};
         $URL_FOR_FIND = {{url_for('find')|tojson|safe}};
         $URL_FOR_AUTOCOMPLETE = {{url_for('autocomplete')|tojson|safe}};
+        $URL_FOR_TRACKING = {{url_for('tracking')|tojson|safe}};
+        $URL_FOR_GETSUBCATEG = {{url_for('getsubcateg')|tojson|safe}};
     </script>
 </head>
 
@@ -25,7 +27,7 @@
 	<div class="header-small">
 		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="/articles">
+				<a class="navbar-brand" href="{{ url_for('second') }}">
 					<img src="{{ url_for('static', filename='new/img/wikiglobe.png') }}">
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation"> <span class="icon-bar top-bar"></span>

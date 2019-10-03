@@ -52,7 +52,7 @@ function trackingUserActivity(type, title, weblink){
     data['title'] = title;
     data['weblink'] = weblink;
     $.ajax({
-        url: '/tracking',
+        url: $URL_FOR_TRACKING,
         type: 'POST',
         contentType: 'application/json',
         dataType: 'json',
@@ -74,7 +74,7 @@ function getSubcategoriesForUser(){
         userInt = JSON.parse(userInt);
         if(userInt.length > 0){
             $.ajax({
-                url: '/getsubcateg',
+                url: $URL_FOR_GETSUBCATEG,
                 type: 'POST',
                 contentType: 'application/json',
                 dataType: 'json',
