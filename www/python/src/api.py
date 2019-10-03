@@ -64,7 +64,7 @@ class Mitmachen:
                                  cursorclass=pymysql.cursors.DictCursor)
 
     def _tracking_connection(self):
-        return toolforge.connect("s53772__mitracking_p", cursorclass=pymysql.cursors.DictCursor)
+        return toolforge.toolsdb(dbname="s54178__mitracking_p")
 
     def _load(self, fname):
         self.logger.info("Load query from '%s'.", fname)

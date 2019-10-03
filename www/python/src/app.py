@@ -63,7 +63,7 @@ def getsubcateg():
     subcategories = api.getsubcategories(data)
     return flask.jsonify({"status": 1, "message": "All subcategories", "data": subcategories})
 
-if __name__ == '__main__':
-    app.debug = True
-    app.config['TEMPLATES_AUTO_RELOAD'] = True
-    app.run(host = '0.0.0.0', port = 5000)
+# if __name__ == '__main__':
+#     app.debug = True
+#     app.config['TEMPLATES_AUTO_RELOAD'] = True
+#     app.run(host = '0.0.0.0', port = 5000)
