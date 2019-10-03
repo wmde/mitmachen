@@ -145,7 +145,7 @@ function findTopics(topic){
 
     $("<div/>").text(text.PLEASE_WAIT).appendTo(articleList);
 
-    $.getJSON($URL_TO_FIND, {q: topic}, function(result){
+    $.getJSON($URL_FOR_FIND, {q: topic}, function(result){
         articleList.empty();
 
         if(result.articles.length == 0){
