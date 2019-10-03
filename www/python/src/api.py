@@ -221,7 +221,7 @@ class Mitmachen:
         articles = {}
 
         # categories is list and remove items from it that are in blacklist
-        categories = [item for item in categories if item not in blacklist]
+        categories = [item for item in categories if item not in self.blacklist]
 
         categories_concat = '|'.join(categories)
         try:
