@@ -226,7 +226,6 @@ class Mitmachen:
         categories_concat = '|'.join(categories)
         try:
             with conn.cursor() as cursor:
-                print ('BEFORE articles query: ', categories_concat)
                 cursor.execute(self.articles_query,
                                {"categories": categories_concat,
                                 "tags": self.TAGS})
