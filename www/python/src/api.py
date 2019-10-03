@@ -106,10 +106,9 @@ class Mitmachen:
 
     # get subcategories list for all categories
     def getsubcategories(self, data):
-        conn = self._tracking_connection()
-        print (type(data['categories']))
-        categories = data['categories']
+        categories = data
         # categories = ast.literal_eval(data['categories'])
+        conn = self._tracking_connection()
 
         try:
             with conn.cursor() as cursor:
