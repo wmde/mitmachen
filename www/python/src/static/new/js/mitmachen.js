@@ -171,12 +171,15 @@ function findTopics(topic){
 
             $.each(doc.problems, function(i, problem){
                 var ulLi = $("<li/>");
-                var a = $("<a/>").attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)).concat(anchor[problem])).appendTo(ulLi);
-                $("<span/>").addClass("badge")
+                var a = $("<a/>").addClass('dropdown').attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)).concat(anchor[problem])).appendTo(ulLi);
+                var adiv = $('<div/>').addClass('dropdown-menu custom-dropdown');
+                $('<p/>').text(problem).appendTo(adiv);
+                adiv.appendTo(ulLi);
+                /*$("<span/>").addClass("badge")
                 .addClass("badge-warning")
                 .attr("title", text[problem])
                 .text(problem)
-                .appendTo(a);
+                .appendTo(a);*/
 
                 ulLi.appendTo(ul);
             })
@@ -291,15 +294,23 @@ $( function() {
     // for selecting user interests
     $('.user-interest').on('click', function(e){
         e.preventDefault();
-        var itemName = $(this).attr('data-attr-name');
+        var itemName = $(this).attr('data-attr-name').replace(/_/g, " ");
         if($(this).hasClass('active')){
             $(this).removeClass('active');
             var idx = userInterests.indexOf(itemName);
 
-            userInterests = idx != -1 ? userInterests.splice(idx, 1) : userInterests;
+            if(idx != -1)
+                userInterests.splice(idx, 1)
+    
         }else{
             $(this).addClass('active');
             userInterests.push(itemName);
+        }
+
+        if(userInterests.length > 0){
+            $('#to-articles').removeClass('disabled');
+        }else{
+            $('#to-articles').addClass('disabled');
         }
 
         localStorage.setItem('user_interests', JSON.stringify(userInterests));
