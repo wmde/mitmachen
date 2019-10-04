@@ -172,7 +172,7 @@ function findTopics(topic){
             $.each(doc.problems, function(i, problem){
                 var ulLi = $("<li/>");
                 var a = $("<a/>").addClass('dropdown').attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)).concat(anchor[problem])).html(problem).appendTo(ulLi);
-                var adiv = $('<div/>').addClass('dropdown-menu custom-dropdown');
+                var adiv = $('<div/>').addClass('dropdown-menu custom-dropdown').attr('aria-labelledby', "dropdownMenuButton");
                 $('<p/>').text(text[problem]).appendTo(adiv);
                 adiv.appendTo(ulLi);
                 /*$("<span/>").addClass("badge")
