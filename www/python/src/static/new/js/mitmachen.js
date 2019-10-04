@@ -318,13 +318,53 @@ $( function() {
         localStorage.setItem('user_interests', JSON.stringify(userInterests));
     })
 
-    /*$('.filter-task').on('click', function(e){
-        e.preventDefault();
-        var dn = $(this).attr('data-attr-name');
+    $('.filter-task').on('click', function(e){
+        // e.preventDefault();
 
-        if(dn == "all"){
-            
+        // var allChecked = $('.filter-task:checkbox:checked');
+        // console.log(allChecked.length);
+
+        var dn = $(this).attr('data-attr-name');
+        var v = $(this).prop('checked');
+
+        if(dn == "all_tasks" && v == true){
+            $(".filter-task").prop('checked', true);
+            $('.list-box').show();
+        }else if(dn == "all_tasks" && v == false){
+            $(".filter-task").prop('checked', false);
+            $('.list-box').show();
         }
 
-    })*/
+        if(dn != "all_tasks"){
+            if(v == true){
+
+                if($('.filter-task[data-attr-name="all_tasks"]').is(':checked')){
+                    $('.filter-task').prop('checked', false);
+                    $(this).prop('checked', true);
+                }else{
+                    $('.list-box').hide();
+                    // get all selected and show them
+                    if($('.filter-task:checkbox:checked').length == 0){
+                        $('.list-box').show();
+                    }else{
+                        $('.filter-task:checkbox:checked').each(function(i){
+                            $('.'+$(this).attr('data-attr-name')).parent().parent().parent().show();
+                        })
+                    }
+                }
+
+            }else if(v == false){
+                $('.list-box').hide();
+                // get all selected and show them
+                if($('.filter-task:checkbox:checked').length == 0){
+                    $('.list-box').show();
+                }else{
+                    $('.filter-task:checkbox:checked').each(function(i){
+                        $('.'+$(this).attr('data-attr-name')).parent().parent().parent().show();
+                    })
+                }
+            }
+        }
+
+    })
 });
