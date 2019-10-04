@@ -317,4 +317,14 @@ $( function() {
 
         localStorage.setItem('user_interests', JSON.stringify(userInterests));
     })
+
+    /*$('.filter-task').on('click', function(e){
+        e.preventDefault();
+        var dn = $(this).attr('data-attr-name');
+
+        if(dn == "all"){
+            
+        }
+
+    })*/
 });
