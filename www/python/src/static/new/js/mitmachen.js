@@ -171,9 +171,9 @@ function findTopics(topic){
 
             $.each(doc.problems, function(i, problem){
                 var ulLi = $("<li/>");
-                var a = $("<a/>").addClass('dropdown').attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)).concat(anchor[problem])).appendTo(ulLi);
+                var a = $("<a/>").addClass('dropdown').attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)).concat(anchor[problem])).html(problem).appendTo(ulLi);
                 var adiv = $('<div/>').addClass('dropdown-menu custom-dropdown');
-                $('<p/>').text(problem).appendTo(adiv);
+                $('<p/>').text(text[problem]).appendTo(adiv);
                 adiv.appendTo(ulLi);
                 /*$("<span/>").addClass("badge")
                 .addClass("badge-warning")
