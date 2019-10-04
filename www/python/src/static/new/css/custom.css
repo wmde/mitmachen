@@ -1099,3 +1099,21 @@ nav.navbar.sticky-top {
 .ui-autocomplete::-webkit-scrollbar { width: 0 !important }
 
 .ui-autocomplete { overflow: -moz-scrollbars-none; }
+
+.banner-block.header-small nav.navbar.navbar-expand-lg {  
+    position: relative;
+}
+.header-small .banner-info {
+    margin-top: -5px;
+}
+
+.common-list-wrap .filter-row {
+    min-height: 24px;
+}
+
+@media (min-width:1200px) {
+  .banner-block .banner-info p {
+      max-width: 780px;
+      width: 780px;
+  }
+}

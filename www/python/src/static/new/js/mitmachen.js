@@ -367,4 +367,12 @@ $( function() {
         }
 
     })
+
+
+    $('#category,#categoryindex').on('focus', function(){
+        $(this).prop('placeholder', 'Search a topic you want to contribute to');
+    })
+    $('#category,#categoryindex').on('blur', function(){
+        $(this).prop('placeholder', '');
+    })
 });
