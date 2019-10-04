@@ -992,11 +992,11 @@ nav.navbar.sticky-top {
   padding-top: 20px;
   padding-bottom: 20px; }
 
-.header-small .banner-info {
-  padding-top: 120px; }
-  @media (max-width: 767px) {
+/*.header-small .banner-info {
+  padding-top: 120px; }*/
+  /*@media (max-width: 767px) {
     .header-small .banner-info {
-      padding-top: 92px; } }
+      padding-top: 92px; } }*/
   @media (min-width: 992px) {
     .header-small .banner-info {
       padding-left: 118px; } }
