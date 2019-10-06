@@ -117,6 +117,7 @@ class Mitmachen:
 
                 try:
                     subcategories = [item['subcateg'].decode('utf-8') for item in cursor.fetchall()]
+                    subcategories = list(set(subcategories))
                 except Exception as e:
                     self.logged.log('Failed to fetch subcategories for categories')
                     return []
