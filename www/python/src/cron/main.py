@@ -1,7 +1,7 @@
 import urllib.request, json
-# import toolforge
+import toolforge
 
-# conn = toolforge.toolsdb(dbname="s54178__mitracking_p")
+conn = toolforge.toolsdb(dbname="s54178__mitracking_p")
 
 # having issue with kunst and kultur category, can't get result with space and underscore in between
 all_links = {
