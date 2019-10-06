@@ -1,7 +1,7 @@
 import urllib.request, json
-import toolforge
+# import toolforge
 
-conn = toolforge.toolsdb(dbname="s54178__mitracking_p")
+# conn = toolforge.toolsdb(dbname="s54178__mitracking_p")
 
 # having issue with kunst and kultur category, can't get result with space and underscore in between
 all_links = {
@@ -18,14 +18,22 @@ all_links = {
 for item in list(all_links.keys()):
 	with urllib.request.urlopen(all_links[item]) as url:
 		data = json.loads(url.read().decode())
-		
-		query = "INSERT INTO crondata (categ, subcateg, page_id) VALUES " + ",".join("(%s, %s, %s)" for _ in len(data['*']['a']['*']))
-		val_insert = [(item, elem['title'].lower(), elem['id']) for elem in data['*']['a']['*']]
-		flatten_values = [pp for sublist in val_insert for pp in sublist]
+		all_values = []
+
+		for elem in data['*'][0]['a']['*']:
+			all_values.append((item.lower(), elem['title'], elem['id']))
+
+		query = "INSERT INTO crondata (categ, subcateg, page_id) VALUES (%s, %s, %s)"
+		# print (all_values)
+		# print (data['*'][0]['a']['*'])
+		# query = "INSERT INTO crondata (categ, subcateg, page_id) VALUES " + ",".join("(%s, %s, %s)" for _ in len(data['*'][0]['a']['*']))
+		# print (query)
+		# val_insert = [(item, elem['title'].lower(), elem['id']) for elem in data['*']['a']['*']]
+		# flatten_values = [pp for sublist in val_insert for pp in sublist]
 
 		try:
 			with conn.cursor() as cursor:
-				cursor.execute(query, flatten_values)
+				cursor.execute(query, all_values)
 
 				conn.commit()
 		except Exception as e:
