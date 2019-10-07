@@ -120,7 +120,7 @@ class Mitmachen:
                     subcategories = [item for item in cursor.fetchall()]
                     subcategories = list(set(subcategories))
                 except Exception as e:
-                    self.logged.log('Failed to fetch subcategories for categories')
+                    self.logger.log('Failed to fetch subcategories for categories: ', e)
                     return []
                 else:
                     return subcategories
@@ -142,7 +142,7 @@ class Mitmachen:
                     articles = [item for item in cursor.fetchall()]
                     articles = list(set(articles))
                 except Exception as e:
-                    self.logged.log('Failed to fetch articles using subcategories')
+                    self.logger.log('Failed to fetch articles using subcategories: ', e)
                     return []
                 else:
                     return articles
