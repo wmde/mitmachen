@@ -84,7 +84,11 @@ function getSubcategoriesForUser(){
                         $('.categories-subcategories').html('<div class="owl-carousel owl-theme common-grid-listing"></div>');
 
                         for(var item in d['data']){
-                            $('.owl-carousel').append('<div class="item active"><span>'+d['data'][item]+'</span></div>')
+                            if(item == 0){
+                                $('.owl-carousel').append('<div class="item active"><span>'+d['data'][item]+'</span></div>')
+                            }else{
+                                $('.owl-carousel').append('<div class="item"><span>'+d['data'][item]+'</span></div>')
+                            }
                         }
 
                         var owl = $('.owl-carousel');
@@ -151,6 +155,8 @@ function findTopics(topic){
         if(result.articles.length == 0){
             $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
             suggest_topics();
+        }else{
+            $('.article-found').text(result.articles.length + ' articles found for ' + topic);
         }
 
         $.each(result.articles, function(i, doc){
@@ -296,27 +302,54 @@ $( function() {
     // for selecting user interests
     $('.user-interest').on('click', function(e){
         e.preventDefault();
-        var itemName = $(this).attr('data-attr-name').replace(/_/g, " ");
-        if($(this).hasClass('active')){
-            $(this).removeClass('active');
-            var idx = userInterests.indexOf(itemName);
+        
+        var uIFromDb = localStorage.getItem('user_interests');
+        uIFromDb = uIFromDb != undefined ? JSON.parse(uIFromDb) : [];
 
-            if(idx != -1)
-                userInterests.splice(idx, 1)
-    
+        var itemName = $(this).attr('data-attr-name').replace(/_/g, " ");
+
+        if(uIFromDb.length > 0){
+            console.log('uIFromDb')
+            if($(this).hasClass('active')){
+                $(this).removeClass('active');
+                var idx = uIFromDb.indexOf(itemName);
+                console.log('idx: ', idx)
+                if(idx != -1)
+                    uIFromDb.splice(idx, 1)
+        
+            }else{
+                $(this).addClass('active');
+                uIFromDb.push(itemName);
+            }
         }else{
-            $(this).addClass('active');
-            userInterests.push(itemName);
+            if($(this).hasClass('active')){
+                $(this).removeClass('active');
+                var idx = userInterests.indexOf(itemName);
+
+                if(idx != -1)
+                    userInterests.splice(idx, 1)
+        
+            }else{
+                $(this).addClass('active');
+                userInterests.push(itemName);
+            }
         }
+
 
         if(userInterests.length > 0){
             $('#to-articles').removeClass('disabled');
         }else{
             $('#to-articles').addClass('disabled');
         }
+        
 
-        localStorage.setItem('user_interests', JSON.stringify(userInterests));
+        var allSelInt = Array.from(new Set(uIFromDb.concat(userInterests)));
+
+        localStorage.setItem('user_interests', JSON.stringify(allSelInt));
     })
+
+    // show all selected by default
+    $('.filter-task').trigger('click');
 
     $('.filter-task').on('click', function(e){
         // e.preventDefault();
@@ -370,10 +403,11 @@ $( function() {
 
 
     $('#category,#categoryindex').on('focus', function(){
-        $(this).prop('placeholder', 'Search a topic you want to contribute to');
+        // $(this).prop('placeholder', 'Search a topic you want to contribute to');
+        $(this).prop('placeholder', '');
     })
     $('#category,#categoryindex').on('blur', function(){
-        $(this).prop('placeholder', '');
+        $(this).prop('placeholder', 'Search a topic you want to contribute to');
     })
 
     // show user selected categories on articles page
@@ -384,6 +418,27 @@ $( function() {
     var fs = curSelUserInterests.length > 0 ? curSelUserInterests.slice(0,2).join(", ") : "";
     var ls = curSelUserInterests.length > 0 ? curSelUserInterests.slice(2).length : "";
 
-    var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" more") : fs : "";
-    $('.user-sel-categories').text(textToAdd);
+    var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" more <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>") : fs : "";
+    $('.user-sel-categories').html(textToAdd);
+
+
+    $("#update-user-int").on('click', function(e){
+        e.preventDefault();
+        // update 
+        $("#changeCateg").modal('hide');
+        window.location.reload();
+    })
+
+    $("#changeCateg").on('shown.bs.modal', function(){
+        var ui = localStorage.getItem('user_interests');
+        ui = (ui != undefined) ? JSON.parse(ui) : [];
+
+        if(ui.length > 0){
+            ui.map((item) => {
+                item = item.replace(/\s/g, '_');
+                $('.user-interest[data-attr-name="'+item+'"]').addClass('active');
+            })
+        }
+    })
+
 });
