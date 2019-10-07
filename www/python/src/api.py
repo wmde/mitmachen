@@ -135,20 +135,23 @@ class Mitmachen:
 
         try:
             with conn.cursor() as cursor:
-                cursor.execute(self.subcateg_articles, {"subcateg": subcateg})
+                cursor.execute(self.subcateg_articles,
+                               {"subcateg": subcateg})
                 conn.commit()
+                articles = self._extract_problems(cursor.fetchall(),
+                                                  articles)
 
-                try:
-                    articles = [item for item in cursor.fetchall()]
-                    print ('CHECK ME: ', articles)
-                    articles = list(set(articles))
-                except Exception as e:
-                    self.logger.log('Failed to fetch articles using subcategories: ', e)
-                    return []
-                else:
-                    return articles
+            articles = articles.items()
+            
+            more = len(articles) > self.NUM
+            if more:
+                articles = random.sample(articles, self.NUM)
+
+            return [{"page": page, "problems": list(set(problems))}
+                    for page, problems in articles], more
         finally:
             conn.close()
+
 
     def matching_categories(self, first_letters):
         """Return a list of categories starting with *first_letters*."""
