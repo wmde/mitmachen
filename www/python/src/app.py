@@ -63,6 +63,12 @@ def getsubcateg():
     subcategories = api.getsubcategories(data)
     return flask.jsonify({"status": 1, "message": "All subcategories", "data": subcategories})
 
+@app.route('/subcategarticles', methods=["POST"])
+def getarticlesforsubcategory():
+    data = flask.request.get_json()
+    articles = api.getarticlesforsubcategory(data)
+    return flask.jsonify({"status": 1, "message": "All articles with the subcategory", "data": articles})
+
 # if __name__ == '__main__':
 #     app.debug = True
 #     app.config['TEMPLATES_AUTO_RELOAD'] = True

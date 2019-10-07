@@ -48,6 +48,7 @@ class Mitmachen:
         self.tracking_query = self._load("tracking.sql")
         self.tracking_insert_query = self._load("trackinginsert.sql")
         self.getsubs_query = self._load("getsubs.sql")
+        self.subcateg_articles = self._load("getcategarticles.sql")
 
 
         self.blacklist = self._readfile("blacklist.txt")
@@ -126,6 +127,27 @@ class Mitmachen:
         finally:
             conn.close()
 
+    # get articles for passed subcategory
+    def getarticlesforsubcategory(self, data):
+        subcateg = data
+
+        conn = self._tracking_connection()
+
+        try:
+            with conn.cursor() as cursor:
+                cursor.execute(self.subcateg_articles, {"subcateg": subcateg})
+                conn.commit()
+
+                try:
+                    articles = [item for item in cursor.fetchall()]
+                    articles = list(set(articles))
+                except Exception as e:
+                    self.logged.log('Failed to fetch articles using subcategories')
+                    return []
+                else:
+                    return articles
+        finally:
+            conn.close()
 
     def matching_categories(self, first_letters):
         """Return a list of categories starting with *first_letters*."""

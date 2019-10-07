@@ -21,6 +21,7 @@
         $URL_FOR_TRACKING = {{url_for('tracking')|tojson|safe}};
         $URL_FOR_GETSUBCATEG = {{url_for('getsubcateg')|tojson|safe}};
         $URL_FOR_ARTICLES = {{url_for('second')|tojson|safe}};
+        $URL_FOR_SUBARTICLES = {{url_for('getarticlesforsubcategory')|tojson|safe}};
     </script>
 </head>
 
@@ -153,46 +154,56 @@
 								<h6><form>
 												  <div class="custom-control custom-checkbox">
 												    <input type="checkbox" class="custom-control-input filter-task" id="customCheck" name="example1" data-attr-name="ungeprüfter_link">
-												    <label class="custom-control-label" for="customCheck">ungeprufter link</label>
+												    <label class="custom-control-label" for="customCheck">
+												    ungeprufter link
+													<p>In diesem Artikel wurde ein Link automatisch aktualisiert. Prüfe, ob der Link noch stimmt.</p>
+												</label>
 												  </div>
 													</form> </h6>
-								<p>In diesem Artikel wurde ein Link automatisch aktualisiert. Prüfe, ob der Link noch stimmt.</p>
 							</li>
 							<li>
 								<h6> <form>
 												  <div class="custom-control custom-checkbox">
 												    <input type="checkbox" class="custom-control-input filter-task" id="customCheck1" name="example1" data-attr-name="belege_fehlen">
-												    <label class="custom-control-label" for="customCheck1">belege fehlen</label>
+												    <label class="custom-control-label" for="customCheck1">
+												    	belege fehlen
+								<p>In diesem Artikel fehlen Belege. Recherchiere fehlende Quellen und füge sie ein.</p>
+												    </label>
 												  </div>
 													</form></h6>
-								<p>In diesem Artikel fehlen Belege. Recherchiere fehlende Quellen und füge sie ein.</p>
 							</li>
 							<li>
 								<h6><form>
 												  <div class="custom-control custom-checkbox">
 												    <input type="checkbox" class="custom-control-input filter-task" id="customCheck2" name="example1" data-attr-name="lückenhaft">
-												    <label class="custom-control-label" for="customCheck2">luckenhaft</label>
+												    <label class="custom-control-label" for="customCheck2">
+												    luckenhaft
+								<p>In diesem Artikel fehlen wichtige Informationen. Recherchiere die Informationen und ergänze den Artikel.</p>
+												</label>
 												  </div>
 													</form></h6>
-								<p>In diesem Artikel fehlen wichtige Informationen. Recherchiere die Informationen und ergänze den Artikel.</p>
 							</li>
 							<li>
 								<h6><form>
 												  <div class="custom-control custom-checkbox">
 												    <input type="checkbox" class="custom-control-input filter-task" id="customCheck3" name="example1" data-attr-name="veraltet">
-												    <label class="custom-control-label" for="customCheck3">Veraltet</label>
+												    <label class="custom-control-label" for="customCheck3">
+												    Veraltet
+								<p>In diesem Artikel fehlen Belege. Recherchiere fehlende Quellen und füge sie ein.</p>
+												</label>
 												  </div>
 													</form></h6>
-								<p>In diesem Artikel fehlen Belege. Recherchiere fehlende Quellen und füge sie ein.</p>
 							</li>
 							<li>
 								<h6><form>
 												  <div class="custom-control custom-checkbox">
 												    <input type="checkbox" class="custom-control-input filter-task" id="customCheck4" name="example1" data-attr-name="nurliste">
-												    <label class="custom-control-label" for="customCheck4">NurListe</label>
+												    <label class="custom-control-label" for="customCheck4">
+												    	NurListe
+								<p>In diesem Artikel fehlen Belege. Recherchiere fehlende Quellen und füge sie ein.</p>
+												    </label>
 												  </div>
 													</form></h6>
-								<p>In diesem Artikel fehlen Belege. Recherchiere fehlende Quellen und füge sie ein.</p>
 							</li>
 						</ul>
 					</div>
