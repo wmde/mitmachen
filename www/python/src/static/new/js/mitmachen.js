@@ -33,13 +33,13 @@ function getArticlesSubcateg(name){
 
     $.getJSON($URL_FOR_SUBARTICLES, {q: name}, function(result){
         if(result['status']){
-            if(result['articles'].length == 0){
+            if(result['data'].length == 0){
                 $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
             }else{
-                $('.article-found').text(result['articles'].length + ' articles found for ' + topic);
+                $('.article-found').text(result['data'].length + ' articles found for ' + topic);
             }
 
-            $.each(result.articles, function(i, doc){
+            $.each(result.data, function(i, doc){
 
                 var div = $("<div/>").addClass("list-box list-box-new mb-2").appendTo(articleList);
                 var h3 = $("<h3/>").appendTo(div);
@@ -418,10 +418,19 @@ $( function() {
         }
 
         if(dn != "all_tasks"){
+            var p = $('.select-subitems ul .filter-task:checked').length;
+            var q = $('.select-subitems ul .filter-task').length;
+            // console.log(p, q);
+            if(p == q){
+                $('.filter-task[data-attr-name="all_tasks"]').prop('checked', true);
+            }else{
+                $('.filter-task[data-attr-name="all_tasks"]').prop('checked', false);
+            }
+
             if(v == true){
 
                 if($('.filter-task[data-attr-name="all_tasks"]').is(':checked')){
-                    $('.filter-task').prop('checked', false);
+                    // $('.filter-task').prop('checked', false);
                     $(this).prop('checked', true);
                 }else{
                     $('.list-box').hide();
