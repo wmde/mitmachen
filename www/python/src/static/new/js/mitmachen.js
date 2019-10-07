@@ -162,9 +162,10 @@ function getSubcategoriesForUser(){
 
                         for(var item in d['data']){
                             if(item == 0){
-                                $('.owl-carousel').append('<div class="item active subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item]+'</span></div>')
+                                $('.owl-carousel').append('<div class="item active subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item]+'</span></div>');
+                                getArticlesSubcateg(d['data'][item]);
                             }else{
-                                $('.owl-carousel').append('<div class="item subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item]+'</span></div>')
+                                $('.owl-carousel').append('<div class="item subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item]+'</span></div>');
                             }
                         }
 
@@ -532,7 +533,7 @@ $( function() {
     });
 
 
-    $('.subcateg-item').on('click', function(){
+    $('body').on('click', '.subcateg-item', function(){
         var name = $(this).attr('data-attr-name');
         $('.owl-item .item').removeClass('active');
         $(this).addClass('active');

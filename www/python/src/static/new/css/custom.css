@@ -711,9 +711,9 @@ nav.navbar.sticky-top {
 .modal .close:focus {
   outline: none; }
 
-.modal .modal-content {
+/*.modal .modal-content {
   background-color: #F3F3F3;
-  padding: 0 45px; }
+  padding: 0 45px; }*/
 
 @media (min-width: 992px) and (max-width: 1199px) {
   .modal .my-interest-listing li {
@@ -1157,4 +1157,24 @@ nav.navbar.sticky-top {
 .select-box-wrap .select-subitems ul li .custom-control-label::after {
     top: 12px;
     left: 12px;
+}
+
+@media (min-width:1200px) {
+  .modal .modal-content {
+    margin-top: 200px;
+  }
+}
+.modal {
+    padding-right: 5px !important;
+}
+
+.close-btn {
+    position: absolute;
+    right: 0;
+    top: -70px;
+    color: #fff;
+}
+.modal .modal-content {
+    background-color: #F3F3F3;
+    padding: 25px 45px 50px;
 }
