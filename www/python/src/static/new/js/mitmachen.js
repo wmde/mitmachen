@@ -302,37 +302,19 @@ $( function() {
     // for selecting user interests
     $('.user-interest').on('click', function(e){
         e.preventDefault();
-        
-        var uIFromDb = localStorage.getItem('user_interests');
-        uIFromDb = uIFromDb != undefined ? JSON.parse(uIFromDb) : [];
 
         var itemName = $(this).attr('data-attr-name').replace(/_/g, " ");
 
-        if(uIFromDb.length > 0){
-            console.log('uIFromDb')
-            if($(this).hasClass('active')){
-                $(this).removeClass('active');
-                var idx = uIFromDb.indexOf(itemName);
-                console.log('idx: ', idx)
-                if(idx != -1)
-                    uIFromDb.splice(idx, 1)
-        
-            }else{
-                $(this).addClass('active');
-                uIFromDb.push(itemName);
-            }
-        }else{
-            if($(this).hasClass('active')){
-                $(this).removeClass('active');
-                var idx = userInterests.indexOf(itemName);
+        if($(this).hasClass('active')){
+            $(this).removeClass('active');
+            var idx = userInterests.indexOf(itemName);
 
-                if(idx != -1)
-                    userInterests.splice(idx, 1)
-        
-            }else{
-                $(this).addClass('active');
-                userInterests.push(itemName);
-            }
+            if(idx != -1)
+                userInterests.splice(idx, 1)
+    
+        }else{
+            $(this).addClass('active');
+            userInterests.push(itemName);
         }
 
 
@@ -341,11 +323,8 @@ $( function() {
         }else{
             $('#to-articles').addClass('disabled');
         }
-        
 
-        var allSelInt = Array.from(new Set(uIFromDb.concat(userInterests)));
-
-        localStorage.setItem('user_interests', JSON.stringify(allSelInt));
+        localStorage.setItem('user_interests', JSON.stringify(userInterests));
     })
 
     // show all selected by default
@@ -436,9 +415,33 @@ $( function() {
         if(ui.length > 0){
             ui.map((item) => {
                 item = item.replace(/\s/g, '_');
-                $('.user-interest[data-attr-name="'+item+'"]').addClass('active');
+                $('.user-interest-popup[data-attr-name="'+item+'"]').addClass('active');
             })
         }
+    })
+
+    $('.user-interest-popup').on('click', function(e){
+        e.preventDefault();
+
+        var uIFromDb = localStorage.getItem('user_interests');
+        uIFromDb = uIFromDb != undefined ? JSON.parse(uIFromDb) : [];
+
+        var itemName = $(this).attr('data-attr-name').replace(/_/g, " ");
+
+        if(uIFromDb.length > 0){
+            if($(this).hasClass('active')){
+                $(this).removeClass('active');
+                var idx = uIFromDb.indexOf(itemName);
+                if(idx != -1)
+                    uIFromDb.splice(idx, 1)
+        
+            }else{
+                $(this).addClass('active');
+                uIFromDb.push(itemName);
+            }
+        }
+
+        localStorage.setItem('user_interests', JSON.stringify(uIFromDb));
     })
 
 });

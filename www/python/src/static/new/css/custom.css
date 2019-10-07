@@ -1066,8 +1066,9 @@ nav.navbar.sticky-top {
   display: none; }
 
 .banner-block .navbar-brand {
-  margin-left: -3px;
-  margin-right: 1rem; }
+    margin-left: -6px;
+    margin-right: 7px;
+}
 
 
 .ui-autocomplete {
@@ -1126,4 +1127,11 @@ nav.navbar.sticky-top {
   nav.navbar.navbar-expand-lg .container-fluid {
     max-width: 1316px;
   }
+}
+
+.banner-block .navbar-brand img {
+    max-width: 87px;
+}
+.footer-logo img {
+    max-width: 167px;
 }
