@@ -131,7 +131,7 @@ class Mitmachen:
     def getarticlesforsubcategory(self, data):
         subcateg = data
 
-        conn = self._tracking_connection()
+        conn = self._get_connection()
 
         try:
             with conn.cursor() as cursor:
