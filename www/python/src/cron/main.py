@@ -33,7 +33,7 @@ for item in list(all_links.keys()):
 
 		try:
 			with conn.cursor() as cursor:
-				cursor.execute(query, all_values)
+				cursor.executemany(query, all_values)
 
 				conn.commit()
 		except Exception as e:

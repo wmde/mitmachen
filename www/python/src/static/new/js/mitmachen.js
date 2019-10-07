@@ -375,4 +375,10 @@ $( function() {
     $('#category,#categoryindex').on('blur', function(){
         $(this).prop('placeholder', '');
     })
+
+    // show user selected categories on articles page
+    var curSelUserInterests = localStorage.getItem('user_interests');
+    curSelUserInterests = curSelUserInterests != undefined ? JSON.parse(curSelUserInterests) : "";
+    var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? curSelUserInterests.join(', ') : "";
+    $('.user-sel-categories').text(textToAdd);
 });
