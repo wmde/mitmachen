@@ -140,6 +140,7 @@ class Mitmachen:
 
                 try:
                     articles = [item for item in cursor.fetchall()]
+                    print ('CHECK ME: ', articles)
                     articles = list(set(articles))
                 except Exception as e:
                     self.logger.log('Failed to fetch articles using subcategories: ', e)
