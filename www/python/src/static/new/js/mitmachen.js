@@ -397,7 +397,7 @@ $( function() {
     var fs = curSelUserInterests.length > 0 ? curSelUserInterests.slice(0,2).join(", ") : "";
     var ls = curSelUserInterests.length > 0 ? curSelUserInterests.slice(2).length : "";
 
-    var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" more <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>") : fs : "";
+    var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" more <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>") : fs + " <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>" : "";
     $('.user-sel-categories').html(textToAdd);
 
 

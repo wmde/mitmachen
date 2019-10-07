@@ -1066,8 +1066,8 @@ nav.navbar.sticky-top {
   display: none; }
 
 .banner-block .navbar-brand {
-    margin-left: -6px;
-    margin-right: 7px;
+    margin-left: -3px;
+    margin-right: 10px;
 }
 
 
@@ -1130,7 +1130,7 @@ nav.navbar.sticky-top {
 }
 
 .banner-block .navbar-brand img {
-    max-width: 87px;
+    max-width: 80px;
 }
 .footer-logo img {
     max-width: 167px;
