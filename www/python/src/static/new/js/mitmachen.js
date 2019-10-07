@@ -444,4 +444,14 @@ $( function() {
         localStorage.setItem('user_interests', JSON.stringify(uIFromDb));
     })
 
+    const $menu = $('.select-box-wrap');
+
+    $(document).mouseup(e => {
+        if (!$menu.is(e.target) // if the target of the click isn't the container...
+            && $menu.has(e.target).length === 0) // ... nor a descendant of the container
+        {
+            $menu.find('.select-subitems').css('display', 'none');
+        }
+    });
+
 });
