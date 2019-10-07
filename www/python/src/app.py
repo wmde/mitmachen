@@ -63,10 +63,10 @@ def getsubcateg():
     subcategories = api.getsubcategories(data)
     return flask.jsonify({"status": 1, "message": "All subcategories", "data": subcategories})
 
-@app.route('/subcategarticles', methods=["POST"])
+@app.route('/subcategarticles', methods=["GET"])
 def getarticlesforsubcategory():
-    data = flask.request.get_json()
-    articles = api.getarticlesforsubcategory(data)
+    name = flask.request.args.get("q", default="")
+    articles = api.getarticlesforsubcategory(name)
     return flask.jsonify({"status": 1, "message": "All articles with the subcategory", "data": articles})
 
 # if __name__ == '__main__':

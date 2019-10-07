@@ -30,73 +30,65 @@ function getArticlesSubcateg(name){
     var articleList = $('.results-search');
     articleList.empty();
 
-    $.ajax({
-        url: $URL_FOR_SUBARTICLES,
-        type: 'POST',
-        contentType: 'application/json',
-        dataType: 'json',
-        data: name,
-        success: function(result){
-            if(result['status']){
-                if(result['articles'].length == 0){
-                    $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
-                }else{
-                    $('.article-found').text(result['articles'].length + ' articles found for ' + topic);
-                }
 
-                $.each(result.articles, function(i, doc){
+    $.getJSON($URL_FOR_SUBARTICLES, {q: name}, function(result){
+        if(result['status']){
+            if(result['articles'].length == 0){
+                $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
+            }else{
+                $('.article-found').text(result['articles'].length + ' articles found for ' + topic);
+            }
 
-                    var div = $("<div/>").addClass("list-box list-box-new mb-2").appendTo(articleList);
-                    var h3 = $("<h3/>").appendTo(div);
-                    var ptag = $("<p/>").appendTo(div);
-                    var ul = $("<ul/>").addClass('links-row').appendTo(div);
+            $.each(result.articles, function(i, doc){
 
-                    $.getJSON("https://de.wikipedia.org/api/rest_v1/page/summary/".concat(encodeURIComponent(doc.page)), function(result){
-                        $("<a/>").attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page))).attr('target', '_blank').html(result.displaytitle).appendTo(h3);
-                        /*$("<small/>").addClass("text-muted")
-                            .text(result.description)
-                            .appendTo(div);*/
+                var div = $("<div/>").addClass("list-box list-box-new mb-2").appendTo(articleList);
+                var h3 = $("<h3/>").appendTo(div);
+                var ptag = $("<p/>").appendTo(div);
+                var ul = $("<ul/>").addClass('links-row').appendTo(div);
 
-                        $("<a/>").attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page))).attr('target', '_blank').html("Preview Article").appendTo(ptag);
-                    })
+                $.getJSON("https://de.wikipedia.org/api/rest_v1/page/summary/".concat(encodeURIComponent(doc.page)), function(result){
+                    $("<a/>").attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page))).attr('target', '_blank').html(result.displaytitle).appendTo(h3);
+                    /*$("<small/>").addClass("text-muted")
+                        .text(result.description)
+                        .appendTo(div);*/
 
-                    $.each(doc.problems, function(i, problem){
-                        var ulLi = $("<li/>").addClass('dropdown');
-                        var a = $("<a/>").addClass('dropdown-toggle').attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)).concat(anchor[problem])).html(problem).appendTo(ulLi);
-                        var prb = problem.toLowerCase().replace(/\s/g, "_");
-                        var adiv = $('<div/>').addClass('dropdown-menu custom-dropdown').addClass(prb).attr('aria-labelledby', "dropdownMenuButton");
-                        $('<p/>').text(text[problem]).appendTo(adiv);
-                        adiv.appendTo(ulLi);
-                        /*$("<span/>").addClass("badge")
-                        .addClass("badge-warning")
-                        .attr("title", text[problem])
-                        .text(problem)
-                        .appendTo(a);*/
-
-                        ulLi.appendTo(ul);
-                    })
-
+                    $("<a/>").attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page))).attr('target', '_blank').html("Preview Article").appendTo(ptag);
                 })
 
-                if(result.more){
-                    var more = $("<div/>").text(text.MORE_RESULTS).appendTo(articleList);
-                    $("<button />").addClass("btn")
-                        .addClass("btn-secondary")
-                        .attr("type", "button")
-                        .text(text.LOAD_MORE)
-                        .click(function(event) {
-                            $("#category").change();
-                        })
-                        .css("margin-left", "0.5em")
-                        .appendTo(more);
-                }
+                $.each(doc.problems, function(i, problem){
+                    var ulLi = $("<li/>").addClass('dropdown');
+                    var a = $("<a/>").addClass('dropdown-toggle').attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)).concat(anchor[problem])).html(problem).appendTo(ulLi);
+                    var prb = problem.toLowerCase().replace(/\s/g, "_");
+                    var adiv = $('<div/>').addClass('dropdown-menu custom-dropdown').addClass(prb).attr('aria-labelledby', "dropdownMenuButton");
+                    $('<p/>').text(text[problem]).appendTo(adiv);
+                    adiv.appendTo(ulLi);
+                    /*$("<span/>").addClass("badge")
+                    .addClass("badge-warning")
+                    .attr("title", text[problem])
+                    .text(problem)
+                    .appendTo(a);*/
 
+                    ulLi.appendTo(ul);
+                })
+
+            })
+
+            if(result.more){
+                var more = $("<div/>").text(text.MORE_RESULTS).appendTo(articleList);
+                $("<button />").addClass("btn")
+                    .addClass("btn-secondary")
+                    .attr("type", "button")
+                    .text(text.LOAD_MORE)
+                    .click(function(event) {
+                        $("#category").change();
+                    })
+                    .css("margin-left", "0.5em")
+                    .appendTo(more);
             }
-        },
-        error: function(err){
-            console.log(err);
+
         }
     })
+
 }
 
 function suggest_topics() {
