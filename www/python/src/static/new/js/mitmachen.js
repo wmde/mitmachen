@@ -36,7 +36,7 @@ function getArticlesSubcateg(name){
             if(result['data'].length == 0){
                 $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
             }else{
-                $('.article-found').text(result['data'].length + ' articles found for ' + topic);
+                $('.article-found').text(result['data'].length + ' articles found for ' + name);
             }
 
             $.each(result.data, function(i, doc){
