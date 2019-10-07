@@ -379,6 +379,11 @@ $( function() {
     // show user selected categories on articles page
     var curSelUserInterests = localStorage.getItem('user_interests');
     curSelUserInterests = curSelUserInterests != undefined ? JSON.parse(curSelUserInterests) : "";
-    var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? curSelUserInterests.join(', ') : "";
+
+    var textToAdd = "";
+    var fs = curSelUserInterests.length > 0 ? curSelUserInterests.slice(0,2).join(", ") : "";
+    var ls = curSelUserInterests.length > 0 ? curSelUserInterests.slice(2).length : "";
+
+    var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" more") : fs : "";
     $('.user-sel-categories').text(textToAdd);
 });
