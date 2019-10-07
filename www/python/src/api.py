@@ -132,7 +132,7 @@ class Mitmachen:
         subcateg = data
 
         conn = self._get_connection()
-
+        articles = {}
         try:
             with conn.cursor() as cursor:
                 cursor.execute(self.subcateg_articles,
