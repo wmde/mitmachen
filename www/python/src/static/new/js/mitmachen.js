@@ -33,13 +33,14 @@ function getArticlesSubcateg(name){
 
     $.getJSON($URL_FOR_SUBARTICLES, {q: name}, function(result){
         if(result['status']){
-            if(result['data'].length == 0){
+            var data = result['data'][0];
+            if(data.length == 0){
                 $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
             }else{
-                $('.article-found').text(result['data'].length + ' articles found for ' + name);
+                $('.article-found').text(data.length + ' articles found for ' + name);
             }
 
-            $.each(result.data, function(i, doc){
+            $.each(data, function(i, doc){
 
                 var div = $("<div/>").addClass("list-box list-box-new mb-2").appendTo(articleList);
                 var h3 = $("<h3/>").appendTo(div);
