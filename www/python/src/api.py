@@ -125,11 +125,11 @@ class Mitmachen:
                 subcategories = list(set(subcategories))
 
             with conn_orig.cursor() as cursor:
-                cursor.execute(self.subfilter_query, {"subcateg": subcategories, "tags": self.TAGS})
+                cursor.execute(self.subfilter_query, {"subcateg": subcategories, "tags": self.tags})
                 conn_orig.commit()
 
                 distinct_categories = [item for item in cursor.fetchall()]
-                distinct_categories = list(set(distinct_categories))
+                # distinct_categories = list(set(distinct_categories))
 
             return distinct_categories
 
