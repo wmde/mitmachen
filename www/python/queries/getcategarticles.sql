@@ -17,5 +17,6 @@ FROM
 WHERE
 	page.page_id = subpages.page_id
 	AND tl_from = subpages.page_id
+	AND tl_title IN %(tags)s
 ORDER BY RAND()
 LIMIT 100;

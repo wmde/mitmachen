@@ -136,7 +136,7 @@ class Mitmachen:
         try:
             with conn.cursor() as cursor:
                 cursor.execute(self.subcateg_articles,
-                               {"subcateg": subcateg})
+                               {"subcateg": subcateg, "tags": self.TAGS})
                 conn.commit()
                 articles = self._extract_problems(cursor.fetchall(),
                                                   articles)
