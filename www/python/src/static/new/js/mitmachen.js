@@ -35,6 +35,7 @@ function getArticlesSubcateg(name){
         if(result['status']){
             var data = result['data'][0];
             if(data.length == 0){
+                $('.article-found').text("");
                 $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
             }else{
                 $('.article-found').text(data.length + ' articles found for ' + name);
