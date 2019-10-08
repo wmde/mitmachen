@@ -1,0 +1,1 @@
+SELECT DISTINCT cl_to FROM page, categorylinks, templatelinks  WHERE cl_to IN %(subcateg)s AND tl_title IN %(tags)s AND cl_type = 'page' AND cl_from = page_id LIMIT 100;

@@ -49,6 +49,7 @@ class Mitmachen:
         self.tracking_insert_query = self._load("trackinginsert.sql")
         self.getsubs_query = self._load("getsubs.sql")
         self.subcateg_articles = self._load("getcategarticles.sql")
+        self.subfilter_query = self._load("subcategfilter.sql")
 
 
         self.blacklist = self._readfile("blacklist.txt")
@@ -110,20 +111,28 @@ class Mitmachen:
         categories = data
         # categories = ast.literal_eval(data['categories'])
         conn = self._tracking_connection()
+        conn_orig = self._get_connection()
+
+        subcategories = []
+        distinct_categories = []
 
         try:
             with conn.cursor() as cursor:
                 cursor.execute(self.getsubs_query, {"categories": categories})
                 conn.commit()
 
-                try:
-                    subcategories = [item for item in cursor.fetchall()]
-                    subcategories = list(set(subcategories))
-                except Exception as e:
-                    self.logger.log('Failed to fetch subcategories for categories: ', e)
-                    return []
-                else:
-                    return subcategories
+                subcategories = [item for item in cursor.fetchall()]
+                subcategories = list(set(subcategories))
+
+            with conn_orig.cursor() as cursor:
+                cursor.execute(self.subfilter_query, {"subcateg": subcategories, "tags": tags})
+                conn_orig.commit()
+
+                distinct_categories = [item for item in cursor.fetchall()]
+                distinct_categories = list(set(distinct_categories))
+
+            return distinct_categories
+
         finally:
             conn.close()
 
