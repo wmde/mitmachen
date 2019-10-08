@@ -145,7 +145,7 @@ class Mitmachen:
         try:
             with conn.cursor() as cursor:
                 cursor.execute(self.subcateg_articles,
-                               {"subcateg": subcateg, "tags": self.TAGS})
+                               {"subcateg": [subcateg], "tags": self.TAGS})
                 conn.commit()
                 articles = self._extract_problems(cursor.fetchall(),
                                                   articles)
@@ -259,7 +259,7 @@ class Mitmachen:
         # categories is list and remove items from it that are in blacklist
         categories = [item for item in categories if item not in self.blacklist]
 
-        # categories_concat = '|'.join(categories)
+        categories_concat = '|'.join(categories)
         try:
             with conn.cursor() as cursor:
                 cursor.execute(self.articles_query,
