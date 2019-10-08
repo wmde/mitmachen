@@ -128,7 +128,7 @@ class Mitmachen:
                 cursor.execute(self.subfilter_query, {"subcateg": subcategories, "tags": self.TAGS})
                 conn_orig.commit()
 
-                distinct_categories = [item.decode("utf-8") for item in cursor.fetchall()]
+                distinct_categories = [item['cl_to'].decode("utf-8") for item in cursor.fetchall()]
                 # distinct_categories = list(set(distinct_categories))
 
             return distinct_categories
