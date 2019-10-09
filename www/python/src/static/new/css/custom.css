@@ -1129,9 +1129,9 @@ nav.navbar.sticky-top {
   }
 }
 
-.banner-block .navbar-brand img {
+/*.banner-block .navbar-brand img {
     max-width: 80px;
-}
+}*/
 .footer-logo img {
     max-width: 167px;
 }
@@ -1177,4 +1177,13 @@ nav.navbar.sticky-top {
 .modal .modal-content {
     background-color: #F3F3F3;
     padding: 25px 45px 50px;
+}
+.ui-autocomplete .ui-menu-item:hover {
+    background: #f6f6f6;
+}
+.header-small .navbar-brand img {
+    max-width: 66px;
+}
+.banner-block.header-small .navbar-brand img {
+    max-width: 80px;
 }

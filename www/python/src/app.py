@@ -22,6 +22,20 @@ with open("text.js", "rt") as f:
 api = Mitmachen()
 app = flask.Flask(__name__)
 
+image_prob = {
+    "Belege fehlen": {
+        "image": "new/img/review-media1.png",
+        "text":"In diesem Artikel fehlen Belege. Recherchiere fehlende Quellen und füge sie ein."},
+    "Veraltet": {
+        "image": "new/img/review-media1.png",
+        "text": "Teile dieses Artikels sind nicht auf dem neuesten Stand. Recherchiere die Informationen und ergänze den Artikel."},
+    "Lückenhaft": {
+        "image": "new/img/review-media2.png",
+        "text": "In diesem Artikel fehlen wichtige Informationen. Recherchiere die Informationen und ergänze den Artikel."},
+    "Ungeprüfter Link": {"image": "new/img/review-media1.png", "text": "In diesem Artikel wurde ein Link automatisch aktualisiert. Prüfe, ob der Link noch stimmt."},
+    "Überarbeiten": {"image": "new/img/review-media1.png", "text": "In diesem Artikel muss grundlegend etwas verändert werden. Schau nach, was fehlt und überarbeite den Artikel."}
+}
+
 
 @app.route("/", methods=["GET"])
 def index():
@@ -74,7 +88,7 @@ def previewarticle():
     query = flask.request.args.get("q", default="")
     problems = flask.request.args.getlist("problems")
 
-    return flask.render_template("preview.html", text=text, query=query, problems=problems)
+    return flask.render_template("preview.html", text=text, query=query, problems=problems, image_prob=image_prob)
     # BASE = 'https://render-tron.appspot.com/screenshot/'
     # url = query
     # path = query+'.jpg'
