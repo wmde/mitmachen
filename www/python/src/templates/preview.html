@@ -198,7 +198,7 @@
 
         	<div class="review-article-row">
         		<div class="container">
-	        		<h2>This article needs {{ len(problems) }} reviews</h2>
+	        		<h2>This article needs {{ problems|length }} reviews</h2>
 	        		<input type="hidden" id="query-url" value="{{ query }}">
 	        		<ul class="review-article-listing"> 
 	        			<li><a href="#"><img src="assets/img/review-media1.png"> <div class="reviews-article-info"><h5>Überarbeiten</h5><p>In diesem Artikel wurde ein Link automatisch aktualisiert. Prüfe, ob der Link noch stimmt.</p></div></a></li>
