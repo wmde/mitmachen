@@ -375,7 +375,7 @@ function runTabAndCategCode(t){
         var fs = curSelUserInterests.length > 0 ? curSelUserInterests.slice(0,2).join(", ") : "";
         var ls = curSelUserInterests.length > 0 ? curSelUserInterests.slice(2).length : "";
 
-        var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" more <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>") : fs + " <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>" : "";
+        var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" more <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>") : fs + " <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>" : ("No interests selected, please select. <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>");
         $('.user-sel-categories').html(textToAdd);
 
         getSubcategoriesForUser('user_interests');
@@ -665,24 +665,24 @@ $( function() {
 
     $('.user-interest-popup').on('click', function(e){
         e.preventDefault();
-
+        console.log('clciked');
         var uIFromDb = localStorage.getItem('user_interests');
         uIFromDb = uIFromDb != undefined ? JSON.parse(uIFromDb) : [];
 
         var itemName = $(this).attr('data-attr-name').replace(/_/g, " ");
 
-        if(uIFromDb.length > 0){
-            if($(this).hasClass('active')){
-                $(this).removeClass('active');
-                var idx = uIFromDb.indexOf(itemName);
-                if(idx != -1)
-                    uIFromDb.splice(idx, 1)
-        
-            }else{
-                $(this).addClass('active');
-                uIFromDb.push(itemName);
-            }
+        // if(uIFromDb.length > 0){
+        if($(this).hasClass('active')){
+            $(this).removeClass('active');
+            var idx = uIFromDb.indexOf(itemName);
+            if(idx != -1)
+                uIFromDb.splice(idx, 1)
+    
+        }else{
+            $(this).addClass('active');
+            uIFromDb.push(itemName);
         }
+        // }
 
         localStorage.setItem('user_interests', JSON.stringify(uIFromDb));
     })
