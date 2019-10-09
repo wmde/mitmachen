@@ -72,8 +72,8 @@ def getarticlesforsubcategory():
 @app.route('/preview', methods=['GET'])
 def previewarticle():
     query = flask.request.args.get("q", default="")
-    problems = flask.request.args.get("problems")
-    print ('PROBLEMS: ', problems)
+    problems = flask.request.args.get("problems", default=[])
+
     return flask.render_template("preview.html", text=text, query=query, problems=problems)
     # BASE = 'https://render-tron.appspot.com/screenshot/'
     # url = query
