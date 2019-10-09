@@ -138,60 +138,119 @@ function trackingUserActivity(type, title, weblink){
 }
 
 // get subcategories for categories
-function getSubcategoriesForUser(){
-    var userInt = localStorage.getItem('user_interests');
+function getSubcategoriesForUser(type){
 
-    if(userInt != undefined){
-        userInt = JSON.parse(userInt);
-        if(userInt.length > 0){
-            $.ajax({
-                url: $URL_FOR_GETSUBCATEG,
-                type: 'POST',
-                contentType: 'application/json',
-                dataType: 'json',
-                data: JSON.stringify(userInt),
-                success: function(d){
-                    if(d['status']){
-                        $('.categories-subcategories').html('<div class="owl-carousel owl-theme common-grid-listing"></div>');
+    if(type == "popular"){
+        var userInt = localStorage.getItem('user_interests_popular');
 
-                        for(var item in d['data']){
-                            if(item == 0){
-                                $('.owl-carousel').append('<div class="item active subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item]+'</span></div>');
-                                getArticlesSubcateg(d['data'][item]);
-                            }else{
-                                $('.owl-carousel').append('<div class="item subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item]+'</span></div>');
-                            }
-                        }
+        if(userInt != undefined){
+            userInt = JSON.parse(userInt);
+            if(userInt.length > 0){
+                $.ajax({
+                    url: $URL_FOR_GETSUBCATEG,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify(userInt),
+                    success: function(d){
+                        if(d['status']){
+                            $('.categories-subcategories').html('<div class="owl-carousel owl-theme common-grid-listing"></div>');
 
-                        var owl = $('.owl-carousel');
-                        owl.owlCarousel({
-                            stagePadding: 130,
-                            margin: 10,
-                            nav: true,
-                            loop: false,
-                            navRewind: false,
-                            responsive: {
-                                0: {
-                                    items: 1,
-                                    stagePadding: 50,
-                                },
-                                600: {
-                                    items: 2
-                                },
-                                1000: {
-                                    items: 5
+                            for(var item in d['data']){
+                                if(item == 0){
+                                    $('.owl-carousel').append('<div class="item active subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item]+'</span></div>');
+                                    getArticlesSubcateg(d['data'][item]);
+                                }else{
+                                    $('.owl-carousel').append('<div class="item subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item]+'</span></div>');
                                 }
                             }
-                        });
 
+                            var owl = $('.owl-carousel');
+                            owl.owlCarousel({
+                                stagePadding: 130,
+                                margin: 10,
+                                nav: true,
+                                loop: false,
+                                navRewind: false,
+                                responsive: {
+                                    0: {
+                                        items: 1,
+                                        stagePadding: 50,
+                                    },
+                                    600: {
+                                        items: 2
+                                    },
+                                    1000: {
+                                        items: 5
+                                    }
+                                }
+                            });
+
+                        }
+                    },
+                    error: function(err){
+                        console.log(err);
                     }
-                },
-                error: function(err){
-                    console.log(err);
-                }
-            })
+                })
+            }
+        }
+    }else{
+        var userInt = localStorage.getItem('user_interests');
+
+        if(userInt != undefined){
+            userInt = JSON.parse(userInt);
+            if(userInt.length > 0){
+                $.ajax({
+                    url: $URL_FOR_GETSUBCATEG,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify(userInt),
+                    success: function(d){
+                        if(d['status']){
+                            $('.categories-subcategories').html('<div class="owl-carousel owl-theme common-grid-listing"></div>');
+
+                            for(var item in d['data']){
+                                if(item == 0){
+                                    $('.owl-carousel').append('<div class="item active subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item]+'</span></div>');
+                                    getArticlesSubcateg(d['data'][item]);
+                                }else{
+                                    $('.owl-carousel').append('<div class="item subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item]+'</span></div>');
+                                }
+                            }
+
+                            var owl = $('.owl-carousel');
+                            owl.owlCarousel({
+                                stagePadding: 130,
+                                margin: 10,
+                                nav: true,
+                                loop: false,
+                                navRewind: false,
+                                responsive: {
+                                    0: {
+                                        items: 1,
+                                        stagePadding: 50,
+                                    },
+                                    600: {
+                                        items: 2
+                                    },
+                                    1000: {
+                                        items: 5
+                                    }
+                                }
+                            });
+
+                        }
+                    },
+                    error: function(err){
+                        console.log(err);
+                    }
+                })
+            }
         }
     }
+
+    
 }
 
 // function that runs on articles page only
@@ -208,7 +267,7 @@ function runArticlesCode(){
     suggest_topics();
 
     // fetch subcategories
-    getSubcategoriesForUser();
+    // getSubcategoriesForUser();
 
 }
 
@@ -282,6 +341,42 @@ function findTopics(topic){
 
 }
 
+function runTabAndCategCode(t){
+    
+    console.log('runTabAndCategCode: ', t);
+
+    if(t == 'popular'){
+        $(".nav-link").removeClass('active');
+        $('.nav-link[href="#home"]').addClass('active');
+
+        var curSelUserInterests = localStorage.getItem('user_interests_popular');
+        curSelUserInterests = curSelUserInterests != undefined ? JSON.parse(curSelUserInterests) : "";
+        
+        var textToAdd = "";
+        var fs = curSelUserInterests.length > 0 ? curSelUserInterests.slice(0,2).join(", ") : "";
+        var ls = curSelUserInterests.length > 0 ? curSelUserInterests.slice(2).length : "";
+        
+        var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" more <a href='#' class='edit-categ-popular' data-toggle='modal' data-target='#changeCategPopular'>Edit</a>") : fs + " <a href='#' class='edit-categ-popular' data-toggle='modal' data-target='#changeCategPopular'>Edit</a>" : "";
+        
+        $('.user-sel-categories-popular').html(textToAdd);
+
+        getSubcategoriesForUser('popular');
+
+    }else{
+        var curSelUserInterests = localStorage.getItem('user_interests');
+        curSelUserInterests = curSelUserInterests != undefined ? JSON.parse(curSelUserInterests) : "";
+
+        var textToAdd = "";
+        var fs = curSelUserInterests.length > 0 ? curSelUserInterests.slice(0,2).join(", ") : "";
+        var ls = curSelUserInterests.length > 0 ? curSelUserInterests.slice(2).length : "";
+
+        var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" more <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>") : fs + " <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>" : "";
+        $('.user-sel-categories').html(textToAdd);
+
+        getSubcategoriesForUser('user_interests');
+    }
+}
+
 $( function() {
     
 
@@ -303,6 +398,11 @@ $( function() {
         select: function(event, ui) {
             $("#category,#categoryindex").val(ui.item.value);
             $("#category,#categoryindex").change();
+
+            localStorage.setItem('search', ui.item.value.trim().toLowerCase());
+
+            window.location.href = $URL_FOR_ARTICLES;
+
         }
     });
 
@@ -399,6 +499,43 @@ $( function() {
         localStorage.setItem('user_interests', JSON.stringify(userInterests));
     })
 
+
+    // popular interests select
+    var popularInterests = [];
+    $('.user-interest-popular').on('click', function(e){
+        e.preventDefault();
+        var itemName = $(this).attr('data-attr-name').replace(/_/g, " ");
+
+        if($(this).hasClass('active')){
+            $(this).removeClass('active');
+            var idx = popularInterests.indexOf(itemName);
+
+            if(idx != -1)
+                popularInterests.splice(idx, 1)
+    
+        }else{
+            $(this).addClass('active');
+            popularInterests.push(itemName);
+        }
+
+
+        if(popularInterests.length > 0){
+            $('#to-articles-popular').removeClass('disabled');
+        }else{
+            $('#to-articles-popular').addClass('disabled');
+        }
+
+        localStorage.setItem('user_interests_popular', JSON.stringify(popularInterests));
+    })
+
+    $("#to-articles-popular").on('click', function(){
+        localStorage.setItem('frompopular', 1);
+    })
+
+    $("#to-articles").on('click', function(){
+        localStorage.setItem('frompopular', 0);
+    })
+
     // show all selected by default
     $('.filter-task').trigger('click');
 
@@ -462,16 +599,19 @@ $( function() {
     })
 
 
-    $('#category,#categoryindex').on('focus', function(){
+    $('#category, #categoryindex').on('focus', function(){
         // $(this).prop('placeholder', 'Search a topic you want to contribute to');
         $(this).prop('placeholder', '');
     })
-    $('#category,#categoryindex').on('blur', function(){
-        $(this).prop('placeholder', 'Search a topic you want to contribute to');
+
+    $('#category, #categoryindex').on('focusout', function(){
+        var v = $("#category,#categoryindex").val().trim();
+        if(v == "")
+            $(this).prop('placeholder', 'Search a topic you want to contribute to');
     })
 
     // show user selected categories on articles page
-    var curSelUserInterests = localStorage.getItem('user_interests');
+    /*var curSelUserInterests = localStorage.getItem('user_interests');
     curSelUserInterests = curSelUserInterests != undefined ? JSON.parse(curSelUserInterests) : "";
 
     var textToAdd = "";
@@ -479,13 +619,20 @@ $( function() {
     var ls = curSelUserInterests.length > 0 ? curSelUserInterests.slice(2).length : "";
 
     var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" more <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>") : fs + " <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>" : "";
-    $('.user-sel-categories').html(textToAdd);
+    $('.user-sel-categories').html(textToAdd);*/
 
 
     $("#update-user-int").on('click', function(e){
         e.preventDefault();
         // update 
         $("#changeCateg").modal('hide');
+        window.location.reload();
+    })
+
+    $("#update-user-int-popular").on('click', function(e){
+        e.preventDefault();
+        // update 
+        $("#changeCategPopular").modal('hide');
         window.location.reload();
     })
 
@@ -497,6 +644,19 @@ $( function() {
             ui.map((item) => {
                 item = item.replace(/\s/g, '_');
                 $('.user-interest-popup[data-attr-name="'+item+'"]').addClass('active');
+            })
+        }
+    })
+
+    $("#changeCategPopular").on('shown.bs.modal', function(){
+        console.log('changeCategPopular')
+        var ui = localStorage.getItem('user_interests_popular');
+        ui = (ui != undefined) ? JSON.parse(ui) : [];
+
+        if(ui.length > 0){
+            ui.map((item) => {
+                item = item.replace(/\s/g, '_');
+                $('.user-interest-popup-popular[data-attr-name="'+item+'"]').addClass('active');
             })
         }
     })
@@ -525,6 +685,30 @@ $( function() {
         localStorage.setItem('user_interests', JSON.stringify(uIFromDb));
     })
 
+    $('.user-interest-popup-popular').on('click', function(e){
+        e.preventDefault();
+
+        var uIFromDb = localStorage.getItem('user_interests_popular');
+        uIFromDb = uIFromDb != undefined ? JSON.parse(uIFromDb) : [];
+
+        var itemName = $(this).attr('data-attr-name').replace(/_/g, " ");
+
+        if(uIFromDb.length > 0){
+            if($(this).hasClass('active')){
+                $(this).removeClass('active');
+                var idx = uIFromDb.indexOf(itemName);
+                if(idx != -1)
+                    uIFromDb.splice(idx, 1)
+        
+            }else{
+                $(this).addClass('active');
+                uIFromDb.push(itemName);
+            }
+        }
+
+        localStorage.setItem('user_interests_popular', JSON.stringify(uIFromDb));
+    })
+
     const $menu = $('.select-box-wrap');
 
     $(document).mouseup(e => {
@@ -542,5 +726,6 @@ $( function() {
         $(this).addClass('active');
         getArticlesSubcateg(name);
     })
+
 
 });
