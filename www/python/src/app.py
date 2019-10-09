@@ -14,7 +14,7 @@
 import json
 import flask
 from api import Mitmachen
-# import request
+import requests
 
 with open("text.js", "rt") as f:
     text = json.load(f)
@@ -68,6 +68,24 @@ def getarticlesforsubcategory():
     name = flask.request.args.get("q", default="")
     articles = api.getarticlesforsubcategory(name)
     return flask.jsonify({"status": 1, "message": "All articles with the subcategory", "data": articles})
+
+@app.route('/preview', methods=['GET'])
+def previewarticle():
+    query = flask.request.args.get("q", default="")
+    problems = flask.request.args.get("problems")
+    return flask.render_template("preview.html", text=text, query=query, problems=problems)
+    # BASE = 'https://render-tron.appspot.com/screenshot/'
+    # url = query
+    # path = query+'.jpg'
+
+    # response = requests.get(BASE + url, stream=True)
+
+    # if response.status_code == 200:
+    #     with open(path, 'wb') as file:
+    #         for chunk in response:
+    #             file.write(chunk)
+    # else:
+    #     return flask.render_template("preview.html", text=text, query=query)
 
 # if __name__ == '__main__':
 #     app.debug = True

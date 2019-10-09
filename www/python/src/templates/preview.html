@@ -1,0 +1,248 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='new/css/bootstrap.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='new/css/custom.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='new/css/owl.carousel.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='new/css/responsive.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='new/css/font-awesome.min.css') }}">
+
+    <title>Article-preview</title>
+    <style>
+    	.article-preview-page {
+    		padding:0;
+    		margin:0;
+    	}
+
+    	.preview-top-heading {
+		    background: #E1DFDF;
+		    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+		    min-height: 25px;
+		}
+
+		.preview-top-heading span {
+		    text-transform: uppercase;
+		    font-size: 14px;
+		    color: #232323;
+		    font-family: Arial Narrow;
+		}
+
+		.review-article-row {
+		    background: #238352;
+		    box-shadow: 0px 4px 24px rgba(35, 35, 35, 0.2);
+		}
+
+		.review-article-row h2 {
+		    color: #fff;
+		    font-family: Georgia;
+		    font-size: 30px;
+		    padding: 40px 0px;
+		    margin: 0;
+		}
+
+		.review-article-listing li {
+		    list-style: none;
+		    background: #fff;
+		    box-shadow: 0px 4px 4px rgba(67, 67, 67, 0.25);
+		    border-radius: 3px;
+		    padding: 15px;
+		    overflow: hidden;
+		    min-height: 115px;
+		    margin: 0 8px 16px;
+		}
+
+		.review-article-listing li img {
+    		float: left;
+		}
+
+		.review-article-listing li .reviews-article-info {
+		    float: left;
+		    width: 87%;
+		    padding-left: 14px;
+		}
+
+		ul.review-article-listing {
+		    padding: 0;
+		    margin: 0;
+		}
+
+		.review-article-listing li .reviews-article-info h5 {
+		    color: #232323;
+		    font-size: 14px;
+		    font-family: Arial Narrow;
+		    text-transform: uppercase;
+		}
+
+		.review-article-listing li .reviews-article-info p {
+		    font-family: Montserrat;
+		    font-size: 12px;
+		    line-height: 138%;
+		    color: #424242;
+		    margin: 0;
+		}
+
+		.article-preview-media-row {
+    		padding: 40px 0 0;
+		}
+
+		.preview-top-heading .container-fluid {
+    		max-width: 1349px;
+		}
+
+		.show-article-btn-row {
+		    background: linear-gradient(360deg, rgba(255, 255, 255, 0.91) 37.31%, rgba(255, 255, 255, 0) 121.43%);
+		    position: fixed;
+		    bottom: 0px;
+		    left: 50%;
+		    transform: translate(-50%,0%);
+		    width: 100%;
+		    padding-bottom: 20px;
+		}
+
+		@media (min-width:576px) {
+			.review-article-listing li {
+			    width: 24%;	
+			    display: inline-block;
+			}
+
+			.review-article-listing {
+    			margin: 0 -8px !important;
+			}
+		}	
+
+		@media (min-width: 1200px) {
+			.article-preview-page .container {
+			    max-width: 1294px;
+			}
+
+			.aricle-preview-top-block {
+			    position: fixed;
+			    width: 100%;
+			    top: 0;
+			}
+
+			.article-preview-media-row {
+    			padding: 319px 0 0;
+			}
+		}
+
+		@media (min-width:768px) and (max-width:991px) {
+			.review-article-listing li {
+			    width: 30.5%;
+			    vertical-align: top;
+			}
+
+			.review-article-listing li .reviews-article-info {
+				width:75%;	
+			}
+		}
+
+		@media (min-width:992px) and (max-width:1199px) {
+			.review-article-listing li {
+			    width: 31.3%;
+			    vertical-align: top;
+			}
+
+			.review-article-listing li .reviews-article-info {
+				width:82%;	
+			}
+		}
+
+		@media (min-width:576px) and (max-width:767px) {
+			.review-article-listing li {
+			    width: 46.5%;
+			    vertical-align: top;
+			    min-height: 135px;
+			}  
+
+			.review-article-listing li .reviews-article-info {
+				width: 83%;
+			}  
+		}	
+
+		@media (max-width:575px) {
+			.review-article-listing li .reviews-article-info {
+				width: 85%;
+			}
+
+			.review-article-row {
+				padding-bottom: 15px;
+			}
+
+			.review-article-row h2 {
+				font-size: 20px;
+			}
+
+			.preview-top-heading span {
+				font-size: 13px;
+			}
+		}
+    </style>	
+  </head>
+  <body class="bg-white">
+    
+
+    <div class="main-wrapper article-preview-page">
+        <div class="aricle-preview-top-block">
+        	<div class="preview-top-heading">
+        		<div class="container-fluid">
+        			<span>This is an article preview and it’s not editable</span>
+        		</div> 	
+        	</div>
+
+        	<div class="review-article-row">
+        		<div class="container">
+	        		<h2>This article needs 3 reviews</h2>
+	        		<input type="hidden" id="query-url" value="{{ query }}">
+	        		<ul class="review-article-listing"> 
+	        			<li><a href="#"><img src="assets/img/review-media1.png"> <div class="reviews-article-info"><h5>Überarbeiten</h5><p>In diesem Artikel wurde ein Link automatisch aktualisiert. Prüfe, ob der Link noch stimmt.</p></div></a></li>
+
+	        			<li><a href="#"><img src="assets/img/review-media2.png"> <div class="reviews-article-info"><h5>Lückenhaft</h5><p>In diesem Artikel muss grundlegend etwas verändert werden. Schau nach, was fehlt und überarbeite den Artikel.</p></div></a></li>
+
+	        			<li><a href="#"><img src="assets/img/review-media3.png"> <div class="reviews-article-info"><h5>Veraltet</h5><p>In diesem Artikel fehlen Belege. Recherchiere fehlende Quellen und füge sie ein.</p></div></a></li>
+	        		</ul>
+	        		<ul class="review-article-listing">
+	        			{% for item in problems %}
+	        				{{ item }}
+	        			{% endfor %}
+	        		</ul>
+        		</div>
+        	</div>	
+        </div>	
+
+        <div class="article-preview-media-row">
+        	<div class="container">
+        		<img src="https://render-tron.appspot.com/screenshot/{{ query }}/?width=1536&height=754" class="img-fluid">
+        	</div>	
+        </div>
+
+        <div class="text-center show-article-btn-row">
+			<a href="{{ query }}" target="_blank" class="btn get-started-btn">Show article on wikipedia</a>
+		</div>	
+
+
+
+	</div> 
+		
+	<script type="text/javascript" src="{{ url_for('static', filename='new/js/jquery.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='new/js/jquery-ui.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='new/js/owl.carousel.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='new/js/popper.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='new/js/bootstrap.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='new/js/custom.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='new/js/mitmachen.js') }}"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var query = $('#query-url').val();
+		})
+	</script>		    	  
+
+  </body>
+</html>
