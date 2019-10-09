@@ -451,20 +451,24 @@
 		$(document).ready(function(){
 			runArticlesCode();
 			// runTabAndCategCode();
-
+			var si = localStorage.getItem('search');
 			var v = localStorage.getItem('frompopular');
 
-			if(v != undefined && parseInt(v) == 1){
-				$('.tab-pane').removeClass('active show');
-				localStorage.setItem('frompopular', 1);
-				$('#home').addClass('active show');
+			if(si == undefined || si == ""){
+				if(v != undefined && parseInt(v) == 1){
+					$('.tab-pane').removeClass('active show');
+					localStorage.setItem('frompopular', 1);
+					$('#home').addClass('active show');
 
-				runTabAndCategCode('popular');
+					runTabAndCategCode('popular');
+				}else{
+					$('.tab-pane').removeClass('active show');
+					localStorage.setItem('frompopular', 0);
+					$('#menu1').addClass('active show');
+					runTabAndCategCode('other');
+				}
 			}else{
-				$('.tab-pane').removeClass('active show');
-				localStorage.setItem('frompopular', 0);
-				$('#menu1').addClass('active show');
-				runTabAndCategCode('other');
+				findTopics(si);
 			}
 
 			$('.nav-link').on('click', function(){
