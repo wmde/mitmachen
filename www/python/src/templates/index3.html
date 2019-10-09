@@ -329,17 +329,32 @@
 			if(ui != undefined){
 				ui = JSON.parse(ui);
 				// select the ones here
+				userInterests = ui;
 				ui.map((item) => {
 					$('.user-interest[data-attr-name="'+item+'"]').addClass('active');
 				})
+
+				if(ui.length > 0){
+					$('#to-articles').removeClass('disabled');
+				}
 			}
 
 			if(pt != undefined){
 				pt = JSON.parse(pt);
 				// select the ones here
+				popularInterests = pt;
 				pt.map((item) => {
 					$('.user-interest-popular[data-attr-name="'+item+'"]').addClass('active');
 				})
+
+				if(pt.length > 0){
+					$('#to-articles-popular').removeClass('disabled');
+				}
+			}
+
+			if(performance.navigation.type != 2){
+				// user reloads
+				localStorage.clear();
 			}
 		})
 	</script>

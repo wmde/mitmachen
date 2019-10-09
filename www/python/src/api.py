@@ -255,15 +255,15 @@ class Mitmachen:
         """Return a list of articles with associated problems."""
         conn = self._get_connection()
         articles = {}
-
+        print ('Categories to search: ', categories)
         # categories is list and remove items from it that are in blacklist
         categories = [item for item in categories if item not in self.blacklist]
 
-        categories_concat = '|'.join(categories)
+        # categories_concat = '|'.join(categories)
         try:
             with conn.cursor() as cursor:
                 cursor.execute(self.articles_query,
-                               {"categories": categories_concat,
+                               {"categories": categories,
                                 "tags": self.TAGS})
                 conn.commit()
                 articles = self._extract_problems(cursor.fetchall(),
@@ -271,7 +271,7 @@ class Mitmachen:
 
             with conn.cursor() as cursor:
                 cursor.execute(self.iabot_query,
-                               {"categories": categories_concat,
+                               {"categories": categories,
                                 "iabot_categories": self.IABOT_CATS})
                 conn.commit()
                 articles = self._extract_problems(cursor.fetchall(),

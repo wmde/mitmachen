@@ -22,6 +22,9 @@ var anchor = {
     "Allgemeinverständlichkeit": "#Vorlage_Unverstaendlich"
 }
 
+var userInterests = [];
+var popularInterests = [];
+
 // get articles for a subcategory
 function getArticlesSubcateg(name){
 
@@ -155,7 +158,7 @@ function getSubcategoriesForUser(type){
                     data: JSON.stringify(userInt),
                     success: function(d){
                         if(d['status']){
-                            $('.categories-subcategories').html('<div class="owl-carousel owl-theme common-grid-listing"></div>');
+                            $('.categories-subcategories-popular').html('<div class="owl-carousel owl-theme common-grid-listing"></div>');
 
                             for(var item in d['data']){
                                 if(item == 0){
@@ -472,7 +475,6 @@ $( function() {
 
     })
 
-    var userInterests = [];
 
     // for selecting user interests
     $('.user-interest').on('click', function(e){
@@ -504,7 +506,7 @@ $( function() {
 
 
     // popular interests select
-    var popularInterests = [];
+    
     $('.user-interest-popular').on('click', function(e){
         e.preventDefault();
         var itemName = $(this).attr('data-attr-name').replace(/_/g, " ");
