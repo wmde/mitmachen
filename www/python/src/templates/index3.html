@@ -331,6 +331,7 @@
 				// select the ones here
 				userInterests = ui;
 				ui.map((item) => {
+					item = item.replace(/\s/g, '_');
 					$('.user-interest[data-attr-name="'+item+'"]').addClass('active');
 				})
 

@@ -56,7 +56,7 @@ function getArticlesSubcateg(name){
                     /*$("<small/>").addClass("text-muted")
                         .text(result.description)
                         .appendTo(div);*/
-                    
+
                     var pvLink = $URL_FOR_PREVIEW + "?q=https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)) + "&problems=".concat(doc.problems);
                     
                     $("<a/>").attr("href", pvLink).attr('target', '_blank').html("Preview Article").appendTo(ptag);
@@ -134,10 +134,10 @@ function trackingUserActivity(type, title, weblink){
         dataType: 'json',
         data: JSON.stringify(data),
         success: function(d){
-            console.log(d);
+            // console.log(d);
         },
         error: function(err){
-            console.log(err);
+            // console.log(err);
         }
     })
 }
@@ -194,7 +194,7 @@ function getSubcategoriesForUser(type){
                         }
                     },
                     error: function(err){
-                        console.log(err);
+                        // console.log(err);
                     }
                 })
             }
@@ -248,7 +248,7 @@ function getSubcategoriesForUser(type){
                         }
                     },
                     error: function(err){
-                        console.log(err);
+                        // console.log(err);
                     }
                 })
             }
@@ -349,8 +349,6 @@ function findTopics(topic){
 }
 
 function runTabAndCategCode(t){
-    
-    console.log('runTabAndCategCode: ', t);
 
     if(t == 'popular'){
         $(".nav-link").removeClass('active');
@@ -445,7 +443,6 @@ $( function() {
     })
 
     if ($("#category").val() != "") {
-        // console.log('this is running');
         $("#category").change();
     }
 
@@ -655,7 +652,6 @@ $( function() {
     })
 
     $("#changeCategPopular").on('shown.bs.modal', function(){
-        console.log('changeCategPopular')
         var ui = localStorage.getItem('user_interests_popular');
         ui = (ui != undefined) ? JSON.parse(ui) : [];
 
