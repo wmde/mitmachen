@@ -474,6 +474,13 @@
 
 				if(t == 'popular'){
 					localStorage.setItem('frompopular', 1);
+
+					var pt = localStorage.getItem('user_interests_popular');
+
+					if(pt == undefined || pt..length == 0){
+						localStorage.setItem('user_interests_popular', JSON.stringify(["Geographie","Sport"]));
+					}
+
 					$('#home').addClass('active show');
 				}else{
 					localStorage.setItem('frompopular', 0);
