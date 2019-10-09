@@ -71,7 +71,7 @@
 				<ul class="nav nav-tabs">
 					<li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#menu1">Your interests</a>	
 					</li>
-					<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#home">POPULAR TOPICS</a>
+					<li class="nav-item"> <a class="nav-link home-pop-topics" href="{{ url_for('second') }}">POPULAR TOPICS</a>
 					</li>
 				</ul>
 				<!-- Tab panes -->
@@ -325,6 +325,11 @@
 		$(document).ready(function(){
 			var ui = localStorage.getItem('user_interests');
 			var pt = localStorage.getItem('user_interests_popular');
+
+			$('.home-pop-topics').on('click', function(e){
+				localStorage.setItem('frompopular', 1);
+				localStorage.setItem('user_interests_popular', JSON.stringify(["Geographie","Sport"]));
+			})
 
 			if(ui != undefined){
 				ui = JSON.parse(ui);
