@@ -48,7 +48,7 @@ function getArticlesSubcateg(name){
 
                 var div = $("<div/>").addClass("list-box list-box-new mb-2").appendTo(articleList);
                 var h3 = $("<h3/>").appendTo(div);
-                var ptag = $("<p/>").appendTo(div);
+                var ptag = $("<div/>").appendTo(div);
                 var ul = $("<ul/>").addClass('links-row').appendTo(div);
 
                 $.getJSON("https://de.wikipedia.org/api/rest_v1/page/summary/".concat(encodeURIComponent(doc.page)), function(result){
@@ -56,7 +56,7 @@ function getArticlesSubcateg(name){
                     /*$("<small/>").addClass("text-muted")
                         .text(result.description)
                         .appendTo(div);*/
-                    $("<span/>").text(result.description).appendTo(ptag);
+                    $("<p/>").text(result['extract_html']).appendTo(ptag);
                     var pvLink = $URL_FOR_PREVIEW + "?q=https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)) + "&problems=".concat(doc.problems);
                     
                     $("<a/>").attr("href", pvLink).attr('target', '_blank').html("Preview Article").appendTo(ptag);
@@ -299,7 +299,7 @@ function findTopics(topic){
 
             var div = $("<div/>").addClass("list-box list-box-new mb-2").appendTo(articleList);
             var h3 = $("<h3/>").appendTo(div);
-            var ptag = $("<p/>").appendTo(div);
+            var ptag = $("<div/>").appendTo(div);
             var ul = $("<ul/>").addClass('links-row').appendTo(div);
 
             $.getJSON("https://de.wikipedia.org/api/rest_v1/page/summary/".concat(encodeURIComponent(doc.page)), function(result){
@@ -307,7 +307,7 @@ function findTopics(topic){
                 /*$("<small/>").addClass("text-muted")
                     .text(result.description)
                     .appendTo(div);*/
-                $("<span/>").text(result.description).appendTo(ptag);
+                $("<p/>").text(result['extract_html']).appendTo(ptag);
                 var pvLink = $URL_FOR_PREVIEW + "?q=https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)) + "&problems=".concat(doc.problems);
                     
                 $("<a/>").attr("href", pvLink).attr('target', '_blank').html("Preview Article").appendTo(ptag);
