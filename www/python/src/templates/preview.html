@@ -209,17 +209,20 @@
 	        		</ul> -->
 	        		<ul class="review-article-listing">
 	        			{% for item in problems %}
-	        				<li>
-	        					<a href="">
-	        						<img src="{{ url_for('static', filename=image_prob[item]['image']) }}">
-	        						<div class="reviews-article-info">
-	        							<h5>{{ item }}</h5>
-	        							<p>
-	        								{{ image_prob[item]['text'] }}
-	        							</p>
-	        						</div>
-	        					</a>
-	        				</li>
+	        				Item name: {{ item }}
+	        				{% if(item in image_prob) %}
+		        				<li>
+		        					<a href="">
+		        						<img src="{{ url_for('static', filename=image_prob[item]['image']) }}">
+		        						<div class="reviews-article-info">
+		        							<h5>{{ item }}</h5>
+		        							<p>
+		        								{{ image_prob[item]['text'] }}
+		        							</p>
+		        						</div>
+		        					</a>
+		        				</li>
+		        			{% endif %}
 	        			{% endfor %}
 	        		</ul>
         		</div>

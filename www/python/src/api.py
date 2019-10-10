@@ -123,14 +123,14 @@ class Mitmachen:
 
                 subcategories = [item for item in cursor.fetchall()]
                 subcategories = list(set(subcategories))
-            print ('This is subcategories: ', subcategories)
+            
             with conn_orig.cursor() as cursor:
                 cursor.execute(self.subfilter_query, {"subcateg": subcategories, "tags": self.TAGS})
                 conn_orig.commit()
 
                 distinct_categories = [item['cl_to'].decode("utf-8") for item in cursor.fetchall()]
                 # distinct_categories = list(set(distinct_categories))
-            print ('This is distinct_categories: ', distinct_categories)
+            
             return distinct_categories
 
         finally:
@@ -255,7 +255,7 @@ class Mitmachen:
         """Return a list of articles with associated problems."""
         conn = self._get_connection()
         articles = {}
-        print ('Categories to search: ', categories)
+        
         # categories is list and remove items from it that are in blacklist
         categories = [item for item in categories if item not in self.blacklist]
         categories = [item.title() for item in categories]
