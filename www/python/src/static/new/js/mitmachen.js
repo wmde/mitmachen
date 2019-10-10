@@ -56,7 +56,7 @@ function getArticlesSubcateg(name){
                     /*$("<small/>").addClass("text-muted")
                         .text(result.description)
                         .appendTo(div);*/
-                    $("<p/>").text(result['extract_html']).appendTo(ptag);
+                    $("<p/>").html(result['extract_html']).appendTo(ptag);
                     var pvLink = $URL_FOR_PREVIEW + "?q=https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)) + "&problems=".concat(doc.problems);
                     
                     $("<a/>").attr("href", pvLink).attr('target', '_blank').html("Preview Article").appendTo(ptag);
@@ -307,7 +307,7 @@ function findTopics(topic){
                 /*$("<small/>").addClass("text-muted")
                     .text(result.description)
                     .appendTo(div);*/
-                $("<p/>").text(result['extract_html']).appendTo(ptag);
+                $("<p/>").html(result['extract_html']).appendTo(ptag);
                 var pvLink = $URL_FOR_PREVIEW + "?q=https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)) + "&problems=".concat(doc.problems);
                     
                 $("<a/>").attr("href", pvLink).attr('target', '_blank').html("Preview Article").appendTo(ptag);
