@@ -307,6 +307,7 @@ function findTopics(topic){
                 /*$("<small/>").addClass("text-muted")
                     .text(result.description)
                     .appendTo(div);*/
+                $("<span/>").text(result.description).appendTo(ptag);
                 var pvLink = $URL_FOR_PREVIEW + "?q=https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)) + "&problems=".concat(doc.problems);
                     
                 $("<a/>").attr("href", pvLink).attr('target', '_blank').html("Preview Article").appendTo(ptag);

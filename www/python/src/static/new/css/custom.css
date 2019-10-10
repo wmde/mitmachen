@@ -1187,3 +1187,6 @@ nav.navbar.sticky-top {
 .banner-block.header-small .navbar-brand img {
     max-width: 80px;
 }
+.user-sel-categories-popular{
+  display:none;
+}
