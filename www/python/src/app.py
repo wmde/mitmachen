@@ -87,7 +87,7 @@ def getarticlesforsubcategory():
 def previewarticle():
     query = flask.request.args.get("q", default="")
     problems = flask.request.args.getlist("problems")
-    print ('problems: ', type(problems), problems)
+    problems = problems[0].split(',') if len(problems) > 0 else problems
 
     return flask.render_template("preview.html", text=text, query=query, problems=problems, image_prob=image_prob)
     # BASE = 'https://render-tron.appspot.com/screenshot/'

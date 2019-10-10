@@ -78,7 +78,7 @@
 					    <div id="menu1" class="tab-pane active">
 					    	<div class="refresh-topic-row">
 					    		<div class="container">
-						    		<span class="refresh-topic">Refresh Topics</span>
+						    		<span class="refresh-topic" id="reftop-yi">Refresh Topics</span>
 									<span class="user-sel-categories"></span>
 								</div>
 							</div>
@@ -88,7 +88,7 @@
 	</div>
 	<div id="home" class="tab-pane fade">
 		<div class="refresh-topic-row">
-			<div class="container">	<span class="refresh-topic">Refresh Topics</span>
+			<div class="container">	<span class="refresh-topic" id="reftop-pt">Refresh Topics</span>
 				<span class="user-sel-categories-popular"></span>
 			</div>
 		</div>
@@ -468,6 +468,11 @@
 					runTabAndCategCode('other');
 				}
 			}else{
+
+				// hide active ness of buttons up top
+				$('.nav-link').removeClass('active');
+				$('.tab-pane').removeClass('active show');
+
 				findTopics(si);
 				/*if(v != undefined && parseInt(v) == 1){
 					runTabAndCategCode('popular');
@@ -492,6 +497,14 @@
 
 					$('#home').addClass('active show');
 				}else{
+
+					// remove search results at bottom
+					$('.article-found').html('');
+					$('.results-search').html('');
+
+
+					$('.results-search').html('<a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>')
+
 					localStorage.setItem('frompopular', 0);
 					$('#menu1').addClass('active show');
 				}

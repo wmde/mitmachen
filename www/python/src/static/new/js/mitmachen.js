@@ -730,5 +730,13 @@ $( function() {
         getArticlesSubcateg(name);
     })
 
+    $("#reftop-yi").on('click', function(){
+        runTabAndCategCode('other');
+    })
+
+    $("#reftop-pt").on('click', function(){
+        runTabAndCategCode('popular');
+    })
+
 
 });
