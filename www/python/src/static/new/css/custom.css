@@ -1210,3 +1210,15 @@ nav.navbar.sticky-top {
       margin: 0 auto;
   }
 }
+
+.ar-preview-div p{
+  display: contents;
+}
+
+.list-box.list-box-new .links-row li a.dropdown-toggle {
+text-transform: capitalize;
+}
+
+.list-box.list-box-new .links-row li a.dropdown-toggle:hover {
+text-decoration: none;
+}
