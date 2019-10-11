@@ -41,7 +41,7 @@ function getArticlesSubcateg(name){
                 $('.article-found').text("");
                 $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
             }else{
-                $('.article-found').text(data.length + ' articles found for ' + name);
+                $('.article-found').text(data.length + ' articles found for ' + name.replace(/_/g, ' '));
             }
 
             $.each(data, function(i, doc){
@@ -292,7 +292,7 @@ function findTopics(topic){
             $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
             suggest_topics();
         }else{
-            $('.article-found').text(result.articles.length + ' articles found for ' + topic);
+            $('.article-found').text(result.articles.length + ' articles found for ' + topic.replace(/_/g, ' '));
         }
 
         $.each(result.articles, function(i, doc){
