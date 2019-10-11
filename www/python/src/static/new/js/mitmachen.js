@@ -56,10 +56,12 @@ function getArticlesSubcateg(name){
                     /*$("<small/>").addClass("text-muted")
                         .text(result.description)
                         .appendTo(div);*/
-                    $("<p/>").html(result['extract_html']).appendTo(ptag);
+                    var ddiv = $("<div/>").appendTo(ptag);
+                    ddiv.html(result['extract_html']);
+                    // $("<div/>").html(result['extract_html']).appendTo(ptag);
                     var pvLink = $URL_FOR_PREVIEW + "?q=https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)) + "&problems=".concat(doc.problems);
                     
-                    $("<a/>").attr("href", pvLink).addClass('preview-article-link').attr('target', '_blank').html("Preview Article").appendTo(ptag);
+                    $("<a/>").attr("href", pvLink).addClass('preview-article-link').attr('target', '_blank').html("Preview Article").appendTo(ddiv);
                 })
 
                 $.each(doc.problems, function(i, problem){
@@ -307,10 +309,12 @@ function findTopics(topic){
                 /*$("<small/>").addClass("text-muted")
                     .text(result.description)
                     .appendTo(div);*/
-                $("<p/>").html(result['extract_html']).appendTo(ptag);
+                var ddiv = $("<div/>").appendTo(ptag);
+                ddiv.html(result['extract_html']);
+                // $("<div/>").html(result['extract_html']).appendTo(ptag);
                 var pvLink = $URL_FOR_PREVIEW + "?q=https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)) + "&problems=".concat(doc.problems);
-                    
-                $("<a/>").attr("href", pvLink).addClass('preview-article-link').attr('target', '_blank').html("Preview Article").appendTo(ptag);
+                
+                $("<a/>").attr("href", pvLink).addClass('preview-article-link').attr('target', '_blank').html("Preview Article").appendTo(ddiv);
                 // $("<a/>").attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page))).attr('target', '_blank').html("Preview Article").appendTo(ptag);
             })
 

@@ -1204,3 +1204,9 @@ nav.navbar.sticky-top {
 .list-box.list-box-new .links-row li a.dropdown-toggle:hover {
     color: #4e4e4e;
 }
+@media (min-width:1351px) {
+  #slider-block {
+      max-width: 1350px;
+      margin: 0 auto;
+  }
+}
