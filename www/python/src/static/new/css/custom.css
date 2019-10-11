@@ -1194,3 +1194,13 @@ nav.navbar.sticky-top {
 .list-box.list-box-new .preview-article-link {
     font-size: 14px;
 }
+.list-box.list-box-new .links-row li a.dropdown-toggle {
+    color: rgba(78,78,78,0.6);
+    font-weight: 500;
+    font-family: Montserrat;
+    transition: 0.2s all;
+}
+
+.list-box.list-box-new .links-row li a.dropdown-toggle:hover {
+    color: #4e4e4e;
+}
