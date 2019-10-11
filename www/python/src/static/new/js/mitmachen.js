@@ -56,7 +56,7 @@ function getArticlesSubcateg(name){
                     /*$("<small/>").addClass("text-muted")
                         .text(result.description)
                         .appendTo(div);*/
-                    var ddiv = $("<div/>").appendTo(ptag);
+                    var ddiv = $("<div/>").addClass('ar-preview-div').appendTo(ptag);
                     ddiv.html(result['extract_html']);
                     // $("<div/>").html(result['extract_html']).appendTo(ptag);
                     var pvLink = $URL_FOR_PREVIEW + "?q=https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)) + "&problems=".concat(doc.problems);
