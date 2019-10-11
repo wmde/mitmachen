@@ -604,7 +604,7 @@ nav.navbar.sticky-top {
   .list-box p {
     font-weight: 400;
     font-size: 14px;
-    line-height: 138%;
+    line-height: 22px;
     color: #4E4E4E;
     margin-bottom: 23px; }
 
@@ -1189,4 +1189,8 @@ nav.navbar.sticky-top {
 }
 .user-sel-categories-popular{
   display:none;
+}
+
+.list-box.list-box-new .preview-article-link {
+    font-size: 14px;
 }
