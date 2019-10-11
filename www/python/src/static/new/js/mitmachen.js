@@ -217,10 +217,10 @@ function getSubcategoriesForUser(type){
 
                             for(var item in d['data']){
                                 if(item == 0){
-                                    $('.owl-carousel').append('<div class="item active subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item]+'</span></div>');
+                                    $('.owl-carousel').append('<div class="item active subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item].replace(/_/g, ' ')+'</span></div>');
                                     getArticlesSubcateg(d['data'][item]);
                                 }else{
-                                    $('.owl-carousel').append('<div class="item subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item]+'</span></div>');
+                                    $('.owl-carousel').append('<div class="item subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item].replace(/_/g, ' ')+'</span></div>');
                                 }
                             }
 
