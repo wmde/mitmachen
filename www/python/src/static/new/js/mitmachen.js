@@ -57,7 +57,9 @@ function getArticlesSubcateg(name){
                         .text(result.description)
                         .appendTo(div);*/
                     var ddiv = $("<div/>").addClass('ar-preview-div').appendTo(ptag);
-                    ddiv.html(result['extract_html']);
+                    var sd = $("<span/>").appendTo(ddiv);
+                    sd.html(result['extract_html']);
+                    // ddiv.html(result['extract_html']);
                     // $("<div/>").html(result['extract_html']).appendTo(ptag);
                     var pvLink = $URL_FOR_PREVIEW + "?q=https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)) + "&problems=".concat(doc.problems);
                     
@@ -310,7 +312,9 @@ function findTopics(topic){
                     .text(result.description)
                     .appendTo(div);*/
                 var ddiv = $("<div/>").addClass('ar-preview-div').appendTo(ptag);
-                ddiv.html(result['extract_html']);
+                var sd = $("<span/>").appendTo(ddiv);
+                sd.html(result['extract_html']);
+                // ddiv.html(result['extract_html']);
                 // $("<div/>").html(result['extract_html']).appendTo(ptag);
                 var pvLink = $URL_FOR_PREVIEW + "?q=https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)) + "&problems=".concat(doc.problems);
                 
