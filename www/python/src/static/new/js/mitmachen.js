@@ -296,7 +296,7 @@ function findTopics(topic){
             $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
             suggest_topics();
         }else{
-            $('.article-found').text(result.articles.length + ' X Artikel gefunden in ' + topic.replace(/_/g, ' '));
+            $('.article-found').text(result.articles.length + ' Artikel gefunden in ' + topic.replace(/_/g, ' '));
         }
 
         $.each(result.articles, function(i, doc){

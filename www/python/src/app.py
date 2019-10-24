@@ -25,15 +25,15 @@ app = flask.Flask(__name__)
 image_prob = {
     "Belege fehlen": {
         "image": "new/img/review-media1.png",
-        "text":"In diesem Artikel fehlen Belege. Recherchiere fehlende Quellen und füge sie ein."},
+        "text":"In diesem Artikel fehlen Belege. Schau in diesem Baustein nach welche. Recherchiere fehlende Quellen und füge sie ein."},
     "Veraltet": {
         "image": "new/img/review-media1.png",
         "text": "Teile dieses Artikels sind nicht auf dem neuesten Stand. Recherchiere die Informationen und ergänze den Artikel."},
     "Lückenhaft": {
         "image": "new/img/review-media2.png",
-        "text": "In diesem Artikel fehlen wichtige Informationen. Recherchiere die Informationen und ergänze den Artikel."},
-    "Ungeprüfter Link": {"image": "new/img/review-media1.png", "text": "In diesem Artikel wurde ein Link automatisch aktualisiert. Prüfe, ob der Link noch stimmt."},
-    "Überarbeiten": {"image": "new/img/review-media1.png", "text": "In diesem Artikel muss grundlegend etwas verändert werden. Schau nach, was fehlt und überarbeite den Artikel."}
+        "text": "In diesem Artikel fehlen wichtige Informationen. Schau in diesem Baustein nach welche. Recherchiere die Informationen und ergänze den Artikel."},
+    "Ungeprüfter Link": {"image": "new/img/review-media1.png", "text": "In diesem Artikel wurde ein Link automatisch aktualisiert. Scrolle nach unten zu den Einzelnachweisen, finde den mit einem (i) markierten Link und prüfe ob der Link noch stimmt."},
+    "Überarbeiten": {"image": "new/img/review-media1.png", "text": "In diesem Artikel muss grundlegend etwas verändert werden. Schau in diesem Baustein nach, was fehlt und überarbeite den Artikel."}
 }
 
 
