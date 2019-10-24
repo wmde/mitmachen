@@ -46,10 +46,10 @@
 				        <div class="buttons-wrap">
 				          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				            <li class="nav-item">
-				              <a class="nav-link" href="#">Log in</a>
+				              <a class="nav-link" href="#" data-toggle="modal" data-target="#signin">Log in</a>
 				            </li>
 				            <li class="nav-item">
-				              <a class="nav-link" href="#">Sign up</a>
+				              <a class="nav-link" href="#" data-toggle="modal" data-target="#signin">Sign up</a>
 				            </li>
 				          </ul>
 				        </div>
@@ -63,6 +63,24 @@
 					<p class="mt-4">{{ text.INTRO_TEXT }}</p>
 			</div>
 	</div>
+	</div>
+
+	<div id="signin" class="modal fade pop-up-wrap" role="dialog">
+		  <div class="modal-dialog">
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		     
+		      <div class="modal-body">
+		      		<button type="button" class="btn close-btn" data-dismiss="modal">Close</button>
+		      		<div class="jumbotron vertical-center"> 
+						  <div class="col-md-10 offset-md-1">
+						    <button class="btn get-started-btn">Login with Wikimedia Account</button>
+						  </div>
+					</div>
+							    		 		
+		      </div>
+		    </div>
+		  </div>
 	</div>
 	<div class="main-wrapper pad-top0">
 		<div class="tabs-block">

@@ -1222,3 +1222,10 @@ text-transform: capitalize;
 .list-box.list-box-new .links-row li a.dropdown-toggle:hover {
 text-decoration: none;
 }
+
+.ar-preview-div .preview-article-link {
+    margin-left: 10px;
+}
+.ar-preview-div ul + .preview-article-link {
+    margin-left: 0;
+}
