@@ -3,5 +3,5 @@ SELECT
 FROM
 	category
 WHERE
-    cat_title LIKE %(%first_letters%)s
+    cat_title LIKE %(first_letters)s
 LIMIT 10;
