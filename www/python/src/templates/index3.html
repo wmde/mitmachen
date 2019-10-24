@@ -74,7 +74,7 @@
 		      		<button type="button" class="btn close-btn" data-dismiss="modal">Close</button>
 		      		<div class="jumbotron vertical-center"> 
 						  <div class="col-md-10 offset-md-1">
-						    <button class="btn get-started-btn">Login with Wikimedia Account</button>
+						    <button class="btn get-started-btn">Einloggen mit deinem Wikipedia-Benutzerkonto</button>
 						  </div>
 					</div>
 							    		 		
@@ -87,9 +87,9 @@
 			<div class="container">
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs">
-					<li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#menu1">Your interests</a>	
+					<li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#menu1">Deine Themen</a>	
 					</li>
-					<li class="nav-item"> <a class="nav-link home-pop-topics" href="{{ url_for('second') }}">POPULAR TOPICS</a>
+					<li class="nav-item"> <a class="nav-link home-pop-topics" href="{{ url_for('second') }}">Beliebte Themen</a>
 					</li>
 				</ul>
 				<!-- Tab panes -->
@@ -97,8 +97,8 @@
 					<div id="menu1" class="tab-pane active">
 						<br>
 						<div class="pop-up-heading">
-							<h2 class="mb-3">Your Interests</h2>
-							<p>Select your interests and we will show you related articles.</p>
+							<h2 class="mb-3">Deine Themen</h2>
+							<p>Wähle deine Themenbereiche und wir zeigen dir passende Artikel.</p>
 						</div>
 						<ul class="my-interest-listing mt-3">
 							<li class="user-interest" data-attr-name="Geographie">
@@ -211,7 +211,7 @@
 						</ul>
 						<div class="text-center get-started-btn-row">
 							<!-- <a href="/articles" class="btn get-started-btn">Show ME ARTICLES</a> -->
-							<a href="{{ url_for('second') }}" class="btn get-started-btn disabled" id="to-articles">Show ME ARTICLES</a>
+							<a href="{{ url_for('second') }}" class="btn get-started-btn disabled" id="to-articles">Finde passende Artikel</a>
 						</div>
 					</div>
 					<div id="home" class="tab-pane fade">
@@ -266,30 +266,15 @@
 						<div class="footer-listing pad-left-25">
 							<h6>Helpful link</h6>
 							<ul>
-								<li><a href="#">Helpful links</a>
+								<li><a href="https://de.wikipedia.org/wiki/Hilfe:%C3%9Cbersicht">Wikipedia Hilfeseiten</a>
 								</li>
-								<li><a href="#">Wikidata</a>
+								<li><a href="https://www.wikidata.org/wiki/Wikidata:Main_Page">Wikidata</a>
 								</li>
-								<li><a href="#">Wikisource</a>
+								<li><a href="https://de.wikisource.org/wiki/Hauptseite">Wikisource</a>
 								</li>
-								<li><a href="#">Commons</a>
+								<li><a href="https://commons.wikimedia.org/wiki/Hauptseite">Wikimedia Commons</a>
 								</li>
-								<li><a href="#">MediaWiki</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-3 col-sm-6 col-6">
-						<div class="footer-listing">
-							<h6>Social media</h6>
-							<ul>
-								<li><a href="#">LinkedIN</a>
-								</li>
-								<li><a href="#">Twitter</a>
-								</li>
-								<li><a href="#">Facebook</a>
-								</li>
-								<li><a href="#">Instagram</a>
+								<li><a href="https://www.mediawiki.org/wiki/MediaWiki">MediaWiki</a>
 								</li>
 							</ul>
 						</div>
@@ -299,34 +284,30 @@
 					<div class="row">
 						<div class="col-lg-5 col-md-6 col-sm-12">
 							<ul>
-								<li><a href="#">Privacy Policy</a>
+								<li><a href="https://meta.wikimedia.org/wiki/Privacy_policy/de">Datenschutz</a>
 								</li>
-								<li><a href="#">Term of use</a>
-								</li>
-								<li><a href="#">Sitemap</a>
-								</li>
-								<li><a href="#">©2019 Wiki</a>
+								<li><a href="https://wikitech.wikimedia.org/wiki/Wikitech:Cloud_Services_Terms_of_use">Nutzungsbedingungen</a>
 								</li>
 							</ul>
 						</div>
-						<div class="col-lg-4 col-md-12 col-sm-12">	<a class="basic-link" href="https://outreachdashboard.wmflabs.org/training/wikipedia-editieren">Learn the basic of wikipedia in guided training</a>
+						<div class="col-lg-4 col-md-12 col-sm-12">	<a class="basic-link" href="https://de.wikipedia.org/wiki/Wikipedia:Wikimedia_Deutschland/LerneWikipedia">Neu bei Wikipedia?</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="help-block">
-			<h4>Need Help?</h4>
-			<span>Learn the <a href="https://outreachdashboard.wmflabs.org/training/wikipedia-editieren">basics of Wikipedia</a> in guided training.</span>
-			<div class="hide-info">	<span>Search in the help pages in Wikipedia:</span>
+			<h4>Du brauchst Hilfe?</h4>
+			<span><a href="https://outreachdashboard.wmflabs.org/training/wikipedia-editieren">Lerne, wie man Artikel bearbeitet in Online-Trainings</span>
+			<div class="hide-info">	<span>Finde Hilfe in der Wikipedia:</span>
 				<ul>
-					<li><a target="_blank" href="https://de.wikipedia.org/wiki/Wikipedia:Wikimedia_Deutschland/LerneWikipedia">Complete supporting documents</a>
+					<li><a target="_blank" href="https://de.wikipedia.org/wiki/Wikipedia:Wikimedia_Deutschland/LerneWikipedia">Startseite für neue Autorinnen und Autoren</a>
 					</li>
-					<li><a href="#">Check links</a>
+					<li><a href="#">Übersicht aller Hilfeseiten</a>
 					</li>
-					<li><a target="_blank" href="https://de.wikipedia.org/wiki/Wikipedia:Mentorenprogramm">Overview of all help pages</a>
+					<li><a target="_blank" href="https://de.wikipedia.org/wiki/Wikipedia:Mentorenprogramm">Stelle eine Frage zur Mitarbeit in Wikipedia</a>
 					</li>
-				</ul>	<span><a href="https://de.wikipedia.org/wiki/Wikipedia:Fragen_von_Neulingen" target="_blank">Find specific answers to questions from newcomers .</a></span>
+				</ul>	<span><a href="https://de.wikipedia.org/wiki/Wikipedia:Fragen_von_Neulingen" target="_blank">Du willst längerfristig dabei bleiben? Melde dich beim Mentorenprogramm an.</a></span>
 			</div>
 		</div>
 	</div>

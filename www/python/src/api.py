@@ -113,6 +113,8 @@ class Mitmachen:
         conn = self._tracking_connection()
         conn_orig = self._get_connection()
 
+        categories = [item.replace(' ', '_') for item in categories]
+
         subcategories = []
         distinct_categories = []
 

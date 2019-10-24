@@ -41,7 +41,7 @@ function getArticlesSubcateg(name){
                 $('.article-found').text("");
                 $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
             }else{
-                $('.article-found').text(data.length + ' articles found for ' + name.replace(/_/g, ' '));
+                $('.article-found').text(data.length + ' Artikel gefunden in ' + name.replace(/_/g, ' '));
             }
 
             $.each(data, function(i, doc){
@@ -63,7 +63,7 @@ function getArticlesSubcateg(name){
                     // $("<div/>").html(result['extract_html']).appendTo(ptag);
                     var pvLink = $URL_FOR_PREVIEW + "?q=https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)) + "&problems=".concat(doc.problems);
                     
-                    $("<a/>").attr("href", pvLink).addClass('preview-article-link').attr('target', '_blank').html("Preview Article").appendTo(ptag);
+                    $("<a/>").attr("href", pvLink).addClass('preview-article-link').attr('target', '_blank').html("Artikelvorschau").appendTo(ptag);
                 })
 
                 $.each(doc.problems, function(i, problem){
@@ -296,7 +296,7 @@ function findTopics(topic){
             $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
             suggest_topics();
         }else{
-            $('.article-found').text(result.articles.length + ' articles found for ' + topic.replace(/_/g, ' '));
+            $('.article-found').text(result.articles.length + ' X Artikel gefunden in ' + topic.replace(/_/g, ' '));
         }
 
         $.each(result.articles, function(i, doc){
@@ -318,7 +318,7 @@ function findTopics(topic){
                 // $("<div/>").html(result['extract_html']).appendTo(ptag);
                 var pvLink = $URL_FOR_PREVIEW + "?q=https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page)) + "&problems=".concat(doc.problems);
                 
-                $("<a/>").attr("href", pvLink).addClass('preview-article-link').attr('target', '_blank').html("Preview Article").appendTo(ptag);
+                $("<a/>").attr("href", pvLink).addClass('preview-article-link').attr('target', '_blank').html("Artikelvorschau").appendTo(ptag);
                 // $("<a/>").attr("href", "https://de.wikipedia.org/wiki/".concat(encodeURIComponent(doc.page))).attr('target', '_blank').html("Preview Article").appendTo(ptag);
             })
 
@@ -370,7 +370,7 @@ function runTabAndCategCode(t){
         var fs = curSelUserInterests.length > 0 ? curSelUserInterests.slice(0,2).join(", ") : "";
         var ls = curSelUserInterests.length > 0 ? curSelUserInterests.slice(2).length : "";
         
-        var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" more <a href='#' class='edit-categ-popular' data-toggle='modal' data-target='#changeCategPopular'>Edit</a>") : fs + " <a href='#' class='edit-categ-popular' data-toggle='modal' data-target='#changeCategPopular'>Edit</a>" : "";
+        var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" more <a href='#' class='edit-categ-popular' data-toggle='modal' data-target='#changeCategPopular'>Auswahl ändern</a>") : fs + " <a href='#' class='edit-categ-popular' data-toggle='modal' data-target='#changeCategPopular'>Auswahl ändern</a>" : "";
         
         $('.user-sel-categories-popular').html(textToAdd);
 
@@ -384,7 +384,7 @@ function runTabAndCategCode(t){
         var fs = curSelUserInterests.length > 0 ? curSelUserInterests.slice(0,2).join(", ") : "";
         var ls = curSelUserInterests.length > 0 ? curSelUserInterests.slice(2).length : "";
 
-        var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" more <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>") : fs + " <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>" : ("No interests selected, please select. <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>");
+        var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" more <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Auswahl ändern</a>") : fs + " <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Auswahl ändern</a>" : ("No interests selected, please select. <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Auswahl ändern</a>");
         $('.user-sel-categories').html(textToAdd);
 
         getSubcategoriesForUser('user_interests');

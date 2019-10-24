@@ -199,13 +199,14 @@
         <div class="aricle-preview-top-block">
         	<div class="preview-top-heading">
         		<div class="container-fluid">
-        			<span>This is an article preview and it’s not editable</span>
+        			<span>Das ist eine Vorschau, die nicht bearbeitet werden kann</span>
         		</div> 	
         	</div>
 
         	<div class="review-article-row">
         		<div class="container">
-	        		<h2>This article needs {{ problems|length }} reviews</h2>
+	        		<!-- <h2>This article needs {{ problems|length }} reviews</h2> -->
+	        		<h2>Dieser Artikel benötigt {{ problems|length }} Überarbeitungen</h2>
 	        		<input type="hidden" id="query-url" value="{{ query }}">
 	        		<!-- <ul class="review-article-listing"> 
 	        			<li><a href="#"><img src="assets/img/review-media1.png"> <div class="reviews-article-info"><h5>Überarbeiten</h5><p>In diesem Artikel wurde ein Link automatisch aktualisiert. Prüfe, ob der Link noch stimmt.</p></div></a></li>
@@ -243,7 +244,7 @@
         </div>
 
         <div class="text-center show-article-btn-row">
-			<a href="{{ query }}" target="_blank" class="btn get-started-btn">Show article on wikipedia</a>
+			<a href="{{ query }}" target="_blank" class="btn get-started-btn">Zeige den Artikel in Wikipedia</a>
 		</div>	
 
 
