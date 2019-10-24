@@ -637,6 +637,7 @@ $( function() {
     $("#update-user-int").on('click', function(e){
         e.preventDefault();
         // update 
+        localStorage.setItem('search', '');
         $("#changeCateg").modal('hide');
         window.location.reload();
     })
@@ -674,7 +675,6 @@ $( function() {
 
     $('.user-interest-popup').on('click', function(e){
         e.preventDefault();
-        console.log('clciked');
         var uIFromDb = localStorage.getItem('user_interests');
         uIFromDb = uIFromDb != undefined ? JSON.parse(uIFromDb) : [];
 
