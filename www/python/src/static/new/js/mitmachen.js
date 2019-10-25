@@ -25,6 +25,8 @@ var anchor = {
 var userInterests = [];
 var popularInterests = [];
 
+var totalArticlesFoundLine = '';
+
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, function(txt){
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -404,8 +406,6 @@ function runTabAndCategCode(t){
 }
 
 $( function() {
-    
-    var totalArticlesFoundLine = '';
 
     // https://stackoverflow.com/questions/34704997/jquery-autocomplete-in-flask
     $("#category,#categoryindex").autocomplete({
