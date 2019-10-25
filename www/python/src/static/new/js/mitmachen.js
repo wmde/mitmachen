@@ -607,7 +607,7 @@ $( function() {
                     }else{
                         var nameConcat = [];
                         $('.filter-task:checkbox:checked').each(function(i){
-                            nameConcat.push(toTitleCase($(this).attr('data-attr-name').split('_')));
+                            nameConcat.push(toTitleCase($(this).attr('data-attr-name').split('_').join(' ')));
                             $('.'+$(this).attr('data-attr-name')).parent().parent().parent().show();
                         })
 
@@ -625,7 +625,7 @@ $( function() {
                 }else{
                     var nameConcat = [];
                     $('.filter-task:checkbox:checked').each(function(i){
-                        nameConcat.push(toTitleCase($(this).attr('data-attr-name').split('_')));
+                        nameConcat.push(toTitleCase($(this).attr('data-attr-name').split('_').join(' ')));
                         $('.'+$(this).attr('data-attr-name')).parent().parent().parent().show();
                     })
 
