@@ -576,12 +576,10 @@ $( function() {
         if(dn == "all_tasks" && v == true){
             $(".filter-task").prop('checked', true);
             $('.list-box').show();
-            console.log('This is running 1: ', totalArticlesFoundLine)
             $('.article-found').text(totalArticlesFoundLine);
         }else if(dn == "all_tasks" && v == false){
             $(".filter-task").prop('checked', false);
             $('.list-box').show();
-            console.log('this is running 2: ', totalArticlesFoundLine)
             $('.article-found').text(totalArticlesFoundLine);
         }
 
@@ -605,7 +603,6 @@ $( function() {
                     // get all selected and show them
                     if($('.filter-task:checkbox:checked').length == 0){
                         $('.list-box').show();
-                        console.log('ths is running 3: ', totalArticlesFoundLine)
                         $('.article-found').text(totalArticlesFoundLine);
                     }else{
                         var nameConcat = [];
@@ -615,7 +612,6 @@ $( function() {
                         })
 
                         var txt = $(".list-box:visible").length + ' Artikel gefunden in ' + nameConcat.join(', ');
-                        console.log('ths is running 4: ', totalArticlesFoundLine)
                         $('.article-found').text(txt);
                     }
                 }
@@ -625,7 +621,6 @@ $( function() {
                 // get all selected and show them
                 if($('.filter-task:checkbox:checked').length == 0){
                     $('.list-box').show();
-                    console.log('ths is running 5: ', totalArticlesFoundLine)
                     $('.article-found').text(totalArticlesFoundLine);
                 }else{
                     var nameConcat = [];
@@ -635,7 +630,6 @@ $( function() {
                     })
 
                     var txt = $(".list-box:visible").length + ' Artikel gefunden in ' + nameConcat.join(', ');
-                    console.log('ths is running 6: ', totalArticlesFoundLine)
                     $('.article-found').text(txt);
                 }
             }
