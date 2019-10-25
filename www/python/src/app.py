@@ -28,7 +28,7 @@ image_prob = {
         "text":"In diesem Artikel fehlen Belege. Schau in diesem Baustein nach welche. Recherchiere fehlende Quellen und füge sie ein."},
     "Veraltet": {
         "image": "new/img/review-media1.png",
-        "text": "Teile dieses Artikels sind nicht auf dem neuesten Stand. Recherchiere die Informationen und ergänze den Artikel."},
+        "text": "Dieser Artikel ist nicht mehr aktuell. Recherchiere fehlende Informationen und füge sie ein."},
     "Lückenhaft": {
         "image": "new/img/review-media2.png",
         "text": "In diesem Artikel fehlen wichtige Informationen. Schau in diesem Baustein nach welche. Recherchiere die Informationen und ergänze den Artikel."},

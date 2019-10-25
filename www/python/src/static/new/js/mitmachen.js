@@ -25,6 +25,12 @@ var anchor = {
 var userInterests = [];
 var popularInterests = [];
 
+function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function(txt){
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+}
+
 // get articles for a subcategory
 function getArticlesSubcateg(name){
 
@@ -41,7 +47,9 @@ function getArticlesSubcateg(name){
                 $('.article-found').text("");
                 $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
             }else{
-                $('.article-found').text(data.length + ' Artikel gefunden in ' + name.replace(/_/g, ' '));
+                var txt = data.length + ' Artikel gefunden in ' + name.replace(/_/g, ' ');
+                totalArticlesFoundLine = txt;
+                $('.article-found').text(txt);
             }
 
             $.each(data, function(i, doc){
@@ -287,6 +295,8 @@ function findTopics(topic){
     var articleList = $('.results-search');
     articleList.empty();
 
+    topic = topic.toLowerCase();
+
     $("<div/>").text(text.PLEASE_WAIT).appendTo(articleList);
 
     $.getJSON($URL_FOR_FIND, {q: topic}, function(result){
@@ -296,7 +306,9 @@ function findTopics(topic){
             $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
             suggest_topics();
         }else{
-            $('.article-found').text(result.articles.length + ' Artikel gefunden in ' + topic.replace(/_/g, ' '));
+            var txt = result.articles.length + ' Artikel gefunden in ' + topic.replace(/_/g, ' ');
+            totalArticlesFoundLine = txt;
+            $('.article-found').text(txt);
         }
 
         $.each(result.articles, function(i, doc){
@@ -393,6 +405,7 @@ function runTabAndCategCode(t){
 
 $( function() {
     
+    var totalArticlesFoundLine = '';
 
     // https://stackoverflow.com/questions/34704997/jquery-autocomplete-in-flask
     $("#category,#categoryindex").autocomplete({
@@ -413,7 +426,7 @@ $( function() {
             $("#category,#categoryindex").val(ui.item.value);
             $("#category,#categoryindex").change();
 
-            localStorage.setItem('search', ui.item.value.trim().toLowerCase());
+            localStorage.setItem('search', ui.item.value.trim());
 
             window.location.href = $URL_FOR_ARTICLES;
 
@@ -427,7 +440,7 @@ $( function() {
         // if (event.type == 'change' || (event.type == 'keypress' && event.which == 13)) {
         if (event.type == 'keypress' && event.which == 13) {
             var topic = $("#category").val();
-            topic = topic.trim().toLowerCase();
+            topic = topic.trim();
             $("#suggested").empty();
 
             
@@ -442,7 +455,7 @@ $( function() {
     $("#categoryindex").on('change keypress', function(event){
         if(event.type == 'keypress' && event.which == 13){
             var topic = $("#categoryindex").val();
-            topic = topic.trim().toLowerCase();
+            topic = topic.trim();
 
             localStorage.setItem('search', topic);
 
@@ -563,9 +576,11 @@ $( function() {
         if(dn == "all_tasks" && v == true){
             $(".filter-task").prop('checked', true);
             $('.list-box').show();
+            $('.article-found').text(totalArticlesFoundLine);
         }else if(dn == "all_tasks" && v == false){
             $(".filter-task").prop('checked', false);
             $('.list-box').show();
+            $('.article-found').text(totalArticlesFoundLine);
         }
 
         if(dn != "all_tasks"){
@@ -588,10 +603,16 @@ $( function() {
                     // get all selected and show them
                     if($('.filter-task:checkbox:checked').length == 0){
                         $('.list-box').show();
+                        $('.article-found').text(totalArticlesFoundLine);
                     }else{
+                        var nameConcat = [];
                         $('.filter-task:checkbox:checked').each(function(i){
+                            nameConcat.push(toTitleCase($(this).attr('data-attr-name').split('_')));
                             $('.'+$(this).attr('data-attr-name')).parent().parent().parent().show();
                         })
+
+                        var txt = $(".list-box:visible").length + ' Artikel gefunden in ' + nameConcat.join(', ');
+                        $('.article-found').text(txt);
                     }
                 }
 
@@ -600,10 +621,16 @@ $( function() {
                 // get all selected and show them
                 if($('.filter-task:checkbox:checked').length == 0){
                     $('.list-box').show();
+                    $('.article-found').text(totalArticlesFoundLine);
                 }else{
+                    var nameConcat = [];
                     $('.filter-task:checkbox:checked').each(function(i){
+                        nameConcat.push(toTitleCase($(this).attr('data-attr-name').split('_')));
                         $('.'+$(this).attr('data-attr-name')).parent().parent().parent().show();
                     })
+
+                    var txt = $(".list-box:visible").length + ' Artikel gefunden in ' + nameConcat.join(', ');
+                    $('.article-found').text(txt);
                 }
             }
         }
