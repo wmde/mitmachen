@@ -297,11 +297,9 @@ function findTopics(topic){
     var articleList = $('.results-search');
     articleList.empty();
 
-    topic = topic.toLowerCase();
-
     $("<div/>").text(text.PLEASE_WAIT).appendTo(articleList);
 
-    $.getJSON($URL_FOR_FIND, {q: topic}, function(result){
+    $.getJSON($URL_FOR_FIND, {q: topic.toLowerCase()}, function(result){
         articleList.empty();
 
         if(result.articles.length == 0){

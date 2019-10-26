@@ -670,3 +670,31 @@ nav.navbar.sticky-top {
 .clear-all{
   cursor:pointer;
 }
+
+
+/*@media (min-width:1200px) {
+  #changeCateg .modal-content {
+      margin-top: 43px;
+      padding: 10px 45px 20px;
+  }
+
+  #changeCateg .get-started-btn-row {
+      margin-top: 10px;
+  }
+
+  #changeCateg .my-interest-listing li {
+      height: 158px;
+    } 
+
+    #changeCateg .close-btn {
+      top: -48px;
+  }
+
+  #changeCateg .pop-up-heading h2 {
+    margin-bottom: 6px !important;
+  }
+
+  #changeCateg .my-interest-listing li span {
+      margin-top: 12px;
+    }
+}*/
