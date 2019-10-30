@@ -453,6 +453,12 @@
 			var si = localStorage.getItem('search');
 			var v = localStorage.getItem('frompopular');
 
+			var ui = localStorage.getItem('user_interests');
+
+			if(ui == undefined || ui == null){
+				$('#changeCateg').modal();
+			}
+
 			if(si == undefined || si == ""){
 				if(v != undefined && parseInt(v) == 1){
 					$('.tab-pane').removeClass('active show');
