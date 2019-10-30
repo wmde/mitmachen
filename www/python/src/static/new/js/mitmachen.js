@@ -107,6 +107,11 @@ function getArticlesSubcateg(name){
                     .appendTo(more);
             }
 
+
+            $('.filter-task:checkbox:checked').each(function(i){
+                $('.'+$(this).attr('data-attr-name')).parent().parent().parent().show();
+            })
+
         }
     })
 
@@ -365,6 +370,14 @@ function findTopics(topic){
                 .appendTo(more);
         }
 
+        var lsNames = JSON.parse(localStorage.getItem('ftasks'));
+
+        if(lsNames != undefined){
+            $.each(lsNames, function(index, value){
+                $('.'+value).parent().parent().parent().show();
+            })
+        }
+
     })
 
 }
@@ -401,6 +414,9 @@ function runTabAndCategCode(t){
 
         getSubcategoriesForUser('user_interests');
     }
+
+
+
 }
 
 $( function() {
@@ -609,6 +625,9 @@ $( function() {
                             $('.'+$(this).attr('data-attr-name')).parent().parent().parent().show();
                         })
 
+                        var lsNames = nameConcat.map(item => {return item.toLowerCase().replace(/\s/g, '_')});
+                        localStorage.setItem('ftasks', JSON.stringify(lsNames));
+
                         var txt = $(".list-box:visible").length + ' Artikel gefunden in ' + nameConcat.join(', ');
                         $('.article-found').text(txt);
                     }
@@ -626,6 +645,9 @@ $( function() {
                         nameConcat.push(toTitleCase($(this).attr('data-attr-name').split('_').join(' ')));
                         $('.'+$(this).attr('data-attr-name')).parent().parent().parent().show();
                     })
+
+                    var lsNames = nameConcat.map(item => {return item.toLowerCase().replace(/\s/g, '_')});
+                    localStorage.setItem('ftasks', JSON.stringify(lsNames));
 
                     var txt = $(".list-box:visible").length + ' Artikel gefunden in ' + nameConcat.join(', ');
                     $('.article-found').text(txt);
