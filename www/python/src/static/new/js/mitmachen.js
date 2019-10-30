@@ -107,10 +107,12 @@ function getArticlesSubcateg(name){
                     .appendTo(more);
             }
 
-
-            $('.filter-task:checkbox:checked').each(function(i){
-                $('.'+$(this).attr('data-attr-name')).parent().parent().parent().show();
-            })
+            if($('.filter-task[data-attr-name="all_tasks"]').is(':checked') == false){
+                $('.list-box').hide();
+                $('.filter-task:checkbox:checked').each(function(i){
+                    $('.'+$(this).attr('data-attr-name')).parent().parent().parent().show();
+                })
+            }
 
         }
     })
@@ -373,6 +375,7 @@ function findTopics(topic){
         var lsNames = JSON.parse(localStorage.getItem('ftasks'));
 
         if(lsNames != undefined){
+            $('.list-box').hide();
             $.each(lsNames, function(index, value){
                 $('.'+value).parent().parent().parent().show();
             })
