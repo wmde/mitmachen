@@ -439,7 +439,7 @@ nav.navbar.sticky-top {
   .help-block:hover {
     cursor: pointer; }
     .help-block:hover .hide-info {
-      height: 137px; }
+      height: 160px; }
 
 .Carousel-slider-block .SlickCarousel .Slick-Next {
   background-image: url(../img/arrow-right.png);

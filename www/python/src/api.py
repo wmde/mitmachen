@@ -282,11 +282,12 @@ class Mitmachen:
             articles = articles.items()
             
             more = len(articles) > self.NUM
+            total = len(articles)
             if more:
                 articles = random.sample(articles, self.NUM)
 
             return [{"page": page, "problems": list(set(problems))}
-                    for page, problems in articles], more
+                    for page, problems in articles], more, total
         finally:
             conn.close()
 

@@ -311,7 +311,12 @@ function findTopics(topic){
             $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
             suggest_topics();
         }else{
-            var txt = result.articles.length + ' Artikel gefunden in ' + topic.replace(/_/g, ' ');
+            var txt = ''; 
+            if(result.total != undefined){
+                txt = result.total + ' Artikel gefunden in ' + topic.replace(/_/g, ' ');
+            }else{
+                txt = result.articles.length + ' Artikel gefunden in ' + topic.replace(/_/g, ' ');
+            }
             totalArticlesFoundLine = txt;
             $('.article-found').text(txt);
         }
@@ -452,8 +457,8 @@ $( function() {
     // suggest_topics();
 
     $("#category").on("change keypress", function(event) {
-        // if (event.type == 'change' || (event.type == 'keypress' && event.which == 13)) {
-        if (event.type == 'keypress' && event.which == 13) {
+        if (event.type == 'change' || (event.type == 'keypress' && event.which == 13)) {
+        // if (event.type == 'keypress' && event.which == 13) {
             var topic = $("#category").val();
             topic = topic.trim();
             $("#suggested").empty();
