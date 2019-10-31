@@ -155,10 +155,8 @@ function trackingUserActivity(type, title, weblink){
         dataType: 'json',
         data: JSON.stringify(data),
         success: function(d){
-            // console.log(d);
         },
         error: function(err){
-            // console.log(err);
         }
     })
 }
@@ -492,8 +490,6 @@ $( function() {
     // for tracking
     // trackingUserActivity();
     $('body').on('click', '.slick-slide, .list-box h3 a', function(evt){
-        // console.log($(this).attr('class'));
-        // console.log(evt.target.tagName);
 
         var cl = $(this).attr('class');
         var tg = evt.target.tagName;
@@ -585,7 +581,6 @@ $( function() {
         // e.preventDefault();
 
         // var allChecked = $('.filter-task:checkbox:checked');
-        // console.log(allChecked.length);
 
         var dn = $(this).attr('data-attr-name');
         var v = $(this).prop('checked');
@@ -603,7 +598,6 @@ $( function() {
         if(dn != "all_tasks"){
             var p = $('.select-subitems ul .filter-task:checked').length;
             var q = $('.select-subitems ul .filter-task').length;
-            // console.log(p, q);
             if(p == q){
                 $('.filter-task[data-attr-name="all_tasks"]').prop('checked', true);
             }else{

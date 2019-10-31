@@ -90,20 +90,3 @@ def previewarticle():
     problems = problems[0].split(',') if len(problems) > 0 else problems
 
     return flask.render_template("preview.html", text=text, query=query, problems=problems, image_prob=image_prob)
-    # BASE = 'https://render-tron.appspot.com/screenshot/'
-    # url = query
-    # path = query+'.jpg'
-
-    # response = requests.get(BASE + url, stream=True)
-
-    # if response.status_code == 200:
-    #     with open(path, 'wb') as file:
-    #         for chunk in response:
-    #             file.write(chunk)
-    # else:
-    #     return flask.render_template("preview.html", text=text, query=query)
-
-# if __name__ == '__main__':
-#     app.debug = True
-#     app.config['TEMPLATES_AUTO_RELOAD'] = True
-#     app.run(host = '0.0.0.0', port = 5000)

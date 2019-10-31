@@ -261,7 +261,7 @@ class Mitmachen:
         # categories is list and remove items from it that are in blacklist
         categories = [item for item in categories if item not in self.blacklist]
         categories = [item.title() for item in categories]
-        # categories_concat = '|'.join(categories)
+        
         try:
             with conn.cursor() as cursor:
                 cursor.execute(self.articles_query,

@@ -55,19 +55,19 @@ Then run the following commands:-
 
 then we need to create tables, so run the following commands
 - `CREATE TABLE tracking (
-id INT NOT NULL AUTO_INCREMENT,
+id INT unsigned NOT NULL AUTO_INCREMENT,
 type VARCHAR(255),
 title VARCHAR(255),
 weblink TEXT,
-count INT,
+count INT unsigned,
 PRIMARY KEY (id)
 );`
 
 - `CREATE TABLE crondata(
-id INT NOT NULL AUTO_INCREMENT,
+id INT unsigned NOT NULL AUTO_INCREMENT,
 categ TEXT,
 subcateg TEXT,
-page_id INT NOT NULL,
+page_id INT unsigned NOT NULL,
 PRIMARY KEY (id)
 );`
 
