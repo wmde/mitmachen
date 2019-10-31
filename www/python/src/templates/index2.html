@@ -501,7 +501,20 @@
 					$('.article-found').html('');
 					$('.results-search').html('');
 
-					$('#changeCateg').modal();
+					var userInt = localStorage.getItem('user_interests');
+
+					if(userInt == undefined){
+						$('#changeCateg').modal();
+					}
+
+					if(userInt != undefined){
+						userInt = JSON.parse(userInt);
+
+						if(userInt.length == 0){
+							$('#changeCateg').modal();
+						}
+					}
+
 
 					$('.results-search').html("<a href='#' class='edit-categ btn get-started-btn' data-toggle='modal' data-target='#changeCateg'>Edit Interests</a>");
 
