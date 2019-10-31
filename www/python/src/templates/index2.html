@@ -453,12 +453,6 @@
 			var si = localStorage.getItem('search');
 			var v = localStorage.getItem('frompopular');
 
-			var ui = localStorage.getItem('user_interests');
-
-			if(ui == undefined || ui == null){
-				$('#changeCateg').modal();
-			}
-
 			if(si == undefined || si == ""){
 				if(v != undefined && parseInt(v) == 1){
 					$('.tab-pane').removeClass('active show');
@@ -507,6 +501,7 @@
 					$('.article-found').html('');
 					$('.results-search').html('');
 
+					$('#changeCateg').modal();
 
 					$('.results-search').html("<a href='#' class='edit-categ btn get-started-btn' data-toggle='modal' data-target='#changeCateg'>Edit Interests</a>");
 
