@@ -62,8 +62,8 @@ def suggest():
 @app.route("/find", methods=["GET"])
 def find():
     category = flask.request.args.get("q", default="")
-    articles, more = api.find_articles(category)
-    return flask.jsonify({"articles": articles, "more": more})
+    articles, more, total = api.find_articles(category)
+    return flask.jsonify({"articles": articles, "more": more, "total": total})
 
 @app.route("/tracking", methods=["POST"])
 def tracking():
