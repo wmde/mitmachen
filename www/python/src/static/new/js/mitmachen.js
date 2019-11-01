@@ -108,13 +108,16 @@ function getArticlesSubcateg(name){
             }
 
             if($('.filter-task[data-attr-name="all_tasks"]').is(':checked') == false){
+                console.log('Code over here')
                 var origTxt = $('.article-found').text();
                 $('.list-box').hide();
                 $('.filter-task:checkbox:checked').each(function(i){
-                    origTxt = origTxt + ' and ' + toTitleCase($(this).attr('data-attr-name'));
+                    origTxt = origTxt + ' and ' + toTitleCase($(this).attr('data-attr-name').replace('_', ' '));
                     $('.'+$(this).attr('data-attr-name')).parent().parent().parent().show();
                 })
+                var visLen = $('.list-box:visible').length;
 
+                origTxt = origTxt.replace(/[0-9]+/g, visLen);
                 $('.article-found').text(origTxt);
             }
 
@@ -386,9 +389,13 @@ function findTopics(topic){
             $('.list-box').hide();
 
             $.each(lsNames, function(index, value){
-                origTxt = origTxt + ' and ' + toTitleCase(value);
+                origTxt = origTxt + ' and ' + toTitleCase(value.replace('_', ' '));
                 $('.'+value).parent().parent().parent().show();
             })
+
+            var visLen = $('.list-box:visible').length;
+
+            origTxt = origTxt.replace(/[0-9]+/g, visLen);
 
             $('.article-found').text(origTxt);
         }
