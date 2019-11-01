@@ -1242,3 +1242,14 @@ text-decoration: none;
   top: 0;
   left: 0;
 }
+
+.order-listing {
+    padding: 0 0 10px 15px;
+}
+.order-listing li {
+    list-style-type: decimal;
+    font-size: 16px;
+    color: #fff;
+    font-family: Georgia;
+    margin-bottom: 10px;
+}

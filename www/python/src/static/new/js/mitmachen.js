@@ -108,7 +108,6 @@ function getArticlesSubcateg(name){
             }
 
             if($('.filter-task[data-attr-name="all_tasks"]').is(':checked') == false){
-                console.log('Code over here')
                 var origTxt = $('.article-found').text();
                 $('.list-box').hide();
                 $('.filter-task:checkbox:checked').each(function(i){
