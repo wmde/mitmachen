@@ -384,10 +384,14 @@ function findTopics(topic){
         var lsNames = JSON.parse(localStorage.getItem('ftasks'));
 
         if(lsNames != undefined){
+
+            $('.filter-task').prop('checked', false);
+
             var origTxt = $('.article-found').text();
             $('.list-box').hide();
 
             $.each(lsNames, function(index, value){
+                $('.filter-task[data-attr-name="'+value+'"]').prop('checked', true);
                 origTxt = origTxt + ' and ' + toTitleCase(value.replace('_', ' '));
                 $('.'+value).parent().parent().parent().show();
             })
@@ -643,6 +647,7 @@ $( function() {
                         })
 
                         var lsNames = nameConcat.map(item => {return item.toLowerCase().replace(/\s/g, '_')});
+                        
                         localStorage.setItem('ftasks', JSON.stringify(lsNames));
 
                         var txt = $(".list-box:visible").length + ' Artikel gefunden in ' + nameConcat.join(', ');
