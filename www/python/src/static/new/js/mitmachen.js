@@ -111,7 +111,7 @@ function getArticlesSubcateg(name){
                 var origTxt = $('.article-found').text();
                 $('.list-box').hide();
                 $('.filter-task:checkbox:checked').each(function(i){
-                    origTxt = origTxt + ' and ' + toTitleCase($(this).attr('data-attr-name').replace('_', ' '));
+                    origTxt = origTxt + ' und ' + toTitleCase($(this).attr('data-attr-name').replace('_', ' '));
                     $('.'+$(this).attr('data-attr-name')).parent().parent().parent().show();
                 })
                 var visLen = $('.list-box:visible').length;
@@ -392,7 +392,7 @@ function findTopics(topic){
 
             $.each(lsNames, function(index, value){
                 $('.filter-task[data-attr-name="'+value+'"]').prop('checked', true);
-                origTxt = origTxt + ' and ' + toTitleCase(value.replace('_', ' '));
+                origTxt = origTxt + ' und ' + toTitleCase(value.replace('_', ' '));
                 $('.'+value).parent().parent().parent().show();
             })
 
