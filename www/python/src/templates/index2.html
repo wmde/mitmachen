@@ -32,7 +32,8 @@
 			<div class="container-fluid">
 				<a class="navbar-brand" href="{{ url_for('index') }}">
 					<img src="{{ url_for('static', filename='new/img/wikiglobe.png') }}">
-				</a>fls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation"> <span class="icon-bar top-bar"></span>
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation"> <span class="icon-bar top-bar"></span>
 					<span class="icon-bar middle-bar"></span>
 					<span class="icon-bar bottom-bar">
 			        </button>
@@ -257,7 +258,7 @@
 		    <div class="modal-content">
 		     
 		      <div class="modal-body">
-		      		<button type="button" class="btn close-btn" data-dismiss="modal">Close</button>
+		      		<button type="button" class="btn close-btn" data-dismiss="modal">Schließen</button>
 		      		<div class="jumbotron vertical-center"> 
 						  <div class="col-md-10 offset-md-1">
 						    <button class="btn get-started-btn">Login with Wikimedia Account</button>
@@ -274,10 +275,10 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-body">
-					<button type="button" class="btn close-btn" data-dismiss="modal">Close</button>
+					<button type="button" class="btn close-btn" data-dismiss="modal">Schließen</button>
 					<div class="pop-up-heading">
-						<h2 class="mb-3">Your Interests</h2>
-						<p>Select your prefrence for editing the articles</p>
+						<h2 class="mb-3">Deine Themen</h2>
+						<p>Wähle deine Themenbereiche und wir zeigen dir passende Artikel</p>
 					</div>
 					<ul class="my-interest-listing mt-3">
 						<li class="user-interest-popup" data-attr-name="Geographie">
@@ -389,7 +390,7 @@
 						</li>
 					</ul>
 					<div class="text-center get-started-btn-row">
-						<button class="btn get-started-btn" id="update-user-int">UPDATE</button>
+						<button class="btn get-started-btn" id="update-user-int">Aktualisieren</button>
 					</div>
 				</div>
 			</div>
@@ -402,10 +403,10 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-body">
-					<button type="button" class="btn close-btn" data-dismiss="modal">Close</button>
+					<button type="button" class="btn close-btn" data-dismiss="modal">Schließen</button>
 					<div class="pop-up-heading">
-						<h2 class="mb-3">Your Interests</h2>
-						<p>Select your prefrence for editing the articles</p>
+						<h2 class="mb-3">Deine Themen</h2>
+						<p>Wählen Sie Ihre Präferenz für die Bearbeitung der Artikel</p>
 					</div>
 					<ul class="my-interest-listing mt-3">
 						<li class="user-interest-popup-popular" data-attr-name="Geographie">
@@ -431,7 +432,7 @@
 						</li>
 					</ul>
 					<div class="text-center get-started-btn-row">
-						<button class="btn get-started-btn" id="update-user-int-popular">UPDATE</button>
+						<button class="btn get-started-btn" id="update-user-int-popular">Aktualisieren</button>
 					</div>
 				</div>
 			</div>
@@ -515,7 +516,7 @@
 					}
 
 
-					$('.results-search').html("<a href='#' class='edit-categ btn get-started-btn' data-toggle='modal' data-target='#changeCateg'>Edit Interests</a>");
+					$('.results-search').html("<a href='#' class='edit-categ btn get-started-btn' data-toggle='modal' data-target='#changeCateg'>Interessen bearbeiten</a>");
 
 					localStorage.setItem('frompopular', 0);
 					$('#menu1').addClass('active show');
