@@ -201,16 +201,16 @@ function getSubcategoriesForUser(type){
 
                             for(var item in d['data']){
                                 if(item == 0){
-                                    $('.owl-carousel').append('<div class="item active subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item].replace(/_/g, ' ')+'</span></div>');
+                                    $('#home .owl-carousel').append('<div class="item active subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item].replace(/_/g, ' ')+'</span></div>');
                                     getArticlesSubcateg(d['data'][item], "popular");
                                 }else{
-                                    $('.owl-carousel').append('<div class="item subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item].replace(/_/g, ' ')+'</span></div>');
+                                    $('#home .owl-carousel').append('<div class="item subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item].replace(/_/g, ' ')+'</span></div>');
                                 }
                             }
 
 
 
-                            var owl = $('.owl-carousel');
+                            var owl = $('#home .owl-carousel');
                             owl.owlCarousel({
                                 stagePadding: 130,
                                 margin: 10,
@@ -261,14 +261,14 @@ function getSubcategoriesForUser(type){
 
                             for(var item in d['data']){
                                 if(item == 0){
-                                    $('.owl-carousel').append('<div class="item active subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item].replace(/_/g, ' ')+'</span></div>');
+                                    $('#menu1 .owl-carousel').append('<div class="item active subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item].replace(/_/g, ' ')+'</span></div>');
                                     getArticlesSubcateg(d['data'][item], "other");
                                 }else{
-                                    $('.owl-carousel').append('<div class="item subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item].replace(/_/g, ' ')+'</span></div>');
+                                    $('#menu1 .owl-carousel').append('<div class="item subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item].replace(/_/g, ' ')+'</span></div>');
                                 }
                             }
 
-                            var owl = $('.owl-carousel');
+                            var owl = $('#menu1 .owl-carousel');
                             owl.owlCarousel({
                                 stagePadding: 130,
                                 margin: 10,
