@@ -82,7 +82,7 @@
 									<span class="user-sel-categories"></span>
 								</div>
 							</div>
-	<section id="slider-block" class="categories-subcategories">
+	<section id="slider-block" class="categories-subcategories owl-categories">
 		
 	</section>
 	</div>
@@ -92,7 +92,7 @@
 				<span class="user-sel-categories-popular"></span>
 			</div>
 		</div>
-		<section id="slider-block" class="categories-subcategories-popular">
+		<section id="slider-block" class="categories-subcategories-popular owl-categories">
 			
 		</section>
 	</div>
@@ -170,24 +170,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="results-search">
-				<!-- <div class="list-box list-box-new mb-2">
-					<h3><a href="#">Gruppo degli Otto</a></h3>
-					<p><a href="#" class="preview-article-link">Preview Article</a>
-					</p>
-					<ul class="links-row">
-						<li class="dropdown">
-							<a href="#" class="dropdown">ungeprufter link</a>
-							<div class="dropdown-menu custom-dropdown" aria-labelledby="dropdownMenuButton">
-								<p>In diesem Artikel wurde ein Link automatisch aktualisiert. Prüfe, ob der Link noch stimmt.</p>
-							</div>
-						</li>
-						<li>
-							<a href="#" class="btn common-btn">belege fehlen</a>
-						</li>
-					</ul>
-				</div> -->
-			</div>
+			<div class="results-search results-display"></div>
+			<div class="results-search-categ results-display"></div>
+			<div class="results-search-popular results-display"></div>
 		</div>
 	</div>
 	</div>
@@ -458,12 +443,13 @@
 					$('.tab-pane').removeClass('active show');
 					localStorage.setItem('frompopular', 1);
 					$('#home').addClass('active show');
-
+					shownPopularCateg = true;
 					runTabAndCategCode('popular');
 				}else{
 					$('.tab-pane').removeClass('active show');
 					localStorage.setItem('frompopular', 0);
 					$('#menu1').addClass('active show');
+					shownUserInterests = true;
 					runTabAndCategCode('other');
 				}
 			}else{
@@ -496,11 +482,20 @@
 					}
 
 					$('#home').addClass('active show');
+
+					if(shownPopularCateg){
+						$('.results-display,.owl-categories').hide();
+						$('.results-search-popular,.categories-subcategories-popular').show();
+					}else{
+						shownPopularCateg = true;
+						runTabAndCategCode(t);
+					}
+
 				}else{
 
 					// remove search results at bottom
-					$('.article-found').html('');
-					$('.results-search').html('');
+					// $('.article-found').html('');
+					// $('.results-search').html('');
 
 					var userInt = localStorage.getItem('user_interests');
 
@@ -517,14 +512,23 @@
 					}
 
 
-					$('.results-search').html("<a href='#' class='edit-categ btn get-started-btn' data-toggle='modal' data-target='#changeCateg'>Interessen bearbeiten</a>");
+					// $('.results-search').html("<a href='#' class='edit-categ btn get-started-btn' data-toggle='modal' data-target='#changeCateg'>Interessen bearbeiten</a>");
 
 					localStorage.setItem('frompopular', 0);
 					$('#menu1').addClass('active show');
+
+					if(shownUserInterests){
+						$('.results-display,.owl-categories').hide();
+						$('.results-search-categ,.categories-subcategories').show();
+					}else{
+						shownUserInterests = true;
+						runTabAndCategCode(t);
+					}
+
 				}
 
 				// runArticlesCode();
-				runTabAndCategCode(t);
+				// runTabAndCategCode(t);
 			})
 
 		})
