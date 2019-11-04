@@ -264,7 +264,6 @@ function getSubcategoriesForUser(type){
                             owl.on({
                                 'initialized.owl.carousel': function(){
                                     console.log('initialized')
-                                    owl.owlCarousel('refresh');
                                     $("#menu1 .categories-subcategories").show();
                                 }
 
