@@ -196,7 +196,11 @@ function getSubcategoriesForUser(type){
                             }
 
                             var owl = $('.owl-carousel');
-                            owl.owlCarousel({
+                            owl.on({
+                                'initialized.owl.carousel': function(){
+                                    $("#home .categories-subcategories-popular").show();
+                                }
+                            }).owlCarousel({
                                 stagePadding: 130,
                                 margin: 10,
                                 nav: true,
@@ -250,7 +254,11 @@ function getSubcategoriesForUser(type){
                             }
 
                             var owl = $('.owl-carousel');
-                            owl.owlCarousel({
+                            owl.on({
+                                'initialized.owl.carousel': function(){
+                                    $("#menu1 .categories-subcategories").show();
+                                }
+                            }).owlCarousel({
                                 stagePadding: 130,
                                 margin: 10,
                                 nav: true,
@@ -420,7 +428,7 @@ function runTabAndCategCode(t){
         var fs = curSelUserInterests.length > 0 ? curSelUserInterests.slice(0,2).join(", ") : "";
         var ls = curSelUserInterests.length > 0 ? curSelUserInterests.slice(2).length : "";
         
-        var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" more <a href='#' class='edit-categ-popular' data-toggle='modal' data-target='#changeCategPopular'>Auswahl ändern</a>") : fs + " <a href='#' class='edit-categ-popular' data-toggle='modal' data-target='#changeCategPopular'>Auswahl ändern</a>" : "";
+        var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" weitere <a href='#' class='edit-categ-popular' data-toggle='modal' data-target='#changeCategPopular'>Auswahl ändern</a>") : fs + " <a href='#' class='edit-categ-popular' data-toggle='modal' data-target='#changeCategPopular'>Auswahl ändern</a>" : "";
         
         $('.user-sel-categories-popular').html(textToAdd);
 
@@ -434,7 +442,7 @@ function runTabAndCategCode(t){
         var fs = curSelUserInterests.length > 0 ? curSelUserInterests.slice(0,2).join(", ") : "";
         var ls = curSelUserInterests.length > 0 ? curSelUserInterests.slice(2).length : "";
 
-        var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" more <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Auswahl ändern</a>") : fs + " <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Auswahl ändern</a>" : ("Keine Interessen ausgewählt, bitte auswählen. <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Auswahl ändern</a>");
+        var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" weitere <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Auswahl ändern</a>") : fs + " <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Auswahl ändern</a>" : ("Keine Interessen ausgewählt, bitte auswählen. <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Auswahl ändern</a>");
         $('.user-sel-categories').html(textToAdd);
 
         getSubcategoriesForUser('user_interests');
@@ -699,7 +707,7 @@ $( function() {
     var fs = curSelUserInterests.length > 0 ? curSelUserInterests.slice(0,2).join(", ") : "";
     var ls = curSelUserInterests.length > 0 ? curSelUserInterests.slice(2).length : "";
 
-    var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" more <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>") : fs + " <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>" : "";
+    var textToAdd = (curSelUserInterests != undefined && curSelUserInterests.length > 0) ? ls > 0 ? (fs + " +"+ls+" weitere <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>") : fs + " <a href='#' class='edit-categ' data-toggle='modal' data-target='#changeCateg'>Edit</a>" : "";
     $('.user-sel-categories').html(textToAdd);*/
 
 

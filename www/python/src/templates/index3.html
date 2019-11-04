@@ -263,7 +263,7 @@
 						<div class="footer-left-info">
 							<a class="footer-logo" href="#">
 								<img src="{{ url_for('static', filename='new/img/footer-logo.png') }}">
-							</a>	<span class="mt-4">"Mitmachen ist ein kleines Tool, das Wikipedia-Autorinnen und Autoren hilft, Artikel mit Überarbeitungsbedarf zu finden. Der Code und die Dokumentation sind auf <a href="https://github.com/wmde/mitmachen/blob/c2ca5040e1a0672b6a42b5652568b706802940fd/README.md" target="_blank">GitHub</a> zu finden. Verbesserungsvorschläge und Bugreports können auf <a href="https://phabricator.wikimedia.org/tag/mitmachen" target="_blank">Phabricator</a> eingetragen werden. Die ursprüngliche Version von Mitmachen wurde entwickelt von User:Cirdan und lizensiert unter <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>. Diese Version steht unter der <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html" target="_blank">Lizenz GNU GPL 2.0</a>."</span>
+							</a>	<span class="mt-4">Mitmachen ist ein kleines Tool, das Wikipedia-Autorinnen und Autoren hilft, Artikel mit Überarbeitungsbedarf zu finden. Der Code und die Dokumentation sind auf <a href="https://github.com/wmde/mitmachen/blob/c2ca5040e1a0672b6a42b5652568b706802940fd/README.md" target="_blank">GitHub</a> zu finden. Verbesserungsvorschläge und Bugreports können auf <a href="https://phabricator.wikimedia.org/tag/mitmachen" target="_blank">Phabricator</a> eingetragen werden. Die ursprüngliche Version von Mitmachen wurde entwickelt von User:Cirdan und lizensiert unter <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>. Diese Version steht unter der <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html" target="_blank">Lizenz GNU GPL 2.0</a>.</span>
 						</div>
 					</div>
 					<div class="col-lg-2 col-md-3 col-sm-6 col-6">
@@ -326,7 +326,18 @@
 	<script type="text/javascript" src="{{ url_for('static', filename='new/js/mitmachen.js') }}"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			var ui = localStorage.getItem('user_interests');
+			// var ui = localStorage.getItem('user_interests');
+			var ui;
+
+			if(performance.navigation.type != 2){
+				// user reloads
+				$('.user-interest').removeClass('active');
+				localStorage.clear();
+				ui = [];
+			}else{
+				ui = localStorage.getItem('user_interests');
+			}
+
 			var pt = localStorage.getItem('user_interests_popular');
 
 			$('.home-pop-topics').on('click', function(e){
@@ -335,7 +346,7 @@
 			})
 
 			if(ui != undefined){
-				ui = JSON.parse(ui);
+				ui = ui.length > 0 && typeof ui == "string" ? JSON.parse(ui) : ui;
 				// select the ones here
 				userInterests = ui;
 				ui.map((item) => {
@@ -361,10 +372,7 @@
 				}
 			}
 
-			if(performance.navigation.type != 2){
-				// user reloads
-				localStorage.clear();
-			}
+			
 		})
 	</script>
 </body>
