@@ -45,6 +45,7 @@ function getArticlesSubcateg(name, ttype){
 
     var articleList = ttype == "popular" ? $('.results-search-popular') : $('.results-search-categ');
     articleList.empty();
+    articleList.show();
 
 
     $.getJSON($URL_FOR_SUBARTICLES, {q: name}, function(result){
@@ -324,6 +325,7 @@ function findTopics(topic){
 
     var articleList = $('.results-search');
     articleList.empty();
+    articleList.show();
 
     $("<div/>").text(text.PLEASE_WAIT).appendTo(articleList);
 
