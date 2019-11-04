@@ -184,7 +184,7 @@ function getSubcategoriesForUser(type){
                     data: JSON.stringify(userInt),
                     success: function(d){
                         if(d['status']){
-                            $('.categories-subcategories-popular').html('<div class="owl-carousel-popular owl-theme common-grid-listing"></div>');
+                            $('.categories-subcategories-popular').html('<div class="owl-carousel owl-theme common-grid-listing"></div>');
 
                             for(var item in d['data']){
                                 if(item == 0){
@@ -198,16 +198,7 @@ function getSubcategoriesForUser(type){
 
 
                             var owl = $('.owl-carousel-popular');
-                            owl.on({
-                                'initialized.owl.carousel': function(){
-                                    console.log('initialized popular')
-                                    $("#home .categories-subcategories-popular").show();
-                                },
-                                'resized.owl.carousel': function(){
-                                    console.log('resized popular')
-                                    $("#home .categories-subcategories-popular").show();
-                                }
-                            }).owlCarousel({
+                            owl.owlCarousel({
                                 stagePadding: 130,
                                 margin: 10,
                                 nav: true,
@@ -226,6 +217,10 @@ function getSubcategoriesForUser(type){
                                     }
                                 }
                             });
+
+                            setTimeout(function(){
+                                $("#home .categories-subcategories-popular").show();
+                            }, 1000);
 
                         }
                     },
@@ -261,13 +256,7 @@ function getSubcategoriesForUser(type){
                             }
 
                             var owl = $('.owl-carousel');
-                            owl.on({
-                                'initialized.owl.carousel': function(){
-                                    console.log('initialized')
-                                    $("#menu1 .categories-subcategories").show();
-                                }
-
-                            }).owlCarousel({
+                            owl.owlCarousel({
                                 stagePadding: 130,
                                 margin: 10,
                                 nav: true,
@@ -286,6 +275,10 @@ function getSubcategoriesForUser(type){
                                     }
                                 }
                             });
+
+                            setTimeout(function(){
+                                $("#menu1 .categories-subcategories").show();
+                            }, 1000)
 
                         }
                     },
