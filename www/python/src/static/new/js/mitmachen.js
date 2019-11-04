@@ -27,6 +27,9 @@ var popularInterests = [];
 
 var totalArticlesFoundLine = '';
 
+var shownUserInterests = false;
+var shownPopularCateg = false;
+
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, function(txt){
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -34,11 +37,13 @@ function toTitleCase(str) {
 }
 
 // get articles for a subcategory
-function getArticlesSubcateg(name){
+function getArticlesSubcateg(name, ttype){
 
     trackingUserActivity('subcategoryarticle', name, '');
 
-    var articleList = $('.results-search');
+    $('.results-display').hide();
+
+    var articleList = ttype == "popular" ? $('.results-search-popular') : $('.results-search-categ');
     articleList.empty();
 
 
@@ -189,7 +194,7 @@ function getSubcategoriesForUser(type){
                             for(var item in d['data']){
                                 if(item == 0){
                                     $('.owl-carousel').append('<div class="item active subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item].replace(/_/g, ' ')+'</span></div>');
-                                    getArticlesSubcateg(d['data'][item]);
+                                    getArticlesSubcateg(d['data'][item], "popular");
                                 }else{
                                     $('.owl-carousel').append('<div class="item subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item].replace(/_/g, ' ')+'</span></div>');
                                 }
@@ -249,7 +254,7 @@ function getSubcategoriesForUser(type){
                             for(var item in d['data']){
                                 if(item == 0){
                                     $('.owl-carousel').append('<div class="item active subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item].replace(/_/g, ' ')+'</span></div>');
-                                    getArticlesSubcateg(d['data'][item]);
+                                    getArticlesSubcateg(d['data'][item], "other");
                                 }else{
                                     $('.owl-carousel').append('<div class="item subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item].replace(/_/g, ' ')+'</span></div>');
                                 }
@@ -314,6 +319,8 @@ function runArticlesCode(){
 function findTopics(topic){
 
     trackingUserActivity('search', topic, '');
+
+    $('.results-display').hide();
 
     var articleList = $('.results-search');
     articleList.empty();
@@ -814,7 +821,13 @@ $( function() {
         var name = $(this).attr('data-attr-name');
         $('.owl-item .item').removeClass('active');
         $(this).addClass('active');
-        getArticlesSubcateg(name);
+
+        var cdiv = $('.results-search-categ').is(':visible');
+        if(cdiv){
+            getArticlesSubcateg(name, "other");
+        }else{
+            getArticlesSubcateg(name, "popular");
+        }
     })
 
     $("#reftop-yi").on('click', function(){
