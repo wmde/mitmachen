@@ -197,7 +197,7 @@ function getSubcategoriesForUser(type){
 
 
 
-                            var owl = $('.owl-carousel-popular');
+                            var owl = $('.owl-carousel');
                             owl.owlCarousel({
                                 stagePadding: 130,
                                 margin: 10,
