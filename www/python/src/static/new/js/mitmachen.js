@@ -27,9 +27,6 @@ var popularInterests = [];
 
 var totalArticlesFoundLine = '';
 
-var shownUserInterests = false;
-var shownPopularCateg = false;
-
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, function(txt){
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -37,15 +34,12 @@ function toTitleCase(str) {
 }
 
 // get articles for a subcategory
-function getArticlesSubcateg(name, ttype){
+function getArticlesSubcateg(name){
 
     trackingUserActivity('subcategoryarticle', name, '');
 
-    $('.results-display').hide();
-
-    var articleList = ttype == "popular" ? $('.results-search-popular') : $('.results-search-categ');
+    var articleList = $('.results-search');
     articleList.empty();
-    articleList.show();
 
 
     $.getJSON($URL_FOR_SUBARTICLES, {q: name}, function(result){
@@ -195,7 +189,7 @@ function getSubcategoriesForUser(type){
                             for(var item in d['data']){
                                 if(item == 0){
                                     $('.owl-carousel').append('<div class="item active subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item].replace(/_/g, ' ')+'</span></div>');
-                                    getArticlesSubcateg(d['data'][item], "popular");
+                                    getArticlesSubcateg(d['data'][item]);
                                 }else{
                                     $('.owl-carousel').append('<div class="item subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item].replace(/_/g, ' ')+'</span></div>');
                                 }
@@ -255,7 +249,7 @@ function getSubcategoriesForUser(type){
                             for(var item in d['data']){
                                 if(item == 0){
                                     $('.owl-carousel').append('<div class="item active subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item].replace(/_/g, ' ')+'</span></div>');
-                                    getArticlesSubcateg(d['data'][item], "other");
+                                    getArticlesSubcateg(d['data'][item]);
                                 }else{
                                     $('.owl-carousel').append('<div class="item subcateg-item" data-attr-name="'+d['data'][item]+'"><span>'+d['data'][item].replace(/_/g, ' ')+'</span></div>');
                                 }
@@ -321,11 +315,8 @@ function findTopics(topic){
 
     trackingUserActivity('search', topic, '');
 
-    $('.results-display').hide();
-
     var articleList = $('.results-search');
     articleList.empty();
-    articleList.show();
 
     $("<div/>").text(text.PLEASE_WAIT).appendTo(articleList);
 
@@ -823,13 +814,7 @@ $( function() {
         var name = $(this).attr('data-attr-name');
         $('.owl-item .item').removeClass('active');
         $(this).addClass('active');
-
-        var cdiv = $('.results-search-categ').is(':visible');
-        if(cdiv){
-            getArticlesSubcateg(name, "other");
-        }else{
-            getArticlesSubcateg(name, "popular");
-        }
+        getArticlesSubcateg(name);
     })
 
     $("#reftop-yi").on('click', function(){
