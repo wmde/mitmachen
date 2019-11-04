@@ -198,6 +198,7 @@ function getSubcategoriesForUser(type){
                             var owl = $('.owl-carousel');
                             owl.on({
                                 'initialized.owl.carousel': function(){
+                                    owl.owlCarousel('refresh');
                                     $("#home .categories-subcategories-popular").show();
                                 }
                             }).owlCarousel({
@@ -256,8 +257,11 @@ function getSubcategoriesForUser(type){
                             var owl = $('.owl-carousel');
                             owl.on({
                                 'initialized.owl.carousel': function(){
+                                    console.log('initialized')
+                                    owl.owlCarousel('refresh');
                                     $("#menu1 .categories-subcategories").show();
                                 }
+
                             }).owlCarousel({
                                 stagePadding: 130,
                                 margin: 10,
