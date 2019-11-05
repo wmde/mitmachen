@@ -1253,3 +1253,16 @@ text-decoration: none;
     font-family: Georgia;
     margin-bottom: 10px;
 }
+@media (min-width:768px) {
+  #changeCateg .get-started-btn-row {
+      position: absolute;
+      margin: 0;
+      top: 25px;
+      right: 20px;
+      text-align: right !important;
+  }
+
+  #changeCateg .modal-content {
+      padding-bottom: 25px;
+  }
+} 
