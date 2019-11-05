@@ -472,6 +472,8 @@
 				$('.tab-pane').removeClass('active show');
 				$(".categories-subcategories,.categories-subcategories-popular").hide();
 
+				$('.article-count-display').hide();
+
 				if(t == 'popular'){
 					localStorage.setItem('frompopular', 1);
 
@@ -486,6 +488,7 @@
 					if(shownPopularCateg){
 						$('.results-display,.owl-categories').hide();
 						$('.results-search-popular,.categories-subcategories-popular').show();
+						$('.article-found-popular').show();
 					}else{
 						shownPopularCateg = true;
 						runTabAndCategCode(t);
@@ -516,6 +519,7 @@
 					if(shownUserInterests){
 						$('.results-display,.owl-categories').hide();
 						$('.results-search-categ,.categories-subcategories').show();
+						$('.article-found-categ').show();
 					}else{
 						shownUserInterests = true;
 						runTabAndCategCode(t);
