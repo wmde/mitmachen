@@ -778,7 +778,7 @@ $( function() {
                         $('.article-found-categ').text(txt);
                     }else{
                         $('.article-found').text(txt);            
-                    }/
+                    }
                 }
             }
         }
