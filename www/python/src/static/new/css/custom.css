@@ -720,10 +720,19 @@ nav.navbar.sticky-top {
     height: 195px;
     width: 199px; } }
 
-@media (min-width: 768px) and (max-width: 991px) {
+/*@media (max-width: 991px) and (min-width: 768px) {
   .modal .my-interest-listing li {
-    height: 195px;
-    width: 198px; } }
+      height: 195px;
+      width: 198px;
+  }
+}*/
+
+/*@media (max-width: 1199px) and (min-width: 992px) {
+  .modal .my-interest-listing li {
+      height: 195px;
+      width: 199px;
+  }
+}*/
 
 @media (min-width: 576px) and (max-width: 767px) {
   .modal .my-interest-listing li {
@@ -1265,4 +1274,22 @@ text-decoration: none;
   #changeCateg .modal-content {
       padding-bottom: 25px;
   }
-} 
+}
+@media (min-width:768px) and (max-width:991px) {
+  #changeCateg .my-interest-listing li {
+      height: 195px;
+      width: 29.7%;
+  }
+
+  #changeCateg .get-started-btn-row .btn {
+     padding: 11px 15px;
+      font-size:12px;
+    }
+}
+
+@media (min-width:768px) and (max-width:991px) {
+  #changeCateg .my-interest-listing li {
+      height: 195px;
+      width: 22.2%;
+  }
+}
