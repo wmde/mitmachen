@@ -62,9 +62,9 @@ function getArticlesSubcateg(name, ttype){
             if(data.length == 0){
 
                 if(ttype == "popular"){
-                    $('.article-found-popular').text("");
+                    $('.article-found-popular').text("").show();
                 }else{
-                    $('.article-found-categ').text("");
+                    $('.article-found-categ').text("").show();
                 }
 
                 $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
@@ -73,9 +73,9 @@ function getArticlesSubcateg(name, ttype){
                 totalArticlesFoundLine = txt;
                 // $('.article-found').text(txt);
                 if(ttype == "popular"){
-                    $('.article-found-popular').text(txt);
+                    $('.article-found-popular').text(txt).show();
                 }else{
-                    $('.article-found-categ').text(txt);
+                    $('.article-found-categ').text(txt).show();
                 }
             }
 
@@ -143,9 +143,9 @@ function getArticlesSubcateg(name, ttype){
 
                 origTxt = origTxt.replace(/[0-9]+/g, visLen);
                 if(ttype == "popular"){
-                    $('.article-found-popular').text(origTxt);
+                    $('.article-found-popular').text(origTxt).show();
                 }else{
-                    $('.article-found-categ').text(origTxt);
+                    $('.article-found-categ').text(origTxt).show();
                 }
             }
 
@@ -369,7 +369,7 @@ function findTopics(topic){
                 txt = result.articles.length + ' Artikel gefunden in ' + topic.replace(/_/g, ' ');
             }
             totalArticlesFoundLine = txt;
-            $('.article-found').text(txt);
+            $('.article-found').text(txt).show();
         }
 
         $.each(result.articles, function(i, doc){
@@ -445,7 +445,7 @@ function findTopics(topic){
 
             origTxt = origTxt.replace(/[0-9]+/g, visLen);
 
-            $('.article-found').text(origTxt);
+            $('.article-found').text(origTxt).show();
         }
 
     })
@@ -662,11 +662,11 @@ $( function() {
             $('.list-box').show();
 
             if(afType == "popular"){
-                $('.article-found-popular').text(totalArticlesFoundLine);
+                $('.article-found-popular').text(totalArticlesFoundLine).show();
             }else if(afType == "categ"){
-                $('.article-found-categ').text(totalArticlesFoundLine);
+                $('.article-found-categ').text(totalArticlesFoundLine).show();
             }else{
-                $('.article-found').text(totalArticlesFoundLine);                
+                $('.article-found').text(totalArticlesFoundLine).show();                
             }
 
         }else if(dn == "all_tasks" && v == false){
@@ -674,11 +674,11 @@ $( function() {
             $('.list-box').show();
             // $('.article-found').text(totalArticlesFoundLine);
             if(afType == "popular"){
-                $('.article-found-popular').text(totalArticlesFoundLine);
+                $('.article-found-popular').text(totalArticlesFoundLine).show();
             }else if(afType == "categ"){
-                $('.article-found-categ').text(totalArticlesFoundLine);
+                $('.article-found-categ').text(totalArticlesFoundLine).show();
             }else{
-                $('.article-found').text(totalArticlesFoundLine);                
+                $('.article-found').text(totalArticlesFoundLine).show();                
             }
         }
 
@@ -701,11 +701,11 @@ $( function() {
                 if($('.filter-task:checkbox:checked').length == 0){
                     $('.list-box').show();
                     if(afType == "popular"){
-                        $('.article-found-popular').text(totalArticlesFoundLine);
+                        $('.article-found-popular').text(totalArticlesFoundLine).show();
                     }else if(afType == "categ"){
-                        $('.article-found-categ').text(totalArticlesFoundLine);
+                        $('.article-found-categ').text(totalArticlesFoundLine).show();
                     }else{
-                        $('.article-found').text(totalArticlesFoundLine);            
+                        $('.article-found').text(totalArticlesFoundLine).show();            
                     }
                 }else{
                     var nameConcat = [];
@@ -730,11 +730,11 @@ $( function() {
 
                     // $('.article-found').text(txt);
                     if(afType == "popular"){
-                        $('.article-found-popular').text(txt);
+                        $('.article-found-popular').text(txt).show();
                     }else if(afType == "categ"){
-                        $('.article-found-categ').text(txt);
+                        $('.article-found-categ').text(txt).show();
                     }else{
-                        $('.article-found').text(txt);            
+                        $('.article-found').text(txt).show();            
                     }
                 }
 
@@ -745,11 +745,11 @@ $( function() {
                     $('.list-box').show();
                     // $('.article-found').text(totalArticlesFoundLine);
                     if(afType == "popular"){
-                        $('.article-found-popular').text(totalArticlesFoundLine);
+                        $('.article-found-popular').text(totalArticlesFoundLine).show();
                     }else if(afType == "categ"){
-                        $('.article-found-categ').text(totalArticlesFoundLine);
+                        $('.article-found-categ').text(totalArticlesFoundLine).show();
                     }else{
-                        $('.article-found').text(totalArticlesFoundLine);            
+                        $('.article-found').text(totalArticlesFoundLine).show();            
                     }
                 }else{
                     var nameConcat = [];
@@ -773,11 +773,11 @@ $( function() {
 
                     // $('.article-found').text(txt);
                     if(afType == "popular"){
-                        $('.article-found-popular').text(txt);
+                        $('.article-found-popular').text(txt).show();
                     }else if(afType == "categ"){
-                        $('.article-found-categ').text(txt);
+                        $('.article-found-categ').text(txt).show();
                     }else{
-                        $('.article-found').text(txt);            
+                        $('.article-found').text(txt).show();            
                     }
                 }
             }
