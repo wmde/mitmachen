@@ -100,7 +100,7 @@
 	</div>
 	<div class="common-list-wrap bg-white">
 		<div class="container">
-			<div class="filter-row mb-4">	<span class="article-found"></span>
+			<div class="filter-row mb-4">	<span class="article-found article-count-display" data-attr-type="search"></span><span class="article-found-categ article-count-display" data-attr-type="categ"></span><span class="article-found-popular article-count-display" data-attr-type="popular"></span>
 				<div class="select-box-wrap">
 					<div class="form-control custom-select-box"> <span class="show-all-title">Filter nach Aufgabe</span>
 					</div>
@@ -223,7 +223,7 @@
 		</div>
 		<div class="help-block">
 			<h4>Du brauchst Hilfe?</h4>
-			<span><a href="https://outreachdashboard.wmflabs.org/training/wikipedia-editieren" target="_blank">Lerne, wie man Artikel bearbeitet in Online-Trainings</span>
+			<span><a href="https://outreachdashboard.wmflabs.org/training/wikipedia-editieren" target="_blank">Lerne, wie man Artikel bearbeitet in Online-Trainings</a></span>
 			<div class="hide-info">	<span>Finde Hilfe in der Wikipedia:</span>
 				<ul>
 					<li><a target="_blank" href="https://de.wikipedia.org/wiki/Wikipedia:Wikimedia_Deutschland/LerneWikipedia">Startseite für neue Autorinnen und Autoren</a>
@@ -232,7 +232,7 @@
 					</li>
 					<li><a target="_blank" href="https://de.wikipedia.org/wiki/Wikipedia:Fragen_von_Neulingen">Stelle eine Frage zur Mitarbeit in Wikipedia</a>
 					</li>
-				</ul>	<span><a href="https://de.wikipedia.org/wiki/Wikipedia:Mentorenprogramm" target="_blank">Du willst längerfristig dabei bleiben?<br>Melde dich beim Mentorenprogramm an.</a></span>
+				</ul>	<span>Du willst längerfristig dabei bleiben?<br><a href="https://de.wikipedia.org/wiki/Wikipedia:Mentorenprogramm" target="_blank">Melde dich beim Mentorenprogramm an.</a></span>
 			</div>
 		</div>
 	</div>
@@ -492,10 +492,6 @@
 					}
 
 				}else{
-
-					// remove search results at bottom
-					// $('.article-found').html('');
-					// $('.results-search').html('');
 
 					var userInt = localStorage.getItem('user_interests');
 

@@ -42,6 +42,7 @@ function getArticlesSubcateg(name, ttype){
     trackingUserActivity('subcategoryarticle', name, '');
 
     $('.results-display').hide();
+    $('.article-count-display').hide();
 
     var articleList = ttype == "popular" ? $('.results-search-popular') : $('.results-search-categ');
     articleList.empty();
@@ -59,12 +60,23 @@ function getArticlesSubcateg(name, ttype){
         if(result['status']){
             var data = result['data'][0];
             if(data.length == 0){
-                $('.article-found').text("");
+
+                if(ttype == "popular"){
+                    $('.article-found-popular').text("");
+                }else{
+                    $('.article-found-categ').text("");
+                }
+
                 $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
             }else{
                 var txt = data.length + ' Artikel gefunden in ' + name.replace(/_/g, ' ');
                 totalArticlesFoundLine = txt;
-                $('.article-found').text(txt);
+                // $('.article-found').text(txt);
+                if(ttype == "popular"){
+                    $('.article-found-popular').text(txt);
+                }else{
+                    $('.article-found-categ').text(txt);
+                }
             }
 
             $.each(data, function(i, doc){
@@ -121,7 +133,7 @@ function getArticlesSubcateg(name, ttype){
             }
 
             if($('.filter-task[data-attr-name="all_tasks"]').is(':checked') == false){
-                var origTxt = $('.article-found').text();
+                var origTxt = ttype == "popular" ? $('.article-found-popular').text() : $('.article-found-categ').text();
                 $('.list-box').hide();
                 $('.filter-task:checkbox:checked').each(function(i){
                     origTxt = origTxt + ' und ' + toTitleCase($(this).attr('data-attr-name').replace('_', ' '));
@@ -130,7 +142,11 @@ function getArticlesSubcateg(name, ttype){
                 var visLen = $('.list-box:visible').length;
 
                 origTxt = origTxt.replace(/[0-9]+/g, visLen);
-                $('.article-found').text(origTxt);
+                if(ttype == "popular"){
+                    $('.article-found-popular').text(origTxt);
+                }else{
+                    $('.article-found-categ').text(origTxt);
+                }
             }
 
         }
@@ -329,6 +345,7 @@ function findTopics(topic){
     trackingUserActivity('search', topic, '');
 
     $('.results-display').hide();
+    $('.article-count-display').hide();
 
     var articleList = $('.results-search');
     articleList.empty();
@@ -637,49 +654,87 @@ $( function() {
         var dn = $(this).attr('data-attr-name');
         var v = $(this).prop('checked');
 
+        var afType = $('.article-count-display:visible').attr('data-attr-type');
+
+        // this is for when all tasks is selected
         if(dn == "all_tasks" && v == true){
             $(".filter-task").prop('checked', true);
             $('.list-box').show();
-            $('.article-found').text(totalArticlesFoundLine);
+
+            if(afType == "popular"){
+                $('.article-found-popular').text(totalArticlesFoundLine);
+            }else if(afType == "categ"){
+                $('.article-found-categ').text(totalArticlesFoundLine);
+            }else{
+                $('.article-found').text(totalArticlesFoundLine);                
+            }
+
         }else if(dn == "all_tasks" && v == false){
             $(".filter-task").prop('checked', false);
             $('.list-box').show();
-            $('.article-found').text(totalArticlesFoundLine);
+            // $('.article-found').text(totalArticlesFoundLine);
+            if(afType == "popular"){
+                $('.article-found-popular').text(totalArticlesFoundLine);
+            }else if(afType == "categ"){
+                $('.article-found-categ').text(totalArticlesFoundLine);
+            }else{
+                $('.article-found').text(totalArticlesFoundLine);                
+            }
         }
 
         if(dn != "all_tasks"){
             var p = $('.select-subitems ul .filter-task:checked').length;
             var q = $('.select-subitems ul .filter-task').length;
+
+            // if all but all_tasks is checked then ...
             if(p == q){
                 $('.filter-task[data-attr-name="all_tasks"]').prop('checked', true);
             }else{
                 $('.filter-task[data-attr-name="all_tasks"]').prop('checked', false);
             }
 
+
             if(v == true){
 
-                if($('.filter-task[data-attr-name="all_tasks"]').is(':checked')){
-                    // $('.filter-task').prop('checked', false);
-                    $(this).prop('checked', true);
-                }else{
-                    $('.list-box').hide();
-                    // get all selected and show them
-                    if($('.filter-task:checkbox:checked').length == 0){
-                        $('.list-box').show();
-                        $('.article-found').text(totalArticlesFoundLine);
+                $('.list-box').hide();
+                // get all selected and show them
+                if($('.filter-task:checkbox:checked').length == 0){
+                    $('.list-box').show();
+                    if(afType == "popular"){
+                        $('.article-found-popular').text(totalArticlesFoundLine);
+                    }else if(afType == "categ"){
+                        $('.article-found-categ').text(totalArticlesFoundLine);
                     }else{
-                        var nameConcat = [];
-                        $('.filter-task:checkbox:checked').each(function(i){
-                            nameConcat.push(toTitleCase($(this).attr('data-attr-name').split('_').join(' ')));
-                            $('.'+$(this).attr('data-attr-name')).parent().parent().parent().show();
-                        })
+                        $('.article-found').text(totalArticlesFoundLine);            
+                    }
+                }else{
+                    var nameConcat = [];
+                    $('.filter-task:checkbox:checked').each(function(i){
+                        nameConcat.push(toTitleCase($(this).attr('data-attr-name').split('_').join(' ')));
+                        $('.'+$(this).attr('data-attr-name')).parent().parent().parent().show();
+                    })
 
-                        var lsNames = nameConcat.map(item => {return item.toLowerCase().replace(/\s/g, '_')});
-                        
-                        localStorage.setItem('ftasks', JSON.stringify(lsNames));
+                    var lsNames = nameConcat.map(item => {return item.toLowerCase().replace(/\s/g, '_')});
+                    
+                    localStorage.setItem('ftasks', JSON.stringify(lsNames));
 
-                        var txt = $(".list-box:visible").length + ' Artikel gefunden in ' + nameConcat.join(', ');
-                        $('.article-found').text(txt);
+                    // var txt = $(".list-box:visible").length + ' Artikel gefunden in ' + nameConcat.join(', ');
+
+                    var txt = totalArticlesFoundLine;
+
+                    var visLen = $('.list-box:visible').length;
+
+                    txt += ' und ' + nameConcat.join(', ');
+
+                    txt = txt.replace(/[0-9]+/g, visLen);
+
+                    // $('.article-found').text(txt);
+                    if(afType == "popular"){
+                        $('.article-found-popular').text(txt);
+                    }else if(afType == "categ"){
+                        $('.article-found-categ').text(txt);
+                    }else{
+                        $('.article-found').text(txt);            
                     }
                 }
 
@@ -688,7 +743,14 @@ $( function() {
                 // get all selected and show them
                 if($('.filter-task:checkbox:checked').length == 0){
                     $('.list-box').show();
-                    $('.article-found').text(totalArticlesFoundLine);
+                    // $('.article-found').text(totalArticlesFoundLine);
+                    if(afType == "popular"){
+                        $('.article-found-popular').text(totalArticlesFoundLine);
+                    }else if(afType == "categ"){
+                        $('.article-found-categ').text(totalArticlesFoundLine);
+                    }else{
+                        $('.article-found').text(totalArticlesFoundLine);            
+                    }
                 }else{
                     var nameConcat = [];
                     $('.filter-task:checkbox:checked').each(function(i){
@@ -699,8 +761,24 @@ $( function() {
                     var lsNames = nameConcat.map(item => {return item.toLowerCase().replace(/\s/g, '_')});
                     localStorage.setItem('ftasks', JSON.stringify(lsNames));
 
-                    var txt = $(".list-box:visible").length + ' Artikel gefunden in ' + nameConcat.join(', ');
-                    $('.article-found').text(txt);
+                    // var txt = $(".list-box:visible").length + ' Artikel gefunden in ' + nameConcat.join(', ');
+
+                    var txt = totalArticlesFoundLine;
+
+                    var visLen = $('.list-box:visible').length;
+
+                    txt += ' und ' + nameConcat.join(', ');
+
+                    txt = txt.replace(/[0-9]+/g, visLen);
+
+                    // $('.article-found').text(txt);
+                    if(afType == "popular"){
+                        $('.article-found-popular').text(txt);
+                    }else if(afType == "categ"){
+                        $('.article-found-categ').text(txt);
+                    }else{
+                        $('.article-found').text(txt);            
+                    }/
                 }
             }
         }
@@ -829,11 +907,18 @@ $( function() {
 
 
     $('body').on('click', '.subcateg-item', function(){
+        var cdiv = $('.results-search-categ').is(':visible');
+        var tt;
+        if(cdiv){
+            tt = "#menu1";
+        }else{
+            tt = "#home";
+        }
+
         var name = $(this).attr('data-attr-name');
-        $('.owl-item .item').removeClass('active');
+        $(tt + ' .owl-item .item').removeClass('active');
         $(this).addClass('active');
 
-        var cdiv = $('.results-search-categ').is(':visible');
         if(cdiv){
             getArticlesSubcateg(name, "other");
         }else{

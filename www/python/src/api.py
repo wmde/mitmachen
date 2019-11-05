@@ -32,7 +32,7 @@ def generate_iabot_cats():
 
 class Mitmachen:
     MAX_DEPTH = 3  # maximum depth in category tree search
-    TAGS = ["Überarbeiten", "Lückenhaft", "Veraltet",
+    TAGS = ["Nur_Liste", "Lückenhaft", "Veraltet",
             "Belege_fehlen", "Ungeprüfter_Link"]
     NUM = 10  # number of articles to return (goal)
     IABOT_CATS = generate_iabot_cats()
