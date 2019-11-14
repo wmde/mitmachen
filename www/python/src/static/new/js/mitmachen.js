@@ -661,6 +661,8 @@ $( function() {
             $(".filter-task").prop('checked', true);
             $('.list-box').show();
 
+            localStorage.removeItem('ftasks');
+
             if(afType == "popular"){
                 $('.article-found-popular').text(totalArticlesFoundLine).show();
             }else if(afType == "categ"){
@@ -689,6 +691,7 @@ $( function() {
             // if all but all_tasks is checked then ...
             if(p == q){
                 $('.filter-task[data-attr-name="all_tasks"]').prop('checked', true);
+                $('.article-found-popular').text(totalArticlesFoundLine).show();
             }else{
                 $('.filter-task[data-attr-name="all_tasks"]').prop('checked', false);
             }
