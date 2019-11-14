@@ -132,7 +132,29 @@ function getArticlesSubcateg(name, ttype){
                     .appendTo(more);
             }
 
-            if($('.filter-task[data-attr-name="all_tasks"]').is(':checked') == false){
+            var lsNames = JSON.parse(localStorage.getItem('ftasks'));
+        
+            if(lsNames != undefined){
+
+                $('.filter-task').prop('checked', false);
+
+                var origTxt = $('.article-found').text();
+                $('.list-box').hide();
+
+                $.each(lsNames, function(index, value){
+                    $('.filter-task[data-attr-name="'+value+'"]').prop('checked', true);
+                    origTxt = origTxt + ' und ' + toTitleCase(value.replace('_', ' '));
+                    $('.'+value).parent().parent().parent().show();
+                })
+
+                var visLen = $('.list-box:visible').length;
+
+                origTxt = origTxt.replace(/[0-9]+/g, visLen);
+
+                $('.article-found').text(origTxt).show();
+            }
+
+            /*if($('.filter-task[data-attr-name="all_tasks"]').is(':checked') == false){
                 var origTxt = ttype == "popular" ? $('.article-found-popular').text() : $('.article-found-categ').text();
                 $('.list-box').hide();
                 $('.filter-task:checkbox:checked').each(function(i){
@@ -147,7 +169,7 @@ function getArticlesSubcateg(name, ttype){
                 }else{
                     $('.article-found-categ').text(origTxt).show();
                 }
-            }
+            }*/
 
             $('html,body').scrollTop(0);
 
