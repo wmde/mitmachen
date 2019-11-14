@@ -149,6 +149,8 @@ function getArticlesSubcateg(name, ttype){
                 }
             }
 
+            $('html,body').scrollTop(0);
+
         }
     })
 
@@ -355,6 +357,8 @@ function findTopics(topic){
 
     $("<div/>").text(text.PLEASE_WAIT).appendTo(articleList);
 
+    $('html,body').scrollTop(0);
+
     $.getJSON($URL_FOR_FIND, {q: topic.toLowerCase()}, function(result){
         articleList.empty();
 
@@ -447,6 +451,8 @@ function findTopics(topic){
 
             $('.article-found').text(origTxt).show();
         }
+
+        $('html,body').scrollTop(0);
 
     })
 

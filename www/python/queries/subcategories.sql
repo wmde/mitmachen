@@ -1,5 +1,6 @@
 SELECT DISTINCT
-    page_title
+    page_title,
+	'Ungeprüfter Link' AS tl_title
 FROM
     page,
     categorylinks
