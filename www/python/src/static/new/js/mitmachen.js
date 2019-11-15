@@ -158,9 +158,9 @@ function getArticlesSubcateg(name, ttype){
                 origTxt = origTxt.replace(/[0-9]+/g, visLen);
 
                 if(ttype == "popular"){
-                    $('.article-found-popular').text(txt).show();
+                    $('.article-found-popular').text(origTxt).show();
                 }else{
-                    $('.article-found-categ').text(txt).show();
+                    $('.article-found-categ').text(origTxt).show();
                 }
             }
 
