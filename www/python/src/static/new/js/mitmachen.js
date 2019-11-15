@@ -68,7 +68,7 @@ function getArticlesSubcateg(name, ttype){
                 }
 
                 $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
-            }else{
+            }/*else{
                 var txt = data.length + ' Artikel gefunden in ' + name.replace(/_/g, ' ');
                 totalArticlesFoundLine = txt;
                 // $('.article-found').text(txt);
@@ -77,7 +77,7 @@ function getArticlesSubcateg(name, ttype){
                 }else{
                     $('.article-found-categ').text(txt).show();
                 }
-            }
+            }*/
 
             $.each(data, function(i, doc){
 
