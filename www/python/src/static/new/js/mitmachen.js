@@ -140,11 +140,11 @@ function getArticlesSubcateg(name, ttype){
 
                 var origTxt = txt;
 
-                if(ttype == "popular"){
+                /*if(ttype == "popular"){
                     origTxt = $('.article-found-popular').text();
                 }else{
                     origTxt = $('.article-found-categ').text();
-                }
+                }*/
                 $('.list-box').hide();
 
                 $.each(lsNames, function(index, value){
