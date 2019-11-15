@@ -68,16 +68,16 @@ function getArticlesSubcateg(name, ttype){
                 }
 
                 $("<div/>").text(text.NO_RESULTS).appendTo(articleList);
-            }/*else{
+            }else{
                 var txt = data.length + ' Artikel gefunden in ' + name.replace(/_/g, ' ');
                 totalArticlesFoundLine = txt;
-                // $('.article-found').text(txt);
-                if(ttype == "popular"){
+                
+                /*if(ttype == "popular"){
                     $('.article-found-popular').text(txt).show();
                 }else{
                     $('.article-found-categ').text(txt).show();
-                }
-            }*/
+                }*/
+            }
 
             $.each(data, function(i, doc){
 
@@ -138,7 +138,13 @@ function getArticlesSubcateg(name, ttype){
 
                 $('.filter-task').prop('checked', false);
 
-                var origTxt = $('.article-found').text();
+                var origTxt = txt;
+
+                if(ttype == "popular"){
+                    origTxt = $('.article-found-popular').text();
+                }else{
+                    origTxt = $('.article-found-categ').text();
+                }
                 $('.list-box').hide();
 
                 $.each(lsNames, function(index, value){
@@ -151,7 +157,11 @@ function getArticlesSubcateg(name, ttype){
 
                 origTxt = origTxt.replace(/[0-9]+/g, visLen);
 
-                $('.article-found').text(origTxt).show();
+                if(ttype == "popular"){
+                    $('.article-found-popular').text(txt).show();
+                }else{
+                    $('.article-found-categ').text(txt).show();
+                }
             }
 
             /*if($('.filter-task[data-attr-name="all_tasks"]').is(':checked') == false){
