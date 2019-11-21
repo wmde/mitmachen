@@ -71,7 +71,7 @@ function getArticlesSubcateg(name, ttype){
             }else{
                 var txt = data.length + ' Artikel gefunden in ' + name.replace(/_/g, ' ');
                 totalArticlesFoundLine = txt;
-                
+             console.log('TOTAL ARTICLES FOUND: ', txt)   
                 /*if(ttype == "popular"){
                     $('.article-found-popular').text(txt).show();
                 }else{
