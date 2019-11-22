@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='new/css/bootstrap.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='new/css/custom.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='new/css/owl.carousel.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='new/css/responsive.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='new/css/font-awesome.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+
+	<title>Mitmachen in Articles</title>
+
+	<script type=text/javascript>
+        $URL_FOR_SUGGEST = {{url_for('suggest')|tojson|safe}};
+        $URL_FOR_FIND = {{url_for('find')|tojson|safe}};
+        $URL_FOR_AUTOCOMPLETE = {{url_for('autocomplete')|tojson|safe}};
+        $URL_FOR_TRACKING = {{url_for('tracking')|tojson|safe}};
+        $URL_FOR_GETSUBCATEG = {{url_for('getsubcateg')|tojson|safe}};
+        $URL_FOR_ARTICLES = {{url_for('second')|tojson|safe}};
+        $URL_FOR_SUBARTICLES = {{url_for('getarticlesforsubcategory')|tojson|safe}};
+        $URL_FOR_PREVIEW = {{url_for('previewarticle')|tojson|safe}};
+    </script>
+</head>
+
+<body class="bg-white">
+	<div class="header-small">
+		<nav class="navbar navbar-expand-lg">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{{ url_for('index') }}">
+					<img src="{{ url_for('static', filename='new/img/wikiglobe.png') }}">
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation"> <span class="icon-bar top-bar"></span>
+					<span class="icon-bar middle-bar"></span>
+					<span class="icon-bar bottom-bar">
+			        </button>
+			        <div class="search-bar-wrap">
+						<i class="fa fa-search" aria-hidden="true"></i>
+						<input id="category" type="text" placeholder="Finde ein Thema, zu dem du beitragen kannst">
+					</div>
+			        <!-- <div class="buttons-wrap">
+			          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+			            <li class="nav-item">
+			              <a class="nav-link" href="#" data-toggle="modal" data-target="#signin">Log in</a>
+			            </li>
+			            <li class="nav-item">
+			              <a class="nav-link" href="#" data-toggle="modal" data-target="#signin">Sign up</a>
+			            </li>
+			          </ul>
+			        </div> -->
+			      </div>  
+			</nav>
+        </div>	
+
+    <div class="main-wrapper article-page-wrap">
+        <table id="statstable" class="display" style="width:100%">
+        	<thead>
+        		<tr>
+        			<th>id</th>
+        			<th>type</th>
+        			<th>title</th>
+        			<th>weblink</th>
+        			<th>count</th>
+        		</tr>
+        		<tbody>
+			    	{% for item in results %}
+			    		<tr>
+			    			<td>
+			    				{{ item['id'] }}
+			    			</td>
+			    			<td>
+			    				{{ item['type'] }}
+			    			</td>
+			    			<td>
+			    				{{ item['title'] }}
+			    			</td>
+			    			<td>
+			    				{{ item['weblink'] }}
+			    			</td>
+			    			<td>
+			    				{{ item['count'] }}
+			    			</td>
+			    		</tr>
+			    	{% endfor %}
+        		</tbody>
+        	</thead>
+        </table>
+
+	</div>
+	<div id="home" class="tab-pane fade">
+		<div class="refresh-topic-row">
+			<div class="container">	<span class="refresh-topic" id="reftop-pt">Kategorien neu laden</span>
+				<span class="user-sel-categories-popular"></span>
+			</div>
+		</div>
+		<section id="slider-block" class="categories-subcategories-popular owl-categories">
+			
+		</section>
+	</div>
+	</div>
+	</div>
+	<div class="common-list-wrap bg-white">
+		<div class="container">
+			<div class="filter-row mb-4">	<span class="article-found article-count-display" data-attr-type="search"></span><span class="article-found-categ article-count-display" data-attr-type="categ"></span><span class="article-found-popular article-count-display" data-attr-type="popular"></span>
+				<div class="select-box-wrap">
+					<div class="form-control custom-select-box"> <span class="show-all-title">Filter nach Aufgabe</span>
+					</div>
+					<div class="select-subitems">	<span class="show-all-title"><form>
+												  <div class="custom-control custom-checkbox">
+												    <input type="checkbox" class="custom-control-input filter-task" id="customCheck10" name="example1" data-attr-name="all_tasks">
+												    <label class="custom-control-label" for="customCheck10">All tasks</label>
+												  </div>
+													</form></span>
+						<ul>
+							<li>
+								<h6><form>
+												  <div class="custom-control custom-checkbox">
+												    <input type="checkbox" class="custom-control-input filter-task" id="customCheck" name="example1" data-attr-name="ungeprüfter_link">
+												    <label class="custom-control-label" for="customCheck">
+												    Ungeprüfter Link
+													<p>In diesem Artikel wurde ein Link automatisch aktualisiert. Prüfe, ob der Link noch stimmt.</p>
+												</label>
+												  </div>
+													</form> </h6>
+							</li>
+							<li>
+								<h6> <form>
+												  <div class="custom-control custom-checkbox">
+												    <input type="checkbox" class="custom-control-input filter-task" id="customCheck1" name="example1" data-attr-name="belege_fehlen">
+												    <label class="custom-control-label" for="customCheck1">
+												    	Belege fehlen
+								<p>In diesem Artikel fehlen Belege. Recherchiere fehlende Quellen und füge sie ein.</p>
+												    </label>
+												  </div>
+													</form></h6>
+							</li>
+							<li>
+								<h6><form>
+												  <div class="custom-control custom-checkbox">
+												    <input type="checkbox" class="custom-control-input filter-task" id="customCheck2" name="example1" data-attr-name="lückenhaft">
+												    <label class="custom-control-label" for="customCheck2">
+												    Lückenhaft
+								<p>In diesem Artikel fehlen wichtige Informationen. Recherchiere die Informationen und ergänze den Artikel.</p>
+												</label>
+												  </div>
+													</form></h6>
+							</li>
+							<li>
+								<h6><form>
+												  <div class="custom-control custom-checkbox">
+												    <input type="checkbox" class="custom-control-input filter-task" id="customCheck3" name="example1" data-attr-name="veraltet">
+												    <label class="custom-control-label" for="customCheck3">
+												    Veraltet
+								<p>Dieser Artikel ist nicht mehr aktuell. Recherchiere fehlende Informationen und füge sie ein.</p>
+												</label>
+												  </div>
+													</form></h6>
+							</li>
+							<li>
+								<h6><form>
+												  <div class="custom-control custom-checkbox">
+												    <input type="checkbox" class="custom-control-input filter-task" id="customCheck4" name="example1" data-attr-name="nur_liste">
+												    <label class="custom-control-label" for="customCheck4">
+												    	Nur Liste
+								<p>Dieser Artikel besteht vornehmlich aus Listen. Formuliere Fließtext und füge ihn ein.</p>
+												    </label>
+												  </div>
+													</form></h6>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="results-search results-display"></div>
+			<div class="results-search-categ results-display"></div>
+			<div class="results-search-popular results-display"></div>
+		</div>
+	</div>
+	</div>
+	<div class="footer-block">
+		<div class="container">
+			<div class="footer-block-innner">
+				<div class="row">
+					<div class="col-lg-5 col-md-5 col-sm-12">
+						<div class="footer-left-info">
+							<a class="footer-logo" href="#">
+								<img src="{{ url_for('static', filename='new/img/footer-logo.png') }}">
+							</a>	<span class="mt-4">Mitmachen ist ein kleines Tool, das Wikipedia-Autorinnen und Autoren hilft, Artikel mit Überarbeitungsbedarf zu finden. Der Code und die Dokumentation sind auf <a href="https://github.com/wmde/mitmachen/blob/c2ca5040e1a0672b6a42b5652568b706802940fd/README.md" target="_blank">GitHub</a> zu finden. Verbesserungsvorschläge und Bugreports können auf <a href="https://phabricator.wikimedia.org/tag/mitmachen" target="_blank">Phabricator</a> eingetragen werden. Die ursprüngliche Version von Mitmachen wurde entwickelt von User:Cirdan und lizensiert unter <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>. Diese Version steht unter der <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html" target="_blank">Lizenz GNU GPL 2.0</a>.</span>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-3 col-sm-6 col-6">
+						<div class="footer-listing pad-left-25">
+							<h6>Weiterführende Links</h6>
+							<ul>
+								<li><a target="_blank" href="https://de.wikipedia.org/wiki/Hilfe:%C3%9Cbersicht">Wikipedia Hilfeseiten</a>
+								</li>
+								<li><a target="_blank" href="https://www.wikidata.org/wiki/Wikidata:Main_Page">Wikidata</a>
+								</li>
+								<li><a target="_blank" href="https://de.wikisource.org/wiki/Hauptseite">Wikisource</a>
+								</li>
+								<li><a target="_blank" href="https://commons.wikimedia.org/wiki/Hauptseite">Wikimedia Commons</a>
+								</li>
+								<li><a target="_blank" href="https://www.mediawiki.org/wiki/MediaWiki">MediaWiki</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="footer-bottom-links-row">
+					<div class="row">
+						<div class="col-lg-5 col-md-6 col-sm-12">
+							<ul>
+								<li><a target="_block" href="https://meta.wikimedia.org/wiki/Privacy_policy/de">Datenschutz</a>
+								</li>
+								<li><a target="_block" href="https://wikitech.wikimedia.org/wiki/Wikitech:Cloud_Services_Terms_of_use">Nutzungsbedingungen</a>
+								</li>
+							</ul>
+						</div>
+						<div class="col-lg-4 col-md-12 col-sm-12">	<a class="basic-link" href="https://de.wikipedia.org/wiki/Wikipedia:Wikimedia_Deutschland/LerneWikipedia" target="_blank">Neu bei Wikipedia?</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="help-block">
+			<h4>Du brauchst Hilfe?</h4>
+			<span><a href="https://outreachdashboard.wmflabs.org/training/wikipedia-editieren" target="_blank">Lerne, wie man Artikel bearbeitet in Online-Trainings</a></span>
+			<div class="hide-info">	<span>Finde Hilfe in der Wikipedia:</span>
+				<ul>
+					<li><a target="_blank" href="https://de.wikipedia.org/wiki/Wikipedia:Wikimedia_Deutschland/LerneWikipedia">Startseite für neue Autorinnen und Autoren</a>
+					</li>
+					<li><a href="https://de.wikipedia.org/wiki/Hilfe:%C3%9Cbersicht" target="_blank">Übersicht aller Hilfeseiten</a>
+					</li>
+					<li><a target="_blank" href="https://de.wikipedia.org/wiki/Wikipedia:Fragen_von_Neulingen">Stelle eine Frage zur Mitarbeit in Wikipedia</a>
+					</li>
+				</ul>	<span>Du willst längerfristig dabei bleiben?<br><a href="https://de.wikipedia.org/wiki/Wikipedia:Mentorenprogramm" target="_blank">Melde dich beim Mentorenprogramm an.</a></span>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript" src="{{ url_for('static', filename='new/js/jquery.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='new/js/jquery-ui.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='new/js/owl.carousel.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='new/js/popper.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='new/js/bootstrap.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='new/js/custom.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='new/js/mitmachen.js') }}"></script>
+	<script type="text/javascript" src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			("#statstable").DataTable();
+		})
+	</script>
+</body>
+
+</html>

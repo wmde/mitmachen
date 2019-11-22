@@ -90,3 +90,8 @@ def previewarticle():
     problems = problems[0].split(',') if len(problems) > 0 else problems
 
     return flask.render_template("preview.html", text=text, query=query, problems=problems, image_prob=image_prob)
+
+@app.route('/stats', methods=['GET'])
+def get_tracking_info():
+    # results = api.getstats()
+    return flask.render_template('stats.html', results={})

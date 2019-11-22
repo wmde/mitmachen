@@ -50,6 +50,7 @@ class Mitmachen:
         self.getsubs_query = self._load("getsubs.sql")
         self.subcateg_articles = self._load("getcategarticles.sql")
         self.subfilter_query = self._load("subcategfilter.sql")
+        self.getstats_query = self._load('trackingget.sql')
 
 
         self.blacklist = self._readfile("blacklist.txt")
@@ -309,3 +310,19 @@ class Mitmachen:
             except KeyError:
                 articles[page] = [problem]
         return articles
+
+    def getstats(self):
+        conn = self._tracking_connection()
+        stats = {}
+        try:
+            with conn.cursor() as cursor:
+                cursor.execute(self.getstats_query)
+
+                conn.commit()
+                stats = self._extract_problems(cursor.fetchall(), stats)
+
+                stats = stats.items()
+
+                return stats
+        finally:
+            conn.close()
