@@ -59,7 +59,7 @@
   .navbar.navbar-expand-lg .search-bar-wrap {
     float: left;
     margin-left: 0;
-    width: 83%; }
+    width: 100%; }
   .navbar.navbar-expand-lg .buttons-wrap {
     display: none;
     position: absolute;
@@ -77,7 +77,7 @@
       .navbar.navbar-expand-lg .buttons-wrap .nav-link:focus {
         background: none; }
   .navbar-toggler {
-    display: block;
+    display: none;
     padding: 0;
     position: absolute;
     right: 15px;
@@ -126,8 +126,8 @@
       text-align: center; }
   .common-list-wrap {
     padding-bottom: 0; }
-  .list-box.list-box-new .preview-article-link {
-    display: none; }
+  /*.list-box.list-box-new .preview-article-link {
+    display: none; }*/
   .pad-left-25 {
     padding-left: 0; }
   .footer-listing {
