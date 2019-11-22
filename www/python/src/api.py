@@ -321,7 +321,7 @@ class Mitmachen:
                 conn.commit()
                 stats = cursor.fetchall()
 
-                stats = stats.items()
+                # stats = stats.items()
 
                 return stats
         finally:
