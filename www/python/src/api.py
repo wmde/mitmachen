@@ -171,7 +171,7 @@ class Mitmachen:
         try:
             with conn.cursor() as cursor:
                 cursor.execute(self.autocomplete_query,
-                               {"first_letters": "%%%s%%"
+                               {"first_letters": "%s%%"
                                                  % first_letters.capitalize()})
                 conn.commit()
                 try:
