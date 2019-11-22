@@ -93,5 +93,5 @@ def previewarticle():
 
 @app.route('/stats', methods=['GET'])
 def get_tracking_info():
-    # results = api.getstats()
-    return flask.render_template('stats.html', results={})
+    results = api.getstats()
+    return flask.render_template('stats.html', results=results)
