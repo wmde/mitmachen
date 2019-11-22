@@ -70,19 +70,19 @@
 			    	{% for item in results %}
 			    		<tr>
 			    			<td>
-			    				{{ item['id'] }}
+			    				{{ item[0] }}
 			    			</td>
 			    			<td>
-			    				{{ item['type'] }}
+			    				{{ item[1] }}
 			    			</td>
 			    			<td>
-			    				{{ item['title'] }}
+			    				{{ item[2] }}
 			    			</td>
 			    			<td>
-			    				{{ item['weblink'] }}
+			    				{{ item[3] }}
 			    			</td>
 			    			<td>
-			    				{{ item['count'] }}
+			    				{{ item[4] }}
 			    			</td>
 			    		</tr>
 			    	{% endfor %}

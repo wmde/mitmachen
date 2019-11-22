@@ -319,7 +319,7 @@ class Mitmachen:
                 cursor.execute(self.getstats_query)
 
                 conn.commit()
-                stats = self._extract_problems(cursor.fetchall(), stats)
+                stats = cursor.fetchall()
 
                 stats = stats.items()
 
