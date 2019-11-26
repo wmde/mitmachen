@@ -1,7 +1,11 @@
 import urllib.request, json
-import toolforge
+import toolforge, os
 
-conn = toolforge.toolsdb(dbname="s53772__mitracking_p")
+with open(os.path.join('../', fname), "r") as ff:
+	ftxt = ff.read()
+	return ftxt
+
+conn = toolforge.toolsdb(dbname=ftxt)
 
 # having issue with kunst and kultur category, can't get result with space and underscore in between
 all_links = {

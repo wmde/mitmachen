@@ -54,6 +54,7 @@ class Mitmachen:
 
 
         self.blacklist = self._readfile("blacklist.txt")
+        self.configdb = self._readconfig("db_config.txt")
 
         autocomplete_result = os.path.join(__dir__, "autocomplete.json")
         if os.path.exists(autocomplete_result):
@@ -67,7 +68,7 @@ class Mitmachen:
                                  cursorclass=pymysql.cursors.DictCursor)
 
     def _tracking_connection(self):
-        return toolforge.toolsdb(dbname="s53772__mitracking_p")
+        return toolforge.toolsdb(dbname=self.configdb)
 
     def _load(self, fname):
         self.logger.info("Load query from '%s'.", fname)
@@ -81,6 +82,13 @@ class Mitmachen:
             full_list = [item.lower().replace(' ', '_') for item in full_list]
             full_list = list(set(full_list))
             return full_list
+
+    # to read db config file
+    def _readconfig(self, fname):
+        self.logger.info("Reading file: {}".format(fname))
+        with open(os.path.join('./', fname), "r") as ff:
+            ftxt = ff.read()
+            return ftxt
 
     # save tracking data into other DB
     def save_tracking_info(self, data):

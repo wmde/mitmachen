@@ -22,6 +22,8 @@ var anchor = {
     "Allgemeinverständlichkeit": "#Vorlage_Unverstaendlich"
 }
 
+var TEXT_SEP = ' und '; // text separator, common place to change
+
 var userInterests = [];
 var popularInterests = [];
 
@@ -149,7 +151,7 @@ function getArticlesSubcateg(name, ttype){
 
                 $.each(lsNames, function(index, value){
                     $('.filter-task[data-attr-name="'+value+'"]').prop('checked', true);
-                    origTxt = origTxt + ' und ' + toTitleCase(value.replace('_', ' '));
+                    origTxt = origTxt + TEXT_SEP + toTitleCase(value.replace('_', ' '));
                     $('.'+value).parent().parent().parent().show();
                 })
 
@@ -163,23 +165,6 @@ function getArticlesSubcateg(name, ttype){
                     $('.article-found-categ').text(origTxt).show();
                 }
             }
-
-            /*if($('.filter-task[data-attr-name="all_tasks"]').is(':checked') == false){
-                var origTxt = ttype == "popular" ? $('.article-found-popular').text() : $('.article-found-categ').text();
-                $('.list-box').hide();
-                $('.filter-task:checkbox:checked').each(function(i){
-                    origTxt = origTxt + ' und ' + toTitleCase($(this).attr('data-attr-name').replace('_', ' '));
-                    $('.'+$(this).attr('data-attr-name')).parent().parent().parent().show();
-                })
-                var visLen = $('.list-box:visible').length;
-
-                origTxt = origTxt.replace(/[0-9]+/g, visLen);
-                if(ttype == "popular"){
-                    $('.article-found-popular').text(origTxt).show();
-                }else{
-                    $('.article-found-categ').text(origTxt).show();
-                }
-            }*/
 
             $('html,body').scrollTop(0);
 
@@ -473,7 +458,7 @@ function findTopics(topic){
 
             $.each(lsNames, function(index, value){
                 $('.filter-task[data-attr-name="'+value+'"]').prop('checked', true);
-                origTxt = origTxt + ' und ' + toTitleCase(value.replace('_', ' '));
+                origTxt = origTxt + TEXT_SEP + toTitleCase(value.replace('_', ' '));
                 $('.'+value).parent().parent().parent().show();
             })
 
@@ -765,7 +750,7 @@ $( function() {
 
                     var visLen = $('.list-box:visible').length;
 
-                    txt += ' und ' + nameConcat.join(', ');
+                    txt += TEXT_SEP + nameConcat.join(', ');
 
                     txt = txt.replace(/[0-9]+/g, visLen);
 
@@ -808,7 +793,7 @@ $( function() {
 
                     var visLen = $('.list-box:visible').length;
 
-                    txt += ' und ' + nameConcat.join(', ');
+                    txt += TEXT_SEP + nameConcat.join(', ');
 
                     txt = txt.replace(/[0-9]+/g, visLen);
 

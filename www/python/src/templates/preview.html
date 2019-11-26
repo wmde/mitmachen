@@ -208,13 +208,6 @@
 	        		<!-- <h2>This article needs {{ problems|length }} reviews</h2> -->
 	        		<h2>Dieser Artikel benötigt {{ problems|length }} Überarbeitungen</h2>
 	        		<input type="hidden" id="query-url" value="{{ query }}">
-	        		<!-- <ul class="review-article-listing"> 
-	        			<li><a href="#"><img src="assets/img/review-media1.png"> <div class="reviews-article-info"><h5>Überarbeiten</h5><p>In diesem Artikel wurde ein Link automatisch aktualisiert. Prüfe, ob der Link noch stimmt.</p></div></a></li>
-
-	        			<li><a href="#"><img src="assets/img/review-media2.png"> <div class="reviews-article-info"><h5>Lückenhaft</h5><p>In diesem Artikel muss grundlegend etwas verändert werden. Schau nach, was fehlt und überarbeite den Artikel.</p></div></a></li>
-
-	        			<li><a href="#"><img src="assets/img/review-media3.png"> <div class="reviews-article-info"><h5>Veraltet</h5><p>In diesem Artikel fehlen Belege. Recherchiere fehlende Quellen und füge sie ein.</p></div></a></li>
-	        		</ul> -->
 	        		<ul class="review-article-listing">
 	        			{% for item in problems %}
 	        				{% if(item in image_prob) %}
