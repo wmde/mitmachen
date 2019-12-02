@@ -49,6 +49,7 @@ class Mitmachen:
         self.tracking_insert_query = self._load("trackinginsert.sql")
         self.getsubs_query = self._load("getsubs.sql")
         self.subcateg_articles = self._load("getcategarticles.sql")
+        self.subcateg_iabotarticles = self._load('iabot_getcategarticles.sql')
         self.subfilter_query = self._load("subcategfilter.sql")
         self.getstats_query = self._load('trackingget.sql')
 
@@ -160,6 +161,12 @@ class Mitmachen:
                 conn.commit()
                 articles = self._extract_problems(cursor.fetchall(),
                                                   articles)
+
+            with conn.cursor() as cursor:
+                cursor.execute(self.subcateg_iabotarticles, {"subcateg": [subcateg], "iabot_categories": self.IABOT_CATS})
+
+                conn.commit()
+                articles = self._extract_problems(cursor.fetchall(), articles)
 
             articles = articles.items()
             
