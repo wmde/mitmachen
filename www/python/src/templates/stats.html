@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='new/css/responsive.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='new/css/font-awesome.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
 
 	<title>Mitmachen in Articles</title>
 
@@ -25,6 +26,13 @@
         $URL_FOR_SUBARTICLES = {{url_for('getarticlesforsubcategory')|tojson|safe}};
         $URL_FOR_PREVIEW = {{url_for('previewarticle')|tojson|safe}};
     </script>
+    <style type="text/css">
+    	.main-wrapper{
+    		padding-top: 105px!important;
+		    padding-left: 20px;
+		    padding-right: 20px;
+    	}
+    </style>
 </head>
 
 <body class="bg-white">
@@ -60,11 +68,12 @@
         <table id="statstable" class="display" style="width:100%">
         	<thead>
         		<tr>
-        			<th>id</th>
-        			<th>type</th>
-        			<th>title</th>
-        			<th>weblink</th>
-        			<th>count</th>
+        			<th>ID</th>
+        			<th>Type</th>
+        			<th>Title</th>
+        			<th>Date</th>
+        			<th>Weblink</th>
+        			<th>Count</th>
         		</tr>
         		<tbody>
 			    	{% for item in results %}
@@ -79,6 +88,9 @@
 			    				{{ item[2] }}
 			    			</td>
 			    			<td>
+			    				{{ item[5] }}
+			    			</td>
+			    			<td>
 			    				{{ item[3] }}
 			    			</td>
 			    			<td>
@@ -91,6 +103,11 @@
         </table>
 
 	</div>
+
+	<div class="">
+		<canvas id="myChart" width="400" height="200"></canvas>
+	</div>
+
 	<div id="home" class="tab-pane fade">
 		<div class="refresh-topic-row">
 			<div class="container">	<span class="refresh-topic" id="reftop-pt">Kategorien neu laden</span>
@@ -142,6 +159,9 @@
 								</li>
 								<li><a target="_block" href="https://wikitech.wikimedia.org/wiki/Wikitech:Cloud_Services_Terms_of_use">Nutzungsbedingungen</a>
 								</li>
+								<li>
+									<a href="/stats">Abrufstatistik</a>
+								</li>
 							</ul>
 						</div>
 						<div class="col-lg-4 col-md-12 col-sm-12">	<a class="basic-link" href="https://de.wikipedia.org/wiki/Wikipedia:Wikimedia_Deutschland/LerneWikipedia" target="_blank">Neu bei Wikipedia?</a>
@@ -175,9 +195,100 @@
 	<script type="text/javascript" src="{{ url_for('static', filename='new/js/custom.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='new/js/mitmachen.js') }}"></script>
 	<script type="text/javascript" src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
 	<script type="text/javascript">
+
 		$(document).ready(function(){
-			$("#statstable").DataTable();
+			$("#statstable").DataTable({
+				dom: 'Bfrtip',
+				buttons: ['csv']
+			});
+
+			var results = {{ results }};
+
+			var canvas = document.getElementById("myChart");
+			var data = {};
+			// data['labels'] = [];
+
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth() + 1; //January is 0!
+
+			var yyyy = today.getFullYear();
+			if (dd < 10) {
+				dd = '0' + dd;
+			} 
+			if (mm < 10) {
+				mm = '0' + mm;
+			}
+
+			var currentDate = mm + "/" + dd + "/" + yyyy;
+
+			var prevD = new Date(new Date().getTime() - 24 * 30 * 60 * 60 * 1000);
+			var prevdd = prevD.getDate();
+			var prevmm = prevD.getMonth() + 1;
+			var prevyyyy = prevD.getFullYear();
+
+			if(prevdd < 10){
+				prevdd = '0' + prevdd;
+			}
+			if(prevmm < 10){
+				prevmm = '0' + prevmm;
+			}
+
+			var previousDate = prevmm + "/" + prevdd + "/" + prevyyyy;
+
+			var getDaysArray = function(start, end) {
+			    for(var arr=[],dt=start; dt<=end; dt.setDate(dt.getDate()+1)){
+			    	var td = new Date(dt);
+			    	var tdd = td.getDate();
+			    	var mdd = td.getMonth() + 1;
+			    	var ydd = td.getFullYear();
+
+			    	if(tdd < 10){
+			    		tdd = '0' + tdd;
+			    	}
+			    	if(mdd < 10){
+			    		mdd = '0' + mdd;
+			    	}
+
+			    	var ttt = tdd + "/" + mdd + "/" + ydd;
+			    	arr.push(ttt);
+
+			        // arr.push(new Date(dt));
+			    }
+			    return arr;
+			};
+
+			var daylist = getDaysArray(new Date(previousDate),new Date(currentDate));
+			data['labels'] = daylist;
+
+			var temp = {};
+			temp['label'] = "Website Usage Stats";
+			temp['backgroundColor'] = "rgba(255,99,132,0.2)";
+			temp['borderColor'] = "rgba(255,99,132,1)";
+			temp['borderWidth'] = 2;
+			temp['hoverBackgroundColor'] = "rgba(255,99,132,0.4)";
+            temp['hoverBorderColor'] = "rgba(255,99,132,1)";
+            data['datasets'] = [];
+
+            var statData = {};
+
+			for(var item in results){
+				// add count to statsData[Date]
+			}
+
+			var option = {
+				animation: {duration:5000}
+			};
+
+
+			var myBarChart = Chart.Bar(canvas,{
+				data:data,
+				options:option
+			});
+
+
 		})
 	</script>
 </body>

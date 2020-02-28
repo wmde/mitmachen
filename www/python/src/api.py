@@ -18,6 +18,7 @@ import random
 import ast
 import pymysql.cursors
 import toolforge
+from datetime import datetime
 
 __dir__ = os.path.abspath("../queries")
 
@@ -106,7 +107,7 @@ class Mitmachen:
                         conn.commit()
                         return []
                     else:
-                        cursor.execute(self.tracking_insert_query, {"type": data['type'], "title": data['title'], "weblink": data['weblink']})
+                        cursor.execute(self.tracking_insert_query, {"type": data['type'], "title": data['title'], "weblink": data['weblink'], "webdate": datetime.today().strftime('%m-%d-%Y')})
                         conn.commit()
                         return []
                 except Exception as e:
