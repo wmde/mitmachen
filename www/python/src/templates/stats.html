@@ -276,18 +276,12 @@
             var stData = new Array(daylist.length).fill(0);
 
 			for(var item in results){
-				if(item[5] != null && item[5] != "" && item[5] != undefined){
-					if(daylist.indexOf(item[5]) != -1){
-						var idx = daylist.indexOf(item[5]);
+				if(results[item][5] != null && results[item][5] != "" && results[item][5] != undefined){
+					if(daylist.indexOf(results[item][5]) != -1){
+						var idx = daylist.indexOf(results[item][5]);
 						stData[idx] += 1;
 					}
 				}
-				/*// add count to statsData[Date]
-				if(statsData[item[5]]){
-					statsData[item[5]] += 1;
-				}else{
-					statsData[item[5]] = 1;
-				}*/
 			}
 
 			temp['data'] = stData;
