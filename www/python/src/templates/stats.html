@@ -160,7 +160,7 @@
 								<li><a target="_block" href="https://wikitech.wikimedia.org/wiki/Wikitech:Cloud_Services_Terms_of_use">Nutzungsbedingungen</a>
 								</li>
 								<li>
-									<a href="/stats">Abrufstatistik</a>
+									<a href="/mitmachen/stats">Abrufstatistik</a>
 								</li>
 							</ul>
 						</div>
@@ -195,6 +195,7 @@
 	<script type="text/javascript" src="{{ url_for('static', filename='new/js/custom.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='new/js/mitmachen.js') }}"></script>
 	<script type="text/javascript" src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
 	<script type="text/javascript">
 
@@ -204,8 +205,7 @@
 				buttons: ['csv']
 			});
 
-			/*var results = {{ results }};
-			console.log(results);
+			var results = {{ results|tojson }};
 			var canvas = document.getElementById("myChart");
 			var data = {};
 			// data['labels'] = [];
@@ -272,11 +272,26 @@
             temp['hoverBorderColor'] = "rgba(255,99,132,1)";
             data['datasets'] = [];
 
-            var statData = {};
+            // var statsData = {};
+            var stData = new Array(daylist.length).fill(0);
 
 			for(var item in results){
-				// add count to statsData[Date]
+				if(item[5] != null && item[5] != "" && item[5] != undefined){
+					if(daylist.indexOf(item[5]) != -1){
+						var idx = daylist.indexOf(item[5]);
+						stData[idx] += 1;
+					}
+				}
+				/*// add count to statsData[Date]
+				if(statsData[item[5]]){
+					statsData[item[5]] += 1;
+				}else{
+					statsData[item[5]] = 1;
+				}*/
 			}
+
+			temp['data'] = stData;
+			data['datasets'].push(temp);
 
 			var option = {
 				animation: {duration:5000}
@@ -286,7 +301,7 @@
 			var myBarChart = Chart.Bar(canvas,{
 				data:data,
 				options:option
-			});*/
+			});
 
 
 		})
