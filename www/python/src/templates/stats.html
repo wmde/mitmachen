@@ -41,7 +41,7 @@
 		    transition: 0.3s all;
 		    border: 1px solid #8d8787;
     	}
-    	#statstable_wrapper button{
+    	#statstable_wrapper button, button{
     		font-size: 13px;
 		    font-weight: 700;
 		    padding: 13px 22px;
@@ -57,7 +57,7 @@
 		    color: #FFFFFF;
 		    border:none;
     	}
-    	.margin-wrapper{
+    	.main-wrapper{
     		margin-bottom:150px!important;
     	}
     	.download, .dt-buttons{
@@ -96,7 +96,7 @@
         </div>	
 
     <div class="main-wrapper article-page-wrap">
-    	<div class="row" style="margin-bottom:10px;">
+    	<div class="row" style="margin-bottom:70px;">
 			<div class="col-md-6">
 				<div class="col-md-6">
 					<input class="form-control" name="min" id="min" type="text" placeholder="Start Date">
@@ -247,7 +247,7 @@
 
 		$(document).ready(function(){
 			$("#statstable").DataTable({
-				dom: '<p>Download:</p>Bfrtip',
+				dom: '<"download">Bfrtip',
 				buttons: ['csv'],
 				"fnServerParams": function (aoData) {
 	            	// console.log(aoData)
@@ -262,6 +262,8 @@
 		            }
 			    },
 			});
+
+			$('.div.download').text('Download:');
 
 			$( "#min, #max" ).datepicker({
 		    	dateFormat: 'yy/mm/dd', 
