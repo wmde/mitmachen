@@ -44,7 +44,7 @@
     	#statstable_wrapper button, button#apply-date-range{
     		font-size: 13px;
 		    font-weight: 700;
-		    padding: 13px 22px;
+		    /*padding: 13px 22px;*/
 		    -webkit-transition: 0.3s all;
 		    -o-transition: 0.3s all;
 		    transition: 0.3s all;
@@ -57,6 +57,8 @@
 		    color: #FFFFFF;
 		    border:none;
 		    cursor:pointer;
+		    padding: 10px 22px !important;
+    		height: 40px;
     	}
     	#statstable_wrapper button:hover, button#apply-date-range:hover {
     color: #fff;
@@ -69,10 +71,10 @@
     		display: inline-block!important;
     	}
 
-    	.custom-btn{
+    	/*.custom-btn{
     		padding: 10px 22px !important;
     		height: 40px;
-    	}
+    	}*/
 
     	@media (max-width: 640px){
     		#statstable_filter{
@@ -119,7 +121,7 @@
 			<div class="form-group col-md-5" style="display:inline-block;">
 				<input class="form-control" name="max" id="max" type="text" placeholder="End Date">
 			</div>
-			<button id="apply-date-range" class="btn btn-info btn-sm custom-btn">Apply Date Range</button>
+			<button id="apply-date-range" class="btn btn-info btn-sm">Apply Date Range</button>
 		</div>
         <table id="statstable" class="display table-responsive" style="width:100%">
         	<thead>
