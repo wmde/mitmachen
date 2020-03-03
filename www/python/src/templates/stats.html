@@ -96,7 +96,7 @@
         </div>	
 
     <div class="main-wrapper article-page-wrap">
-    	<div class="row" style="margin-bottom:70px;">
+    	<div class="row" style="margin-bottom:40px;">
 			<div class="col-md-9">
 				<div class="col-md-4" style="display:inline-block;">
 					<input class="form-control" name="min" id="min" type="text" placeholder="Start Date">
@@ -284,8 +284,8 @@
 		    });
 
 		    $("#apply-date-range").on('click', function(e){
-	        	var min = $('#min').datepicker({ dateFormat: 'dd,MM,yyyy' }).val();
-	            var max = $('#max').datepicker({ dateFormat: 'dd,MM,yyyy' }).val();
+	        	var min = $('#min').datepicker({ dateFormat: 'MM-dd-yyyy' }).val();
+	            var max = $('#max').datepicker({ dateFormat: 'MM-dd-yyyy' }).val();
 
 	            if(min == "" || max == ""){
 	            	return false;
