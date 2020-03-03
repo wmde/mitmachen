@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='new/css/font-awesome.min.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='new/css/jquery.dataTables.min.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='new/css/Chart.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 	<title>Mitmachen in Articles</title>
 
@@ -31,6 +32,36 @@
     		padding-top: 105px!important;
 		    padding-left: 20px;
 		    padding-right: 20px;
+    	}
+    	.dataTables_filter input[type="search"]{
+		    height: 40px;
+		    font-size: 14px;
+		    color: #868686;
+		    border-radius: 4px;
+		    transition: 0.3s all;
+		    border: 1px solid #8d8787;
+    	}
+    	#statstable_wrapper button{
+    		font-size: 13px;
+		    font-weight: 700;
+		    padding: 13px 22px;
+		    -webkit-transition: 0.3s all;
+		    -o-transition: 0.3s all;
+		    transition: 0.3s all;
+		    background: #3669CE;
+		    -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+		    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+		    border-radius: 40px;
+		    letter-spacing: 0.11em;
+		    text-transform: uppercase;
+		    color: #FFFFFF;
+		    border:none;
+    	}
+    	.margin-wrapper{
+    		margin-bottom:150px!important;
+    	}
+    	.download, .dt-buttons{
+    		display: inline-block!important;
     	}
     </style>
 </head>
@@ -65,6 +96,17 @@
         </div>	
 
     <div class="main-wrapper article-page-wrap">
+    	<div class="row" style="margin-bottom:10px;">
+			<div class="col-md-6">
+				<div class="col-md-6">
+					<input class="form-control" name="min" id="min" type="text" placeholder="Start Date">
+				</div>
+				<div class="col-md-6">
+					<input class="form-control" name="max" id="max" type="text" placeholder="End Date">
+				</div>
+			</div>
+			<button id="apply-date-range" class="btn btn-info btn-sm">Apply Date Range</button>
+		</div>
         <table id="statstable" class="display" style="width:100%">
         	<thead>
         		<tr>
@@ -104,7 +146,7 @@
 
 	</div>
 
-	<div class="">
+	<div style="padding:30px;">
 		<canvas id="myChart" width="400" height="200"></canvas>
 	</div>
 
@@ -199,14 +241,57 @@
 	<script type="text/javascript" src="{{ url_for('static', filename='new/js/jszip.min.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='new/js/buttons.html5.min.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='new/js/Chart.bundle.min.js') }}"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 	<script type="text/javascript">
 
 		$(document).ready(function(){
 			$("#statstable").DataTable({
-				dom: 'Bfrtip',
-				buttons: ['csv']
+				dom: '<p>Download:</p>Bfrtip',
+				buttons: ['csv'],
+				"fnServerParams": function (aoData) {
+	            	// console.log(aoData)
+	            	var min = $('#min').datepicker({ dateFormat: 'MM-dd-yyyy' }).val();
+	            	var max = $('#max').datepicker({ dateFormat: 'MM-dd-yyyy' }).val();
+	            	if(min != "" || max != ""){
+	            		aoData['datemin'] = min
+	            		aoData['datemax'] = max
+		            } else {
+		            	aoData['datemin'] = ''
+	            		aoData['datemax'] = ''
+		            }
+			    },
 			});
+
+			$( "#min, #max" ).datepicker({
+		    	dateFormat: 'yy/mm/dd', 
+		        defaultDate: "+1w",
+		        changeMonth: true,
+		        numberOfMonths: 1,
+		        maxDate: new Date(),
+		        onSelect: function( selectedDate ) {
+		            if(this.id == 'min'){
+		              var dateMin = $('#min').datepicker("getDate");
+		              var rMin = new Date(dateMin.getFullYear(), dateMin.getMonth(),dateMin.getDate() + 1); // Min Date = Selected + 1d
+		              //var rMax = new Date(dateMin.getFullYear(), dateMin.getMonth(),dateMin.getDate() + 31); // Max Date = Selected + 31d
+		              $('#max').datepicker("option","minDate",rMin);
+		              //$('#max').datepicker("option","maxDate",rMax);                    
+		            }
+
+		        }
+		    });
+
+		    $("#apply-date-range").on('click', function(e){
+	        	var min = $('#min').datepicker({ dateFormat: 'dd,MM,yyyy' }).val();
+	            var max = $('#max').datepicker({ dateFormat: 'dd,MM,yyyy' }).val();
+
+	            if(min == "" || max == ""){
+	            	return false;
+	            }
+
+	            table.draw();
+
+	        })
 
 			var results = {{ results|tojson }};
 			var canvas = document.getElementById("myChart");
