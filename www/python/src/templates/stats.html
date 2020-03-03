@@ -246,7 +246,7 @@
 	<script type="text/javascript">
 
 		$(document).ready(function(){
-			$("#statstable").DataTable({
+			var table = $("#statstable").DataTable({
 				dom: '<"download">Bfrtip',
 				buttons: ['csv'],
 				"fnServerParams": function (aoData) {
@@ -263,7 +263,7 @@
 			    },
 			});
 
-			$('.div.download').text('Download:');
+			$('div.download').text('Download:');
 
 			$( "#min, #max" ).datepicker({
 		    	dateFormat: 'yy/mm/dd', 
