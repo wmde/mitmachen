@@ -246,27 +246,29 @@
 	<script type="text/javascript">
 
 		$(document).ready(function(){
+
+			$.fn.dataTable.ext.search.push(
+				function (settings, data, dataIndex) {
+				var min = $('#min').datepicker("getDate");
+				var max = $('#max').datepicker("getDate");
+				var startDate = new Date(data[3]);
+				if (min == null && max == null) { return true; }
+				if (min == null && startDate <= max) { return true;}
+				if(max == null && startDate >= min) {return true;}
+				if (startDate <= max && startDate >= min) { return true; }
+					return false;
+				}
+			);
+
 			var table = $("#statstable").DataTable({
 				dom: '<"download">Bfrtip',
-				buttons: ['csv'],
-				"fnServerParams": function (aoData) {
-	            	// console.log(aoData)
-	            	var min = $('#min').datepicker({ dateFormat: 'MM-dd-yyyy' }).val();
-	            	var max = $('#max').datepicker({ dateFormat: 'MM-dd-yyyy' }).val();
-	            	if(min != "" || max != ""){
-	            		aoData['datemin'] = min
-	            		aoData['datemax'] = max
-		            } else {
-		            	aoData['datemin'] = ''
-	            		aoData['datemax'] = ''
-		            }
-			    },
+				buttons: ['csv']
 			});
 
 			$('div.download').text('Download:');
 
 			$( "#min, #max" ).datepicker({
-		    	dateFormat: 'yy/mm/dd', 
+		    	dateFormat: 'mm/dd/yyyy', 
 		        defaultDate: "+1w",
 		        changeMonth: true,
 		        numberOfMonths: 1,
