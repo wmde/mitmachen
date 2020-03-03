@@ -30,8 +30,8 @@
     <style type="text/css">
     	.main-wrapper{
     		padding-top: 105px!important;
-		    padding-left: 20px;
-		    padding-right: 20px;
+		    padding-left: 30px;
+		    padding-right: 30px;
     	}
     	.dataTables_filter input[type="search"]{
 		    height: 40px;
@@ -39,7 +39,7 @@
 		    color: #868686;
 		    border-radius: 4px;
 		    transition: 0.3s all;
-		    border: 1px solid #8d8787;
+		    border: 1px solid rgb(134, 134, 134);
     	}
     	#statstable_wrapper button, button#apply-date-range{
     		font-size: 13px;
@@ -56,7 +56,12 @@
 		    text-transform: uppercase;
 		    color: #FFFFFF;
 		    border:none;
+		    cursor:pointer;
     	}
+    	#statstable_wrapper button:hover, button#apply-date-range:hover {
+    color: #fff;
+    -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15); }
     	.main-wrapper{
     		margin-bottom:150px!important;
     	}
