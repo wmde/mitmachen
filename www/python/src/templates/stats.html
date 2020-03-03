@@ -41,7 +41,7 @@
 		    transition: 0.3s all;
 		    border: 1px solid #8d8787;
     	}
-    	#statstable_wrapper button, button{
+    	#statstable_wrapper button, button#apply-date-range{
     		font-size: 13px;
 		    font-weight: 700;
 		    padding: 13px 22px;
@@ -97,15 +97,15 @@
 
     <div class="main-wrapper article-page-wrap">
     	<div class="row" style="margin-bottom:70px;">
-			<div class="col-md-6">
-				<div class="col-md-6">
+			<div class="col-md-9">
+				<div class="col-md-4" style="display:inline-block;">
 					<input class="form-control" name="min" id="min" type="text" placeholder="Start Date">
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-4" style="display:inline-block;">
 					<input class="form-control" name="max" id="max" type="text" placeholder="End Date">
 				</div>
+				<button id="apply-date-range" class="btn btn-info btn-sm">Apply Date Range</button>
 			</div>
-			<button id="apply-date-range" class="btn btn-info btn-sm">Apply Date Range</button>
 		</div>
         <table id="statstable" class="display" style="width:100%">
         	<thead>
