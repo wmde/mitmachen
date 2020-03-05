@@ -42,10 +42,25 @@
 		    border: 1px solid rgb(134, 134, 134);
 		    padding-left:5px;
     	}
-    	#statstable_wrapper button, button#apply-date-range, button#clear-date-range{
+    	#statstable_wrapper button, button#apply-date-range, button#clear-date-range {
+		    font-size: 12px;
+		    line-height: 18px;
+		    color: #3669CE !important;
+		    padding: 0.8rem 1.7rem;
+		    text-transform: uppercase;
+		    background: #fff;
+		    font-weight: 700;
+		    border: 1px solid #ced4da;
+		    border-radius: 6px;
+		    letter-spacing: 0.1em;
+		    -webkit-transition: 0.3s all;
+		    -o-transition: 0.3s all;
+		    transition: 0.3s all;
+		    height: 47.59px;
+		}
+    	/*#statstable_wrapper button, button#apply-date-range, button#clear-date-range{
     		font-size: 13px;
 		    font-weight: 700;
-		    /*padding: 13px 22px;*/
 		    -webkit-transition: 0.3s all;
 		    -o-transition: 0.3s all;
 		    transition: 0.3s all;
@@ -60,7 +75,7 @@
 		    cursor:pointer;
 		    padding: 10px 22px !important;
     		height: 40px;
-    	}
+    	}*/
     	#statstable_wrapper button:hover, button#apply-date-range:hover, button#clear-date-range:hover {
     color: #fff;
     -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
@@ -84,11 +99,46 @@
     		}
     	}
 
-    	.dataTables_wrapper .dt-buttons .dt-button {
+    	@media (min-width: 768px) {
+		  .main-wrapper.article-page-wrap.table-responsive >.form-row .form-group {
+		      max-width: 282px;
+		      margin-right: 15px;
+		   }
+		}
+
+		.main-wrapper.article-page-wrap.table-responsive >.form-row #apply-date-range {
+		    margin-left: 5px;
+		    margin-right: 15px;
+		}
+
+		.main-wrapper.article-page-wrap.table-responsive >.form-row .form-group input {
+		    height: 47.59px;
+		}
+
+		#statstable_wrapper button:focus, button#apply-date-range:focus, button#clear-date-range:focus {
+			outline: none;
+		    box-shadow: none;
+		}
+
+		.dataTables_wrapper .dt-buttons .dt-button {
+		    margin-left: 25px;
+		}
+
+		table#statstable {
+		    margin-top: 25px;
+		}
+
+		.dataTables_filter input[type="search"] {
+		    height: 47.59px;
+		    margin-left: 25px;
+		    border-color: #ced4da;
+		}
+
+    	/*.dataTables_wrapper .dt-buttons .dt-button {
 		    width: 204.31px;
 		    text-align: center;
 		    margin-left: 5px;
-		}
+		}*/
     </style>
 </head>
 
