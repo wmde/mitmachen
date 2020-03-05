@@ -40,6 +40,7 @@
 		    border-radius: 4px;
 		    transition: 0.3s all;
 		    border: 1px solid rgb(134, 134, 134);
+		    padding-left:5px;
     	}
     	#statstable_wrapper button, button#apply-date-range{
     		font-size: 13px;
@@ -65,7 +66,8 @@
     -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15); }
     	.main-wrapper{
-    		margin-bottom:150px!important;
+    		/*margin-bottom:150px!important;*/
+    		margin-bottom:75px!important;
     	}
     	.download, .dt-buttons{
     		display: inline-block!important;
@@ -120,14 +122,15 @@
         </div>	
 
     <div class="main-wrapper article-page-wrap table-responsive">
-    	<div class="form-row" style="margin-bottom:40px;">
-			<div class="form-group col-md-5" style="display:inline-block;">
+    	<div class="form-row" style="margin-bottom:10px;margin-top:20px;">
+			<div class="form-group col-md-3" style="display:inline-block;">
 				<input class="form-control" name="min" id="min" type="text" placeholder="Start Date">
 			</div>
-			<div class="form-group col-md-5" style="display:inline-block;">
+			<div class="form-group col-md-3" style="display:inline-block;">
 				<input class="form-control" name="max" id="max" type="text" placeholder="End Date">
 			</div>
 			<button id="apply-date-range" class="btn btn-info btn-sm">Apply Date Range</button>
+			<button style="margin-left:10px;" id="clear-date-range" class="btn btn-info btn-sm">Clear Date Range</button>
 		</div>
         <table id="statstable" class="display table" style="width:100%">
         	<thead>
@@ -317,6 +320,13 @@
 
 	            table.draw();
 
+	        })
+
+	        $("#clear-date-range").on('click', function(e){
+	        	$('#min').datepicker({ dateFormat: 'MM-dd-yyyy' }).val('');
+	            $('#max').datepicker({ dateFormat: 'MM-dd-yyyy' }).val('');
+
+	            table.draw();
 	        })
 
 			var results = {{ results|tojson }};
