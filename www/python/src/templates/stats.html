@@ -482,7 +482,7 @@
 			}
 
 			// var currentDate = mm + "/" + dd + "/" + yyyy;
-			var currentDate = dd + "-" + mm + "-" + yyyy;
+			var currentDate = mm + "-" + dd + "-" + yyyy;
 
 			var prevD = new Date(new Date().getTime() - 24 * 30 * 60 * 60 * 1000);
 			var prevdd = prevD.getDate();
@@ -497,13 +497,13 @@
 			}
 
 			// var previousDate = prevmm + "/" + prevdd + "/" + prevyyyy;
-			var previousDate = prevdd + "-" + prevmm + "-" + prevyyyy;
+			var previousDate = prevmm + "-" + prevdd + "-" + prevyyyy;
 
 			var getDaysArray = function(start, end) {
 			    for(var arr=[],dt=start; dt<=end; dt.setDate(dt.getDate()+1)){
-			    	var dateParts = dt.split("-");
-					var td = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
-			    	// var td = new Date(dt);
+			    	// var dateParts = dt.split("-");
+					// var td = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+			    	var td = new Date(dt);
 			    	var tdd = td.getDate();
 			    	var mdd = td.getMonth() + 1;
 			    	var ydd = td.getFullYear();

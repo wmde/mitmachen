@@ -97,7 +97,7 @@ class Mitmachen:
         conn = self._tracking_connection()
         try:
             with conn.cursor() as cursor:
-                cursor.execute(self.tracking_query, {"type": data['type'], "title": data['title']})
+                cursor.execute(self.tracking_query, {"type": data['type'], "title": data['title'], "webdate": datetime.today().strftime('%d-%m-%Y')})
                 # tracking_insert_query
                 
                 try:
