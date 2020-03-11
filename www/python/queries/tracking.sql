@@ -1,1 +1,1 @@
-UPDATE tracking SET count = count + 1 WHERE type = %(type)s AND title = %(title)s;
+UPDATE tracking SET count = count + 1, webdate = %(webdate)s WHERE type = %(type)s AND title = %(title)s;
