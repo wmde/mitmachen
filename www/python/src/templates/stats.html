@@ -422,7 +422,7 @@
 			$('div.download').text('Download:');
 
 			$( "#min, #max" ).datepicker({
-		    	dateFormat: 'dd/mm/yy', 
+		    	dateFormat: 'dd-mm-yy', 
 		        defaultDate: "+1w",
 		        changeMonth: true,
 		        numberOfMonths: 1,
@@ -440,8 +440,10 @@
 		    });
 
 		    $("#apply-date-range").on('click', function(e){
-	        	var min = $('#min').datepicker({ dateFormat: 'dd-MM-yyyy' }).val();
-	            var max = $('#max').datepicker({ dateFormat: 'dd-MM-yyyy' }).val();
+	        	// var min = $('#min').datepicker({ dateFormat: 'dd-MM-yyyy' }).val();
+	         //    var max = $('#max').datepicker({ dateFormat: 'dd-MM-yyyy' }).val();
+		         var min = $("#min").val();
+		         var max = $("#max").val();
 
 	            if(min == "" || max == ""){
 	            	return false;
@@ -452,8 +454,11 @@
 	        })
 
 	        $("#clear-date-range").on('click', function(e){
-	        	$('#min').datepicker({ dateFormat: 'dd-MM-yyyy' }).val('');
-	            $('#max').datepicker({ dateFormat: 'dd-MM-yyyy' }).val('');
+	        	// $('#min').datepicker({ dateFormat: 'dd-MM-yyyy' }).val('');
+	         //    $('#max').datepicker({ dateFormat: 'dd-MM-yyyy' }).val('');
+
+	         	$("#min").val('');
+	         	$("#max").val('');
 
 	            table.draw();
 	        })
