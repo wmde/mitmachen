@@ -107,7 +107,7 @@ class Mitmachen:
                         conn.commit()
                         return []
                     else:
-                        cursor.execute(self.tracking_insert_query, {"type": data['type'], "title": data['title'], "weblink": data['weblink'], "webdate": datetime.today().strftime('%m-%d-%Y')})
+                        cursor.execute(self.tracking_insert_query, {"type": data['type'], "title": data['title'], "weblink": data['weblink'], "webdate": datetime.today().strftime('%d-%m-%Y')})
                         conn.commit()
                         return []
                 except Exception as e:
