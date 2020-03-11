@@ -272,7 +272,6 @@
         			<th>Type</th>
         			<th>Title</th>
         			<th>Date(mm/dd/yyyy)</th>
-        			<th>Weblink</th>
         			<th>Count</th>
         		</tr>
         		<tbody>
@@ -288,10 +287,7 @@
 			    				{{ item[2] }}
 			    			</td>
 			    			<td>
-			    				{{ item[5] }}
-			    			</td>
-			    			<td>
-			    				{{ item[3] }}
+			    				{{ item[5].strftime('%d/%m/%Y') }}
 			    			</td>
 			    			<td>
 			    				{{ item[4] }}
@@ -426,7 +422,7 @@
 			$('div.download').text('Download:');
 
 			$( "#min, #max" ).datepicker({
-		    	dateFormat: 'mm/dd/yy', 
+		    	dateFormat: 'dd/mm/yy', 
 		        defaultDate: "+1w",
 		        changeMonth: true,
 		        numberOfMonths: 1,
@@ -444,8 +440,8 @@
 		    });
 
 		    $("#apply-date-range").on('click', function(e){
-	        	var min = $('#min').datepicker({ dateFormat: 'MM-dd-yyyy' }).val();
-	            var max = $('#max').datepicker({ dateFormat: 'MM-dd-yyyy' }).val();
+	        	var min = $('#min').datepicker({ dateFormat: 'dd-MM-yyyy' }).val();
+	            var max = $('#max').datepicker({ dateFormat: 'dd-MM-yyyy' }).val();
 
 	            if(min == "" || max == ""){
 	            	return false;
@@ -456,8 +452,8 @@
 	        })
 
 	        $("#clear-date-range").on('click', function(e){
-	        	$('#min').datepicker({ dateFormat: 'MM-dd-yyyy' }).val('');
-	            $('#max').datepicker({ dateFormat: 'MM-dd-yyyy' }).val('');
+	        	$('#min').datepicker({ dateFormat: 'dd-MM-yyyy' }).val('');
+	            $('#max').datepicker({ dateFormat: 'dd-MM-yyyy' }).val('');
 
 	            table.draw();
 	        })
@@ -479,7 +475,8 @@
 				mm = '0' + mm;
 			}
 
-			var currentDate = mm + "/" + dd + "/" + yyyy;
+			// var currentDate = mm + "/" + dd + "/" + yyyy;
+			var currentDate = dd + "/" + mm + "/" + yyyy;
 
 			var prevD = new Date(new Date().getTime() - 24 * 30 * 60 * 60 * 1000);
 			var prevdd = prevD.getDate();
@@ -493,7 +490,8 @@
 				prevmm = '0' + prevmm;
 			}
 
-			var previousDate = prevmm + "/" + prevdd + "/" + prevyyyy;
+			// var previousDate = prevmm + "/" + prevdd + "/" + prevyyyy;
+			var previousDate = prevdd + "/" + prevmm + "/" + prevyyyy;
 
 			var getDaysArray = function(start, end) {
 			    for(var arr=[],dt=start; dt<=end; dt.setDate(dt.getDate()+1)){
@@ -509,7 +507,8 @@
 			    		mdd = '0' + mdd;
 			    	}
 
-			    	var ttt = mdd + "-" + tdd + "-" + ydd;
+			    	// var ttt = mdd + "-" + tdd + "-" + ydd;
+			    	var ttt = tdd + "-" + mdd + "-" + ydd;
 			    	arr.push(ttt);
 
 			        // arr.push(new Date(dt));
