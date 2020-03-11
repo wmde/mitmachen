@@ -405,7 +405,8 @@
 				function (settings, data, dataIndex) {
 				var min = $('#min').datepicker("getDate");
 				var max = $('#max').datepicker("getDate");
-				var startDate = new Date(data[3]);
+				var dateParts = data[3].split("-");
+				var startDate = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
 				if (min == null && max == null) { return true; }
 				if (min == null && startDate <= max) { return true;}
 				if(max == null && startDate >= min) {return true;}
