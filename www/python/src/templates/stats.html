@@ -482,7 +482,7 @@
 			}
 
 			// var currentDate = mm + "/" + dd + "/" + yyyy;
-			var currentDate = dd + "/" + mm + "/" + yyyy;
+			var currentDate = dd + "-" + mm + "-" + yyyy;
 
 			var prevD = new Date(new Date().getTime() - 24 * 30 * 60 * 60 * 1000);
 			var prevdd = prevD.getDate();
@@ -497,7 +497,7 @@
 			}
 
 			// var previousDate = prevmm + "/" + prevdd + "/" + prevyyyy;
-			var previousDate = prevdd + "/" + prevmm + "/" + prevyyyy;
+			var previousDate = prevdd + "-" + prevmm + "-" + prevyyyy;
 
 			var getDaysArray = function(start, end) {
 			    for(var arr=[],dt=start; dt<=end; dt.setDate(dt.getDate()+1)){
