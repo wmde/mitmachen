@@ -97,25 +97,51 @@ class Mitmachen:
         conn = self._tracking_connection()
         try:
             with conn.cursor() as cursor:
-                cursor.execute(self.tracking_query, {"type": data['type'], "title": data['title'], "webdate": datetime.today().strftime('%d-%m-%Y')})
+                cursor.execute(self.tracking_insert_query, {"type": data['type'], "title": data['title'], "weblink": data['weblink'], "webdate": datetime.today().strftime('%d-%m-%Y')})
+                conn.commit()
+                return []
+                # cursor.execute(self.tracking_query, {"type": data['type'], "title": data['title'], "webdate": datetime.today().strftime('%d-%m-%Y')})
                 # tracking_insert_query
                 
-                try:
-                    rowsaffected = cursor.rowcount
+                # try:
+                #     rowsaffected = cursor.rowcount
 
-                    if rowsaffected >= 1:
-                        conn.commit()
-                        return []
-                    else:
-                        cursor.execute(self.tracking_insert_query, {"type": data['type'], "title": data['title'], "weblink": data['weblink'], "webdate": datetime.today().strftime('%d-%m-%Y')})
-                        conn.commit()
-                        return []
-                except Exception as e:
-                    self.logger.log('Failed to update, update error: %s', e)
-                    return []
+                #     if rowsaffected >= 1:
+                #         conn.commit()
+                #         return []
+                #     else:
+                #         cursor.execute(self.tracking_insert_query, {"type": data['type'], "title": data['title'], "weblink": data['weblink'], "webdate": datetime.today().strftime('%d-%m-%Y')})
+                #         conn.commit()
+                #         return []
+                # except Exception as e:
+                #     self.logger.log('Failed to update, update error: %s', e)
+                #     return []
 
         finally:
             conn.close()
+    # def save_tracking_info(self, data):
+    #     conn = self._tracking_connection()
+    #     try:
+    #         with conn.cursor() as cursor:
+    #             cursor.execute(self.tracking_query, {"type": data['type'], "title": data['title'], "webdate": datetime.today().strftime('%d-%m-%Y')})
+    #             # tracking_insert_query
+                
+    #             try:
+    #                 rowsaffected = cursor.rowcount
+
+    #                 if rowsaffected >= 1:
+    #                     conn.commit()
+    #                     return []
+    #                 else:
+    #                     cursor.execute(self.tracking_insert_query, {"type": data['type'], "title": data['title'], "weblink": data['weblink'], "webdate": datetime.today().strftime('%d-%m-%Y')})
+    #                     conn.commit()
+    #                     return []
+    #             except Exception as e:
+    #                 self.logger.log('Failed to update, update error: %s', e)
+    #                 return []
+
+    #     finally:
+    #         conn.close()
 
     # get subcategories list for all categories
     def getsubcategories(self, data):
