@@ -446,8 +446,15 @@
 
 			if(filter){
 				// take dates from filter
-				startdate = $("#minchart").val();
-				enddate = $("#maxchart").val();
+				var minval = $("#minchart").val();
+				var maxval = $("#maxchart").val();
+
+				var minSp = minval.split('-');
+				var maxSp = maxval.split('-');
+
+				startdate = minSp[2] + "-" + minSp[1] - 1 + "-" + minSp[0];
+				enddate = maxSp[2] + "-" + maxSp[1] - 1 + "-" + maxSp[0];
+
 			}else{
 				var today = new Date();
 				var dd = today.getDate();
@@ -462,7 +469,7 @@
 				}
 
 				// var currentDate = mm + "/" + dd + "/" + yyyy;
-				startdate = dd + "-" + mm + "-" + yyyy;
+				startdate = mm + "-" + dd + "-" + yyyy;
 
 				var prevD = new Date(new Date().getTime() - 24 * 30 * 60 * 60 * 1000);
 				var prevdd = prevD.getDate();
@@ -477,7 +484,7 @@
 				}
 
 				// var previousDate = prevmm + "/" + prevdd + "/" + prevyyyy;
-				enddate = prevdd + "-" + prevmm + "-" + prevyyyy;
+				enddate = prevmm + "-" + prevdd + "-" + prevyyyy;
 			}
 
 
