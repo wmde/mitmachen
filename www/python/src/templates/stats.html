@@ -253,16 +253,29 @@
         	</thead>
         </table>
 
-        <div class="form-row" style="margin-bottom:10px;margin-top:150px;">
-			<div class="form-group col-md-3" style="display:inline-block;">
-				<input class="form-control" name="minchart" id="minchart" type="text" placeholder="Start Date">
+        <div class="row">
+        	<div class="form-row" style="margin-bottom:10px;margin-top:150px;">
+				<div class="form-group col-md-3" style="display:inline-block;">
+					<input class="form-control" name="minchart" id="minchart" type="text" placeholder="Start Date">
+				</div>
+				<div class="form-group col-md-3" style="display:inline-block;">
+					<input class="form-control" name="maxchart" id="maxchart" type="text" placeholder="End Date">
+				</div>
+				<button id="apply-date-range-chart" class="btn btn-info btn-sm" style="margin-right:15px;">Apply Date Range</button>
+				<button style="margin-left:10px;" id="clear-date-range-chart" class="btn btn-info btn-sm">Clear Date Range</button>
 			</div>
-			<div class="form-group col-md-3" style="display:inline-block;">
-				<input class="form-control" name="maxchart" id="maxchart" type="text" placeholder="End Date">
+        	<div class="written-stats">
+				<h4>Totals</h4>
+				<ul>
+					<li>
+						Pageviews: <span class="total-pageviews"></span>
+					</li>
+					<li>
+						Daily Average: <span class="daily-average"></span>
+					</li>
+				</ul>
 			</div>
-			<button id="apply-date-range-chart" class="btn btn-info btn-sm">Apply Date Range</button>
-			<button style="margin-left:10px;" id="clear-date-range-chart" class="btn btn-info btn-sm">Clear Date Range</button>
-		</div>
+        </div>
 
 	</div>
 
@@ -563,6 +576,8 @@
 			})
 
 			$("#clear-date-range-chart").on('click', function(e){
+				$("#minchart").val('');
+	         	$("#maxchart").val('');
 				makeBarChart(results, false);
 			})
 
