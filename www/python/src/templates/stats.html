@@ -452,8 +452,8 @@
 				var minSp = minval.split('-');
 				var maxSp = maxval.split('-');
 
-				startdate = minSp[2] + "-" + minSp[1] - 1 + "-" + minSp[0];
-				enddate = maxSp[2] + "-" + maxSp[1] - 1 + "-" + maxSp[0];
+				startdate = minSp[1] + "-" + minSp[0] + "-" + minSp[2];
+				enddate = maxSp[1] + "-" + maxSp[0] + "-" + maxSp[2];
 
 			}else{
 				var today = new Date();
@@ -488,7 +488,13 @@
 			}
 
 
-			var daylist = getDaysArray(new Date(startdate),new Date(enddate));
+			var daylist = [];
+
+			if(filter){
+
+			}else{
+				daylist = getDaysArray(new Date(enddate),new Date(startdate));
+			}
 			data['labels'] = daylist;
 
 			var temp = {};
