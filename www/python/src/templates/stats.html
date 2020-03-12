@@ -231,7 +231,7 @@
         		</tr>
         		<tbody>
 			    	{% for item in results %}
-			    		<tr>
+			    		<tr class="{{ item[1] }}">
 			    			<td>
 			    				{{ item[0] }}
 			    			</td>
@@ -494,7 +494,7 @@
 			}
 
 			$('.total-pageviews').text(total);
-			var avg = Math.floor(curtotal / daylist.length);
+			var avg = Math.ceil(curtotal / daylist.length);
 			$('.daily-average').text(avg);
 
 			temp['data'] = stData;
@@ -529,10 +529,30 @@
 				}
 			);
 
-			var table = $("#statstable").DataTable({
-				dom: '<"download">Bfrtip',
+			/*var table = $("#statstable").DataTable({
+				dom: '<"Downloadnload">Bfrtip',
 				buttons: ['csv']
-			});
+			});*/
+
+			var table = $("#statstable").DataTable({
+				dom: '<"Downloadnload">Bfrtip',
+				buttons: [
+					{
+						extend: 'csv',
+						text: 'Download Search',
+						exportOptions: {
+							rows: '.search'
+						}
+					},
+					{
+						extend: 'csv',
+						text: 'Download Page Views',
+						exportOptions: {
+							rows: '.subcategoryarticle'
+						}
+					}
+				]
+			})
 
 			$('div.download').text('Download:');
 
