@@ -70,7 +70,7 @@
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15); }
     	.main-wrapper{
     		/*margin-bottom:150px!important;*/
-    		margin-bottom:75px!important;
+    		margin-bottom:0px!important;
     	}
     	.download, .dt-buttons{
     		display: inline-block!important;
@@ -205,16 +205,6 @@
 						<i class="fa fa-search" aria-hidden="true"></i>
 						<input id="category" type="text" placeholder="Finde ein Thema, zu dem du beitragen kannst">
 					</div>
-			        <!-- <div class="buttons-wrap">
-			          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-			            <li class="nav-item">
-			              <a class="nav-link" href="#" data-toggle="modal" data-target="#signin">Log in</a>
-			            </li>
-			            <li class="nav-item">
-			              <a class="nav-link" href="#" data-toggle="modal" data-target="#signin">Sign up</a>
-			            </li>
-			          </ul>
-			        </div> -->
 			      </div>  
 			</nav>
         </div>	
@@ -263,17 +253,17 @@
         	</thead>
         </table>
 
-	</div>
+        <div class="form-row" style="margin-bottom:10px;margin-top:20px;">
+			<div class="form-group col-md-3" style="display:inline-block;">
+				<input class="form-control" name="minchart" id="minchart" type="text" placeholder="Start Date">
+			</div>
+			<div class="form-group col-md-3" style="display:inline-block;">
+				<input class="form-control" name="maxchart" id="maxchart" type="text" placeholder="End Date">
+			</div>
+			<button id="apply-date-range-chart" class="btn btn-info btn-sm">Apply Date Range</button>
+			<button style="margin-left:10px;" id="clear-date-range-chart" class="btn btn-info btn-sm">Clear Date Range</button>
+		</div>
 
-	<div class="form-row" style="margin-bottom:10px;margin-top:20px;">
-		<div class="form-group col-md-3" style="display:inline-block;">
-			<input class="form-control" name="minchart" id="minchart" type="text" placeholder="Start Date">
-		</div>
-		<div class="form-group col-md-3" style="display:inline-block;">
-			<input class="form-control" name="maxchart" id="maxchart" type="text" placeholder="End Date">
-		</div>
-		<button id="apply-date-range-chart" class="btn btn-info btn-sm">Apply Date Range</button>
-		<button style="margin-left:10px;" id="clear-date-range-chart" class="btn btn-info btn-sm">Clear Date Range</button>
 	</div>
 
 	<div style="padding:30px;">
