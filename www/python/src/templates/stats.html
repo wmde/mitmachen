@@ -300,6 +300,17 @@
 
 	</div>
 
+	<div class="form-row" style="margin-bottom:10px;margin-top:20px;">
+		<div class="form-group col-md-3" style="display:inline-block;">
+			<input class="form-control" name="minchart" id="minchart" type="text" placeholder="Start Date">
+		</div>
+		<div class="form-group col-md-3" style="display:inline-block;">
+			<input class="form-control" name="maxchart" id="maxchart" type="text" placeholder="End Date">
+		</div>
+		<button id="apply-date-range-chart" class="btn btn-info btn-sm">Apply Date Range</button>
+		<button style="margin-left:10px;" id="clear-date-range-chart" class="btn btn-info btn-sm">Clear Date Range</button>
+	</div>
+
 	<div style="padding:30px;">
 		<canvas id="myChart" width="400" height="200"></canvas>
 	</div>
@@ -399,6 +410,117 @@
 
 	<script type="text/javascript">
 
+		// 
+		function makeBarChart(results, filter){
+			var canvas = document.getElementById("myChart");
+			var data = {};
+			// data['labels'] = [];
+
+			var getDaysArray = function(start, end) {
+			    for(var arr=[],dt=start; dt<=end; dt.setDate(dt.getDate()+1)){
+			    	// var dateParts = dt.split("-");
+					// var td = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+			    	var td = new Date(dt);
+			    	var tdd = td.getDate();
+			    	var mdd = td.getMonth() + 1;
+			    	var ydd = td.getFullYear();
+
+			    	if(tdd < 10){
+			    		tdd = '0' + tdd;
+			    	}
+			    	if(mdd < 10){
+			    		mdd = '0' + mdd;
+			    	}
+
+			    	// var ttt = mdd + "-" + tdd + "-" + ydd;
+			    	var ttt = tdd + "-" + mdd + "-" + ydd;
+			    	arr.push(ttt);
+
+			        // arr.push(new Date(dt));
+			    }
+			    return arr;
+			};
+
+			var startdate;
+			var enddate;
+
+			if(filter){
+				// take dates from filter
+				startdate = $("#minchart").val();
+				enddate = $("#maxchart").val();
+			}else{
+				var today = new Date();
+				var dd = today.getDate();
+				var mm = today.getMonth() + 1; //January is 0
+
+				var yyyy = today.getFullYear();
+				if (dd < 10) {
+					dd = '0' + dd;
+				} 
+				if (mm < 10) {
+					mm = '0' + mm;
+				}
+
+				// var currentDate = mm + "/" + dd + "/" + yyyy;
+				startdate = mm + "-" + dd + "-" + yyyy;
+
+				var prevD = new Date(new Date().getTime() - 24 * 30 * 60 * 60 * 1000);
+				var prevdd = prevD.getDate();
+				var prevmm = prevD.getMonth() + 1;
+				var prevyyyy = prevD.getFullYear();
+
+				if(prevdd < 10){
+					prevdd = '0' + prevdd;
+				}
+				if(prevmm < 10){
+					prevmm = '0' + prevmm;
+				}
+
+				// var previousDate = prevmm + "/" + prevdd + "/" + prevyyyy;
+				enddate = prevmm + "-" + prevdd + "-" + prevyyyy;
+			}
+
+
+			var daylist = getDaysArray(new Date(startdate),new Date(enddate));
+			data['labels'] = daylist;
+
+			var temp = {};
+			temp['label'] = "Website Usage Stats";
+			temp['backgroundColor'] = "rgba(255,99,132,0.2)";
+			temp['borderColor'] = "rgba(255,99,132,1)";
+			temp['borderWidth'] = 2;
+			temp['hoverBackgroundColor'] = "rgba(255,99,132,0.4)";
+            temp['hoverBorderColor'] = "rgba(255,99,132,1)";
+            data['datasets'] = [];
+
+            // var statsData = {};
+            var stData = new Array(daylist.length).fill(0);
+
+			for(var item in results){
+				if(results[item][4] != null && results[item][4] != "" && results[item][4] != undefined){
+					if(daylist.indexOf(results[item][4]) != -1){
+						var idx = daylist.indexOf(results[item][4]);
+						stData[idx] += results[item][3];
+					}
+				}
+			}
+
+			temp['data'] = stData;
+			data['datasets'].push(temp);
+
+			var option = {
+				animation: {duration:5000}
+			};
+
+
+			var myBarChart = Chart.Bar(canvas,{
+				data:data,
+				options:option
+			});
+
+			
+		}
+
 		$(document).ready(function(){
 
 			$.fn.dataTable.ext.search.push(
@@ -422,7 +544,7 @@
 
 			$('div.download').text('Download:');
 
-			$( "#min, #max" ).datepicker({
+			$( "#min, #max, #minchart, #maxchart" ).datepicker({
 		    	dateFormat: 'dd-mm-yy', 
 		        defaultDate: "+1w",
 		        changeMonth: true,
@@ -465,102 +587,16 @@
 	        })
 
 			var results = {{ results|tojson }};
-			var canvas = document.getElementById("myChart");
-			var data = {};
-			// data['labels'] = [];
+			
+			makeBarChart(results, false);
 
-			var today = new Date();
-			var dd = today.getDate();
-			var mm = today.getMonth() + 1; //January is 0!
+			$("#apply-date-range-chart").on('click', function(e){
+				makeBarChart(results, true);
+			})
 
-			var yyyy = today.getFullYear();
-			if (dd < 10) {
-				dd = '0' + dd;
-			} 
-			if (mm < 10) {
-				mm = '0' + mm;
-			}
-
-			// var currentDate = mm + "/" + dd + "/" + yyyy;
-			var currentDate = mm + "-" + dd + "-" + yyyy;
-
-			var prevD = new Date(new Date().getTime() - 24 * 30 * 60 * 60 * 1000);
-			var prevdd = prevD.getDate();
-			var prevmm = prevD.getMonth() + 1;
-			var prevyyyy = prevD.getFullYear();
-
-			if(prevdd < 10){
-				prevdd = '0' + prevdd;
-			}
-			if(prevmm < 10){
-				prevmm = '0' + prevmm;
-			}
-
-			// var previousDate = prevmm + "/" + prevdd + "/" + prevyyyy;
-			var previousDate = prevmm + "-" + prevdd + "-" + prevyyyy;
-
-			var getDaysArray = function(start, end) {
-			    for(var arr=[],dt=start; dt<=end; dt.setDate(dt.getDate()+1)){
-			    	// var dateParts = dt.split("-");
-					// var td = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
-			    	var td = new Date(dt);
-			    	var tdd = td.getDate();
-			    	var mdd = td.getMonth() + 1;
-			    	var ydd = td.getFullYear();
-
-			    	if(tdd < 10){
-			    		tdd = '0' + tdd;
-			    	}
-			    	if(mdd < 10){
-			    		mdd = '0' + mdd;
-			    	}
-
-			    	// var ttt = mdd + "-" + tdd + "-" + ydd;
-			    	var ttt = tdd + "-" + mdd + "-" + ydd;
-			    	arr.push(ttt);
-
-			        // arr.push(new Date(dt));
-			    }
-			    return arr;
-			};
-
-			var daylist = getDaysArray(new Date(previousDate),new Date(currentDate));
-			data['labels'] = daylist;
-
-			var temp = {};
-			temp['label'] = "Website Usage Stats";
-			temp['backgroundColor'] = "rgba(255,99,132,0.2)";
-			temp['borderColor'] = "rgba(255,99,132,1)";
-			temp['borderWidth'] = 2;
-			temp['hoverBackgroundColor'] = "rgba(255,99,132,0.4)";
-            temp['hoverBorderColor'] = "rgba(255,99,132,1)";
-            data['datasets'] = [];
-
-            // var statsData = {};
-            var stData = new Array(daylist.length).fill(0);
-
-			for(var item in results){
-				if(results[item][4] != null && results[item][4] != "" && results[item][4] != undefined){
-					if(daylist.indexOf(results[item][4]) != -1){
-						var idx = daylist.indexOf(results[item][4]);
-						stData[idx] += results[item][3];
-					}
-				}
-			}
-
-			temp['data'] = stData;
-			data['datasets'].push(temp);
-
-			var option = {
-				animation: {duration:5000}
-			};
-
-
-			var myBarChart = Chart.Bar(canvas,{
-				data:data,
-				options:option
-			});
-
+			$("#clear-date-range-chart").on('click', function(e){
+				makeBarChart(results, false);
+			})
 
 		})
 	</script>
