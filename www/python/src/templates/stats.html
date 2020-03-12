@@ -382,6 +382,9 @@
 			var data = {};
 			// data['labels'] = [];
 
+			var total = 0;
+			var curtotal = 0;
+
 			var getDaysArray = function(start, end) {
 			    for(var arr=[],dt=start; dt<=end; dt.setDate(dt.getDate()+1)){
 			    	// var dateParts = dt.split("-");
@@ -480,9 +483,19 @@
 					if(daylist.indexOf(results[item][4]) != -1){
 						var idx = daylist.indexOf(results[item][4]);
 						stData[idx] += results[item][3];
+						total += results[item][3];
+						curtotal += results[item][3];
+					}else{
+						total += results[item][3];
 					}
+				}else{
+					total += results[item][3];
 				}
 			}
+
+			$('.total-pageviews').text(total);
+			var avg = Math.floor(curtotal / daylist.length);
+			$('.daily-average').text(avg);
 
 			temp['data'] = stData;
 			data['datasets'].push(temp);
