@@ -187,6 +187,41 @@
 .main-wrapper.article-page-wrap.table-responsive >.form-row button {
     line-height: 22px !important;
 }
+
+@media (max-width:767px) {
+	.dataTables_wrapper .dt-buttons {
+    	width: 100%;
+	}
+
+	.dataTables_wrapper .dt-buttons >.dt-button {
+    	margin-bottom: 1rem;
+	}
+
+	.dataTables_wrapper .dt-buttons .dt-button {
+    	margin: 0;
+    	width: 100%;
+	}
+}
+
+.written-stats {
+    margin-left: 15px;
+}
+
+.written-stats h4 {
+    margin-bottom: 0;
+    font-size: 21px;
+}
+
+.written-stats ul {
+    padding: 0;
+    margin: 0;
+}
+
+.written-stats ul li {
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 7px;
+}
     </style>
 </head>
 
@@ -262,17 +297,18 @@
 			</div>
 			<button id="apply-date-range-chart" class="btn btn-info btn-sm" style="margin-right:15px;">Apply Date Range</button>
 			<button style="margin-left:10px;" id="clear-date-range-chart" class="btn btn-info btn-sm">Clear Date Range</button>
-		</div>
-    	<div class="written-stats">
-			<h4>Totals</h4>
-			<ul>
-				<li>
-					Pageviews: <span class="total-pageviews"></span>
-				</li>
-				<li>
-					Daily Average: <span class="daily-average"></span>
-				</li>
-			</ul>
+	    	
+	    	<div class="written-stats">
+				<h4>Totals</h4>
+				<ul>
+					<li>
+						Pageviews: <span class="total-pageviews"></span>
+					</li>
+					<li>
+						Daily Average: <span class="daily-average"></span>
+					</li>
+				</ul>
+			</div>
 		</div>
 
 	</div>
@@ -539,16 +575,16 @@
 				buttons: [
 					{
 						extend: 'csv',
-						text: 'Download Search',
+						text: 'Page View CSV',
 						exportOptions: {
-							rows: '.search'
+							rows: '.subcategoryarticle'
 						}
 					},
 					{
 						extend: 'csv',
-						text: 'Download Page Views',
+						text: 'Search Term Data CSV',
 						exportOptions: {
-							rows: '.subcategoryarticle'
+							rows: '.search'
 						}
 					}
 				]
