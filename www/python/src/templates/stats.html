@@ -491,7 +491,7 @@
 			var daylist = [];
 
 			if(filter){
-
+				daylist = getDaysArray(new Date(startdate), new Date(enddate));
 			}else{
 				daylist = getDaysArray(new Date(enddate),new Date(startdate));
 			}
