@@ -285,9 +285,15 @@
 			    			<td>
 			    				{{ item[2] }}
 			    			</td>
-			    			<td>
-			    				{{ item[4] }}
-			    			</td>
+			    			{%if item[4] is not none %}
+                            <td>
+                                    {{ item[4] }}
+                            </td>
+                            {%else%}
+                            <td>
+                                    before 11-03-2020
+                            </td>
+                            {%endif%}
 			    			<td>
 			    				{{ item[3] }}
 			    			</td>
