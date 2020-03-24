@@ -1,1 +1,1 @@
-SELECT id, type, title, count(title) as count, webdate FROM tracking GROUP BY webdate, title
+SELECT id, type, title, count(title) as count, webdate FROM tracking WHERE status = 1 GROUP BY webdate, title
