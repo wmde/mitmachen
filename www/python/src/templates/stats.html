@@ -472,8 +472,10 @@
 				var minSp = minval.split('-');
 				var maxSp = maxval.split('-');
 
-				startdate = minSp[1] + "-" + minSp[0] + "-" + minSp[2];
-				enddate = maxSp[1] + "-" + maxSp[0] + "-" + maxSp[2];
+				// startdate = minSp[1] + "-" + minSp[0] + "-" + minSp[2];
+				startdate = minSp[2] + "-" + minSp[1] + "-" + minSp[0];
+				// enddate = maxSp[1] + "-" + maxSp[0] + "-" + maxSp[2];
+				enddate = maxSp[2] + "-" + maxSp[1] + "-" + maxSp[0];
 
 			}else{
 				var today = new Date();
@@ -489,7 +491,8 @@
 				}
 
 				// var currentDate = mm + "/" + dd + "/" + yyyy;
-				startdate = mm + "-" + dd + "-" + yyyy;
+				// startdate = mm + "-" + dd + "-" + yyyy;
+				startdate = yyyy + "-" + mm + "-" + dd;
 
 				var prevD = new Date(new Date().getTime() - 24 * 30 * 60 * 60 * 1000);
 				var prevdd = prevD.getDate();
@@ -504,7 +507,8 @@
 				}
 
 				// var previousDate = prevmm + "/" + prevdd + "/" + prevyyyy;
-				enddate = prevmm + "-" + prevdd + "-" + prevyyyy;
+				// enddate = prevmm + "-" + prevdd + "-" + prevyyyy;
+				enddate = prevyyyy + "-" + prevmm + "-" + prevdd;
 			}
 
 
