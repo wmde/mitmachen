@@ -287,7 +287,9 @@
 			    			</td>
 			    			{%if item[4] is not none %}
                             <td>
-                                    {{ item[4] }}
+                            		{% set dd = item[4] %}
+                            		{% set ddSplit = dd.split('-') %}
+                                    <span style="display:none;">{{ddSplit[2]}}{{ddSplit[1]}}{{ddSplit[0]}}</span>{{ item[4] }}
                             </td>
                             {%else%}
                             <td>
@@ -424,6 +426,8 @@
 	<script type="text/javascript" src="{{ url_for('static', filename='new/js/buttons.html5.min.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='new/js/chart.js') }}"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+	<script src="https://cdn.datatables.net/plug-ins/1.10.20/sorting/datetime-moment.js"></script>
 
 	<script type="text/javascript">
 
@@ -588,7 +592,7 @@
 				dom: '<"Downloadnload">Bfrtip',
 				buttons: ['csv']
 			});*/
-
+			$.fn.dataTable.moment('DD-MM-YYYY');
 			var table = $("#statstable").DataTable({
 				dom: '<"download">Bfrtip',
 				buttons: [
@@ -622,7 +626,15 @@
 		              var dateMin = $('#min').datepicker("getDate");
 		              var rMin = new Date(dateMin.getFullYear(), dateMin.getMonth(),dateMin.getDate() + 1); // Min Date = Selected + 1d
 		              //var rMax = new Date(dateMin.getFullYear(), dateMin.getMonth(),dateMin.getDate() + 31); // Max Date = Selected + 31d
-		              $('#max').datepicker("option","minDate",rMin);
+		              $('#max').datepicker("option","minDate",selectedDate);
+		              //$('#max').datepicker("option","maxDate",rMax);                    
+		            }
+
+		            if(this.id == 'minchart'){
+		              var dateMin = $('#minchart').datepicker("getDate");
+		              var rMin = new Date(dateMin.getFullYear(), dateMin.getMonth(),dateMin.getDate() + 1); // Min Date = Selected + 1d
+		              //var rMax = new Date(dateMin.getFullYear(), dateMin.getMonth(),dateMin.getDate() + 31); // Max Date = Selected + 31d
+		              $('#maxchart').datepicker("option","minDate",selectedDate);
 		              //$('#max').datepicker("option","maxDate",rMax);                    
 		            }
 
@@ -669,7 +681,9 @@
 
 			// make default values for min
 			$("#min").val("11-03-2020");
+			$("#max").datepicker("option", "minDate", "12-03-2020");
 			$("#minchart").val("11-03-2020");
+			$("#maxchart").datepicker("option", "minDate", "12-03-2020");
 
 		})
 	</script>
