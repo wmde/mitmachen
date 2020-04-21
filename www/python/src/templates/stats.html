@@ -334,7 +334,7 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
 
 	</div>
 
-	<div style="padding:30px;">
+	<div style="padding:30px;" id="canvaschart">
 		<canvas id="myChart" width="400" height="200"></canvas>
 	</div>
 
@@ -437,6 +437,10 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
 
 		// 
 		function makeBarChart(results, filter){
+
+			$("#myChart").remove();
+			$("#canvaschart").append('<canvas id="myChart" width="400" height="200"></canvas>');
+
 			var canvas = document.getElementById("myChart");
 			var data = {};
 			// data['labels'] = [];
