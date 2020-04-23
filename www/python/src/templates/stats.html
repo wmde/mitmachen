@@ -604,9 +604,9 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
 			var table = $("#statstable").DataTable({
 				dom: '<"download">Bfrtip',
 				buttons: [
-					'csv', {
+					{
 						extend: 'csv',
-						text: 'Search Download',
+						text: 'SEITENAUFRUFE',
 						title: 'Pageview',
 						customize: function(csv) {
 							var split_csv = csv.split("\n");
