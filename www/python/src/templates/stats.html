@@ -310,14 +310,14 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
         </table>
 
     	<div class="form-row" style="margin-bottom:10px;margin-top:50px;">
-			<div class="form-group col-md-3" style="display:inline-block;">
+			<!-- <div class="form-group col-md-3" style="display:inline-block;">
 				<input class="form-control" name="minchart" id="minchart" type="text" placeholder="Start Date">
 			</div>
 			<div class="form-group col-md-3" style="display:inline-block;">
 				<input class="form-control" name="maxchart" id="maxchart" type="text" placeholder="End Date">
 			</div>
 			<button id="apply-date-range-chart" class="btn btn-info btn-sm" style="margin-right:15px;">Apply Date Range</button>
-			<button style="margin-left:10px;" id="clear-date-range-chart" class="btn btn-info btn-sm">Clear Date Range</button>
+			<button style="margin-left:10px;" id="clear-date-range-chart" class="btn btn-info btn-sm">Clear Date Range</button> -->
 	    	
 	    	<div class="written-stats">
 				<h4>Totals</h4>
@@ -331,7 +331,7 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
 				</ul>
 			</div>
 		</div>
-
+s
 	</div>
 
 	<div style="padding:30px;" id="canvaschart">
@@ -689,6 +689,8 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
 
 	            table.draw();
 
+	            makeBarChart(results, true);
+
 	        })
 
 	        $("#clear-date-range").on('click', function(e){
@@ -699,6 +701,8 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
 	         	$("#max").val('');
 
 	            table.draw();
+
+	            makeBarChart(results, false);
 	        })
 
 			var results = {{ results|tojson }};
