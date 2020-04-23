@@ -604,19 +604,47 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
 			var table = $("#statstable").DataTable({
 				dom: '<"download">Bfrtip',
 				buttons: [
-					{
+					'csv', {
 						extend: 'csv',
-						text: 'Seitenaufrufe',
+						text: 'Search Download',
+						title: 'Pageview',
+						customize: function(csv) {
+							var split_csv = csv.split("\n");
+							var dateRel = {};
+							split_csv[0] = '"Date", "Count"';
+							$.each(split_csv.slice(1), function(index, csv_row) {
+								var csv_cell_array = csv_row.split('","');
+								csv_cell_array[0] = csv_cell_array[0].replace(/"/g, '');
+								csv_cell_array[1] = csv_cell_array[1].replace(/"/g, '');
+
+								if (dateRel[csv_cell_array[0]]) {
+									dateRel[csv_cell_array[0]] += parseInt(csv_cell_array[1]);
+								} else {
+									dateRel[csv_cell_array[0]] = 0;
+									dateRel[csv_cell_array[0]] += parseInt(csv_cell_array[1]);
+								}
+
+							});
+							var ts = [];
+							ts.push('"Date","Count"');
+							Object.keys(dateRel).map(function(item) {
+								ts.push('"' + item + '","' + dateRel[item] + '"');
+							});
+							var total = Object.values(dateRel).reduce(function(a, b) {
+								return a + b
+							});
+							ts.push('"Total",' + total);
+							csv = ts.join("\n");
+							return csv;
+						},
 						exportOptions: {
-							rows: '.subcategoryarticle'
+							columns: [3, 4],
 						}
 					},
 					{
 						extend: 'csv',
 						text: 'Suchbegriffe',
-						exportOptions: {
-							rows: '.search'
-						}
+						title: 'Searchdate'
 					}
 				]
 			})
