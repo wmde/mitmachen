@@ -658,6 +658,9 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
 		        minDate: '11-03-2020',
 		        numberOfMonths: 1,
 		        maxDate: new Date(),
+		        beforeShow: function(input, inst) {
+				    inst.dpDiv.addClass('notranslate');
+				},
 		        onSelect: function( selectedDate ) {
 		            if(this.id == 'min'){
 		              var dateMin = $('#min').datepicker("getDate");
