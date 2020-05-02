@@ -670,6 +670,9 @@ nav.navbar.sticky-top {
 .clear-all{
   cursor:pointer;
 }
+#ui-id-1{
+  z-index: 9999!important;
+}
 
 
 /*@media (min-width:1200px) {
